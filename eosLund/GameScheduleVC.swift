@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  GameScheduleVC.swift
 //  eosLund
 //
 //  Created by Denis Rakitin on 2019-11-26.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class GameScheduleVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
