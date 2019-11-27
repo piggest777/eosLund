@@ -9,23 +9,31 @@
 /* Begin PBXBuildFile section */
 		B5AFD0EC238D5CA900EA88B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0EB238D5CA900EA88B8 /* AppDelegate.swift */; };
 		B5AFD0EE238D5CA900EA88B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0ED238D5CA900EA88B8 /* SceneDelegate.swift */; };
-		B5AFD0F0238D5CA900EA88B8 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0EF238D5CA900EA88B8 /* FirstViewController.swift */; };
+		B5AFD0F0238D5CA900EA88B8 /* GameScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */; };
 		B5AFD0F2238D5CA900EA88B8 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0F1238D5CA900EA88B8 /* SecondViewController.swift */; };
 		B5AFD0F5238D5CA900EA88B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5AFD0F3238D5CA900EA88B8 /* Main.storyboard */; };
 		B5AFD0F7238D5CAC00EA88B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AFD0F6238D5CAC00EA88B8 /* Assets.xcassets */; };
 		B5AFD0FA238D5CAC00EA88B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5AFD0F8238D5CAC00EA88B8 /* LaunchScreen.storyboard */; };
+		B5AFD102238D611900EA88B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5AFD101238D611900EA88B8 /* GoogleService-Info.plist */; };
+		B5AFD109238EB7F300EA88B8 /* RoundedShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD108238EB7F300EA88B8 /* RoundedShadowButton.swift */; };
+		DE1C2FB32637527486D213F9 /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1455D504268233C900808346 /* Pods_eosLund.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1455D504268233C900808346 /* Pods_eosLund.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eosLund.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		302A32A59546E27D6599AA27 /* Pods-eosLund.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eosLund/Pods-eosLund.debug.xcconfig"; sourceTree = "<group>"; };
+		68DC742D299F4DE9259278BE /* Pods-eosLund.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.release.xcconfig"; path = "Pods/Target Support Files/Pods-eosLund/Pods-eosLund.release.xcconfig"; sourceTree = "<group>"; };
 		B5AFD0E8238D5CA900EA88B8 /* eosLund.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eosLund.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AFD0EB238D5CA900EA88B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5AFD0ED238D5CA900EA88B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B5AFD0EF238D5CA900EA88B8 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScheduleVC.swift; sourceTree = "<group>"; };
 		B5AFD0F1238D5CA900EA88B8 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		B5AFD0F4238D5CA900EA88B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5AFD0F6238D5CAC00EA88B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5AFD0F9238D5CAC00EA88B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5AFD0FB238D5CAC00EA88B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5AFD101238D611900EA88B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B5AFD108238EB7F300EA88B8 /* RoundedShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +41,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE1C2FB32637527486D213F9 /* Pods_eosLund.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043AE9E89D62E3231872D890 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				302A32A59546E27D6599AA27 /* Pods-eosLund.debug.xcconfig */,
+				68DC742D299F4DE9259278BE /* Pods-eosLund.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		663368E36587FDC8A20189A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1455D504268233C900808346 /* Pods_eosLund.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B5AFD0DF238D5CA900EA88B8 = {
 			isa = PBXGroup;
 			children = (
 				B5AFD0EA238D5CA900EA88B8 /* eosLund */,
 				B5AFD0E9238D5CA900EA88B8 /* Products */,
+				043AE9E89D62E3231872D890 /* Pods */,
+				663368E36587FDC8A20189A5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,16 +86,42 @@
 		B5AFD0EA238D5CA900EA88B8 /* eosLund */ = {
 			isa = PBXGroup;
 			children = (
+				B5AFD104238EB7A400EA88B8 /* Model */,
+				B5AFD105238EB7AC00EA88B8 /* View */,
+				B5AFD103238EB79D00EA88B8 /* Controller */,
 				B5AFD0EB238D5CA900EA88B8 /* AppDelegate.swift */,
 				B5AFD0ED238D5CA900EA88B8 /* SceneDelegate.swift */,
-				B5AFD0EF238D5CA900EA88B8 /* FirstViewController.swift */,
+				B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */,
 				B5AFD0F1238D5CA900EA88B8 /* SecondViewController.swift */,
 				B5AFD0F3238D5CA900EA88B8 /* Main.storyboard */,
 				B5AFD0F6238D5CAC00EA88B8 /* Assets.xcassets */,
 				B5AFD0F8238D5CAC00EA88B8 /* LaunchScreen.storyboard */,
 				B5AFD0FB238D5CAC00EA88B8 /* Info.plist */,
+				B5AFD101238D611900EA88B8 /* GoogleService-Info.plist */,
 			);
 			path = eosLund;
+			sourceTree = "<group>";
+		};
+		B5AFD103238EB79D00EA88B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B5AFD104238EB7A400EA88B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B5AFD105238EB7AC00EA88B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B5AFD108238EB7F300EA88B8 /* RoundedShadowButton.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +131,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5AFD0FE238D5CAC00EA88B8 /* Build configuration list for PBXNativeTarget "eosLund" */;
 			buildPhases = (
+				D2DEFC1519B67DE56E4AA527 /* [CP] Check Pods Manifest.lock */,
 				B5AFD0E4238D5CA900EA88B8 /* Sources */,
 				B5AFD0E5238D5CA900EA88B8 /* Frameworks */,
 				B5AFD0E6238D5CA900EA88B8 /* Resources */,
+				F458BBC470BD5CF95AB25D45 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5AFD0FA238D5CAC00EA88B8 /* LaunchScreen.storyboard in Resources */,
+				B5AFD102238D611900EA88B8 /* GoogleService-Info.plist in Resources */,
 				B5AFD0F7238D5CAC00EA88B8 /* Assets.xcassets in Resources */,
 				B5AFD0F5238D5CA900EA88B8 /* Main.storyboard in Resources */,
 			);
@@ -136,13 +193,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D2DEFC1519B67DE56E4AA527 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-eosLund-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F458BBC470BD5CF95AB25D45 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-eosLund/Pods-eosLund-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eosLund/Pods-eosLund-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B5AFD0E4238D5CA900EA88B8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				B5AFD0F2238D5CA900EA88B8 /* SecondViewController.swift in Sources */,
-				B5AFD0F0238D5CA900EA88B8 /* FirstViewController.swift in Sources */,
+				B5AFD109238EB7F300EA88B8 /* RoundedShadowButton.swift in Sources */,
+				B5AFD0F0238D5CA900EA88B8 /* GameScheduleVC.swift in Sources */,
 				B5AFD0EC238D5CA900EA88B8 /* AppDelegate.swift in Sources */,
 				B5AFD0EE238D5CA900EA88B8 /* SceneDelegate.swift in Sources */,
 			);
@@ -286,16 +397,18 @@
 		};
 		B5AFD0FF238D5CAC00EA88B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 302A32A59546E27D6599AA27 /* Pods-eosLund.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83G4KB5W5L;
 				INFOPLIST_FILE = eosLund/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "funny-farm.eosLund";
+				PRODUCT_BUNDLE_IDENTIFIER = se.eosLund.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -304,16 +417,18 @@
 		};
 		B5AFD100238D5CAC00EA88B8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68DC742D299F4DE9259278BE /* Pods-eosLund.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83G4KB5W5L;
 				INFOPLIST_FILE = eosLund/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "funny-farm.eosLund";
+				PRODUCT_BUNDLE_IDENTIFIER = se.eosLund.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
