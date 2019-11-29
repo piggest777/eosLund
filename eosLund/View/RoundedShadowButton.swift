@@ -13,9 +13,6 @@ class RoundedShadowButton: UIButton {
     override  func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = self.layer.frame.size.height/2
-//        self.clipsToBounds = false
-//        self.translatesAutoresizingMaskIntoConstraints = false
-//        self.setTitleShadowColor(.darkGray, for: .normal)
         self.layer.shadowColor = UIColor.darkGray.cgColor
         self.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         self.layer.shadowRadius = 5

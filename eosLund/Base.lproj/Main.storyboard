@@ -275,7 +275,7 @@
                                 <rect key="frame" x="0.0" y="330" width="320" height="189"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="wJk-as-hZc">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="gameCell" rowHeight="60" id="wJk-as-hZc" customClass="GamesTableViewCell" customModule="eosLund" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wJk-as-hZc" id="sWi-er-js6">
@@ -374,6 +374,13 @@
                                                 <constraint firstItem="QOn-4H-XeY" firstAttribute="leading" secondItem="ozi-fl-BNi" secondAttribute="trailing" constant="5" id="zHw-DY-IdX"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="gameDateTImeAndPlaceLbl" destination="evQ-xk-Xn4" id="kl4-Bw-LkK"/>
+                                            <outlet property="team1NameLbl" destination="5Rs-ZB-7XX" id="0zm-Uo-gcp"/>
+                                            <outlet property="team1ScoreLbl" destination="NMx-r4-coJ" id="VDY-Nb-n8Z"/>
+                                            <outlet property="team2NameLbl" destination="QOn-4H-XeY" id="jfR-F4-v8j"/>
+                                            <outlet property="team2ScoreLbl" destination="mJR-5f-DCI" id="r2n-LP-HUF"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

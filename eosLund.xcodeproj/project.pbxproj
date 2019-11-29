@@ -16,6 +16,11 @@
 		B5AFD0FA238D5CAC00EA88B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5AFD0F8238D5CAC00EA88B8 /* LaunchScreen.storyboard */; };
 		B5AFD102238D611900EA88B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5AFD101238D611900EA88B8 /* GoogleService-Info.plist */; };
 		B5AFD109238EB7F300EA88B8 /* RoundedShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD108238EB7F300EA88B8 /* RoundedShadowButton.swift */; };
+		B5AFD10C238EC25700EA88B8 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10B238EC25700EA88B8 /* Constant.swift */; };
+		B5AFD10E238EC2AF00EA88B8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10D238EC2AF00EA88B8 /* Game.swift */; };
+		B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */; };
+		B5B7A3F02391939F00D2419F /* MenOrWomenTeamSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3EF2391939F00D2419F /* MenOrWomenTeamSelector.swift */; };
+		B5B7A3F22391A71300D2419F /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F12391A71300D2419F /* Team.swift */; };
 		DE1C2FB32637527486D213F9 /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1455D504268233C900808346 /* Pods_eosLund.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +39,11 @@
 		B5AFD0FB238D5CAC00EA88B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5AFD101238D611900EA88B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5AFD108238EB7F300EA88B8 /* RoundedShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowButton.swift; sourceTree = "<group>"; };
+		B5AFD10B238EC25700EA88B8 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B5AFD10D238EC2AF00EA88B8 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesTableViewCell.swift; sourceTree = "<group>"; };
+		B5B7A3EF2391939F00D2419F /* MenOrWomenTeamSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenOrWomenTeamSelector.swift; sourceTree = "<group>"; };
+		B5B7A3F12391A71300D2419F /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,13 +96,12 @@
 		B5AFD0EA238D5CA900EA88B8 /* eosLund */ = {
 			isa = PBXGroup;
 			children = (
+				B5AFD10A238EC23700EA88B8 /* Utilities */,
 				B5AFD104238EB7A400EA88B8 /* Model */,
 				B5AFD105238EB7AC00EA88B8 /* View */,
 				B5AFD103238EB79D00EA88B8 /* Controller */,
 				B5AFD0EB238D5CA900EA88B8 /* AppDelegate.swift */,
 				B5AFD0ED238D5CA900EA88B8 /* SceneDelegate.swift */,
-				B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */,
-				B5AFD0F1238D5CA900EA88B8 /* SecondViewController.swift */,
 				B5AFD0F3238D5CA900EA88B8 /* Main.storyboard */,
 				B5AFD0F6238D5CAC00EA88B8 /* Assets.xcassets */,
 				B5AFD0F8238D5CAC00EA88B8 /* LaunchScreen.storyboard */,
@@ -105,6 +114,8 @@
 		B5AFD103238EB79D00EA88B8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */,
+				B5AFD0F1238D5CA900EA88B8 /* SecondViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -112,6 +123,9 @@
 		B5AFD104238EB7A400EA88B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B5AFD10D238EC2AF00EA88B8 /* Game.swift */,
+				B5B7A3EF2391939F00D2419F /* MenOrWomenTeamSelector.swift */,
+				B5B7A3F12391A71300D2419F /* Team.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -120,8 +134,17 @@
 			isa = PBXGroup;
 			children = (
 				B5AFD108238EB7F300EA88B8 /* RoundedShadowButton.swift */,
+				B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B5AFD10A238EC23700EA88B8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B5AFD10B238EC25700EA88B8 /* Constant.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,8 +277,13 @@
 				B5AFD0F2238D5CA900EA88B8 /* SecondViewController.swift in Sources */,
 				B5AFD109238EB7F300EA88B8 /* RoundedShadowButton.swift in Sources */,
 				B5AFD0F0238D5CA900EA88B8 /* GameScheduleVC.swift in Sources */,
+				B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */,
+				B5AFD10E238EC2AF00EA88B8 /* Game.swift in Sources */,
 				B5AFD0EC238D5CA900EA88B8 /* AppDelegate.swift in Sources */,
 				B5AFD0EE238D5CA900EA88B8 /* SceneDelegate.swift in Sources */,
+				B5B7A3F02391939F00D2419F /* MenOrWomenTeamSelector.swift in Sources */,
+				B5B7A3F22391A71300D2419F /* Team.swift in Sources */,
+				B5AFD10C238EC25700EA88B8 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
