@@ -33,7 +33,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Xm9-rZ-aqo">
                                         <rect key="frame" x="87.5" y="77" width="145" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lund, Eoshallen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nR9-QF-oit">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lund, Eoshallen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nR9-QF-oit">
                                                 <rect key="frame" x="0.0" y="0.0" width="145" height="25"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                                 <nil key="textColor"/>
@@ -421,19 +421,21 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="daysGameLbl" destination="IYK-AK-7kK" id="PbN-cW-x9c"/>
                         <outlet property="firstTeamLogotipeImg" destination="VXa-QL-zUX" id="o5D-30-fKb"/>
                         <outlet property="firstTeamNameLbl" destination="fuw-iH-4dZ" id="bcg-Hn-ZCh"/>
                         <outlet property="fullScheduleBtn" destination="Sxr-QU-sqZ" id="FnS-q6-BaQ"/>
-                        <outlet property="leftDaysToGameLbl" destination="IYK-AK-7kK" id="e1W-ZE-Sjr"/>
-                        <outlet property="leftHoursToGameLbl" destination="Twg-J1-3LJ" id="BaP-05-b9R"/>
-                        <outlet property="leftMintoGameLbl" destination="lKt-kq-ML8" id="HVe-Vd-p2f"/>
+                        <outlet property="hoursGameLbl" destination="Twg-J1-3LJ" id="v44-LS-7oS"/>
+                        <outlet property="leftDaysToGameLbl" destination="0OJ-eC-9Jj" id="wwj-6P-jPo"/>
+                        <outlet property="leftHoursToGameLbl" destination="4XS-Nu-NcT" id="xA6-4P-5HC"/>
+                        <outlet property="leftMintoGameLbl" destination="pqt-ou-jlv" id="Ems-aj-Vo0"/>
                         <outlet property="manBG" destination="3Wk-qO-Ry8" id="9KN-cu-NCy"/>
                         <outlet property="manOrWomanSegmentControl" destination="YV4-Xc-63R" id="Et7-X1-LiL"/>
                         <outlet property="nextGameDateAndTimeLbl" destination="Crx-o2-27j" id="DWA-67-Oh1"/>
                         <outlet property="nextGamePlaceLbl" destination="nR9-QF-oit" id="P5l-Xh-IjE"/>
                         <outlet property="scheduleTableView" destination="kIQ-Wi-H98" id="1kA-pl-bgo"/>
                         <outlet property="seconTeamLogotipeImg" destination="EUs-lM-B0H" id="vSw-6L-b2N"/>
-                        <outlet property="secondTeamNameLbl" destination="IYK-AK-7kK" id="jog-ij-plX"/>
+                        <outlet property="secondTeamNameLbl" destination="64U-it-0kl" id="E4k-eE-Hs1"/>
                         <outlet property="viewHidhConstraint" destination="SPP-n0-jiq" id="n0C-U7-IOR"/>
                     </connections>
                 </viewController>
