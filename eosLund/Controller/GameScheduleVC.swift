@@ -11,6 +11,7 @@ import Firebase
 
 class GameScheduleVC: UIViewController {
 
+    @IBOutlet weak var nextGameView: UIView!
     @IBOutlet weak var manBG: UIImageView!
     @IBOutlet weak var nextGamePlaceLbl: UILabel!
     @IBOutlet weak var nextGameDateAndTimeLbl: UILabel!
@@ -32,19 +33,31 @@ class GameScheduleVC: UIViewController {
     private lazy var gamesReference:CollectionReference = Firestore.firestore().collection(GAMES_REF)
     private var gameScheduleListener: ListenerRegistration!
     private var isMenTeam: Bool = true
-    var timer = Timer()
-    var timeIntervalToNextGame: Double = 0.0
+    private var timer = Timer()
+    private var timeIntervalToNextGame: Double = 0.0
+    private var isFullScheduleOpen = false
+    private let halfHeightOfScreenSize = UIScreen.main.bounds.height/2 - 45
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+//        return UIStatusBarStyle.lightContent
+        return UIStatusBarStyle.default   // Make dark again
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewHidhConstraint.constant = view.frame.size.height/2
+        viewHidhConstraint.constant = halfHeightOfScreenSize
         scheduleTableView.dataSource = self
         scheduleTableView.delegate = self
+        manOrWomanSegmentControl.layer.cornerRadius = 5
+        swipeNextGame()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setListener()
+        view.setUpStatusBar()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         if gameScheduleListener != nil {
             gameScheduleListener.remove()
@@ -52,6 +65,16 @@ class GameScheduleVC: UIViewController {
         timer.invalidate()
     }
     
+    func swipeNextGame () {
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(hideNextGameView))
+        swipe.direction = .up
+        nextGameView.addGestureRecognizer(swipe)
+    }
+    
+    @objc func hideNextGameView () {
+        fullScheduleOpener()
+        
+    }
     
     func setListener () {
         gameScheduleListener = gamesReference
@@ -70,13 +93,7 @@ class GameScheduleVC: UIViewController {
     }
     
     func loadInfoToNextGameView() {
-//    gamesArray.sort { (game1, game2) -> Bool in
-//        if game1.gameDateAndTime > game2.gameDateAndTime {
-//            return true
-//        } else {
-//            return false
-//            }
-//        }
+
         
 //        need to add function to hide nextgame section if no games on future or change next game information
         guard gamesArray.count != 0 else { return }
@@ -147,8 +164,30 @@ class GameScheduleVC: UIViewController {
     @IBAction func tournamentBtnWasPressed(_ sender: Any) {
     }
     
+    
     @IBAction func fullScheduleBtnWasPressed(_ sender: Any) {
+        fullScheduleOpener()
+    }
+    
+    func fullScheduleOpener () {
+        if isFullScheduleOpen == false {
+            
+            setView(view: nextGameView, hidden: !isFullScheduleOpen)
+            isFullScheduleOpen = true
+            fullScheduleBtn.setTitle("NEXT GAME INFO", for: .normal)
+
+        } else {
+            setView(view: nextGameView, hidden: !isFullScheduleOpen)
+            isFullScheduleOpen = false
+            fullScheduleBtn.setTitle("REVEAL SCHEDULE", for: .normal)
+        }
         
+    }
+    
+    func setView(view: UIView, hidden: Bool) {
+        UIView.transition(with: view, duration: 0.5, options: .showHideTransitionViews, animations: {
+            view.isHidden = hidden
+        })
     }
     
     @IBAction func segmentControlWasSwitched(_ sender: Any) {
@@ -185,4 +224,7 @@ extension GameScheduleVC: UITableViewDelegate, UITableViewDataSource {
     
     
 }
+
+
+
 

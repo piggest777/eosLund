@@ -21,6 +21,7 @@
 		B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */; };
 		B5B7A3F02391939F00D2419F /* MenOrWomenTeamSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3EF2391939F00D2419F /* MenOrWomenTeamSelector.swift */; };
 		B5B7A3F22391A71300D2419F /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F12391A71300D2419F /* Team.swift */; };
+		B5B7A3F52393D71200D2419F /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F42393D71200D2419F /* ViewExt.swift */; };
 		DE1C2FB32637527486D213F9 /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1455D504268233C900808346 /* Pods_eosLund.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesTableViewCell.swift; sourceTree = "<group>"; };
 		B5B7A3EF2391939F00D2419F /* MenOrWomenTeamSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenOrWomenTeamSelector.swift; sourceTree = "<group>"; };
 		B5B7A3F12391A71300D2419F /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		B5B7A3F42393D71200D2419F /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		B5AFD0EA238D5CA900EA88B8 /* eosLund */ = {
 			isa = PBXGroup;
 			children = (
+				B5B7A3F32393D6E900D2419F /* Ext */,
 				B5AFD10A238EC23700EA88B8 /* Utilities */,
 				B5AFD104238EB7A400EA88B8 /* Model */,
 				B5AFD105238EB7AC00EA88B8 /* View */,
@@ -145,6 +148,14 @@
 				B5AFD10B238EC25700EA88B8 /* Constant.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B5B7A3F32393D6E900D2419F /* Ext */ = {
+			isa = PBXGroup;
+			children = (
+				B5B7A3F42393D71200D2419F /* ViewExt.swift */,
+			);
+			path = Ext;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +289,7 @@
 				B5AFD109238EB7F300EA88B8 /* RoundedShadowButton.swift in Sources */,
 				B5AFD0F0238D5CA900EA88B8 /* GameScheduleVC.swift in Sources */,
 				B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */,
+				B5B7A3F52393D71200D2419F /* ViewExt.swift in Sources */,
 				B5AFD10E238EC2AF00EA88B8 /* Game.swift in Sources */,
 				B5AFD0EC238D5CA900EA88B8 /* AppDelegate.swift in Sources */,
 				B5AFD0EE238D5CA900EA88B8 /* SceneDelegate.swift in Sources */,

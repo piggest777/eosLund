@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+
         return true
     }
 
@@ -36,4 +37,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
+//extension UIApplication {
+//var statusBarUIView: UIView? {
+//    if #available(iOS 13.0, *) {
+//        let statusBar = UIView(frame: UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+//         statusBar.backgroundColor = UIColor.init(red: 243/250, green: 243/250, blue: 243/250, alpha: 1)
+//         UIApplication.shared.keyWindow?.addSubview(statusBar)
+//    } else {
+//         UIApplication.shared.statusBarUIView?.backgroundColor = UIColor.init(red: 243/250, green: 243/250, blue: 243/250, alpha: 1)
+//    }
+//    
+//    }
+//}
 
