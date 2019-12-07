@@ -11,6 +11,7 @@ import Foundation
 
 let GAMES_REF = "games"
 
+let REALM_QUEUE = DispatchQueue(label: "realmQueue")
 
 let TEAM_1_NAME = "team1Name"
 let TEAM_1_CITY = "team1City"

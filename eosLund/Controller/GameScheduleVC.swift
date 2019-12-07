@@ -172,19 +172,19 @@ class GameScheduleVC: UIViewController {
     func fullScheduleOpener () {
         if isFullScheduleOpen == false {
             
-            setView(view: nextGameView, hidden: !isFullScheduleOpen)
+            setupNextGameViewShowAndHide(view: nextGameView, hidden: !isFullScheduleOpen)
             isFullScheduleOpen = true
             fullScheduleBtn.setTitle("NEXT GAME INFO", for: .normal)
 
         } else {
-            setView(view: nextGameView, hidden: !isFullScheduleOpen)
+            setupNextGameViewShowAndHide(view: nextGameView, hidden: !isFullScheduleOpen)
             isFullScheduleOpen = false
             fullScheduleBtn.setTitle("REVEAL SCHEDULE", for: .normal)
         }
         
     }
     
-    func setView(view: UIView, hidden: Bool) {
+    func setupNextGameViewShowAndHide(view: UIView, hidden: Bool) {
         UIView.transition(with: view, duration: 0.5, options: .showHideTransitionViews, animations: {
             view.isHidden = hidden
         })
@@ -221,8 +221,7 @@ extension GameScheduleVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    
+  
 }
 
 

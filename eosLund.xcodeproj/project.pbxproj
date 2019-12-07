@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CB10A5DA0AF426F091D1EE2 /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD87443120E24E9BAF0F1045 /* Pods_eosLund.framework */; };
+		B59E75E82399AE9A00191EB5 /* TeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E75E72399AE9A00191EB5 /* TeamCollectionViewCell.swift */; };
+		B59E75EA2399C3A900191EB5 /* PlayerRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E75E92399C3A900191EB5 /* PlayerRealmObject.swift */; };
 		B5AFD0EC238D5CA900EA88B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0EB238D5CA900EA88B8 /* AppDelegate.swift */; };
 		B5AFD0EE238D5CA900EA88B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0ED238D5CA900EA88B8 /* SceneDelegate.swift */; };
 		B5AFD0F0238D5CA900EA88B8 /* GameScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */; };
-		B5AFD0F2238D5CA900EA88B8 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0F1238D5CA900EA88B8 /* SecondViewController.swift */; };
+		B5AFD0F2238D5CA900EA88B8 /* TeamInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD0F1238D5CA900EA88B8 /* TeamInformationVC.swift */; };
 		B5AFD0F5238D5CA900EA88B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5AFD0F3238D5CA900EA88B8 /* Main.storyboard */; };
 		B5AFD0F7238D5CAC00EA88B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5AFD0F6238D5CAC00EA88B8 /* Assets.xcassets */; };
 		B5AFD0FA238D5CAC00EA88B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5AFD0F8238D5CAC00EA88B8 /* LaunchScreen.storyboard */; };
@@ -19,21 +22,19 @@
 		B5AFD10C238EC25700EA88B8 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10B238EC25700EA88B8 /* Constant.swift */; };
 		B5AFD10E238EC2AF00EA88B8 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10D238EC2AF00EA88B8 /* Game.swift */; };
 		B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */; };
-		B5B7A3F02391939F00D2419F /* MenOrWomenTeamSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3EF2391939F00D2419F /* MenOrWomenTeamSelector.swift */; };
 		B5B7A3F22391A71300D2419F /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F12391A71300D2419F /* Team.swift */; };
 		B5B7A3F52393D71200D2419F /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F42393D71200D2419F /* ViewExt.swift */; };
-		DE1C2FB32637527486D213F9 /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1455D504268233C900808346 /* Pods_eosLund.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1455D504268233C900808346 /* Pods_eosLund.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eosLund.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		302A32A59546E27D6599AA27 /* Pods-eosLund.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eosLund/Pods-eosLund.debug.xcconfig"; sourceTree = "<group>"; };
-		68DC742D299F4DE9259278BE /* Pods-eosLund.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.release.xcconfig"; path = "Pods/Target Support Files/Pods-eosLund/Pods-eosLund.release.xcconfig"; sourceTree = "<group>"; };
+		0E485E1E154F74389C6199C9 /* Pods-eosLund.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.release.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.release.xcconfig"; sourceTree = "<group>"; };
+		B59E75E72399AE9A00191EB5 /* TeamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCollectionViewCell.swift; sourceTree = "<group>"; };
+		B59E75E92399C3A900191EB5 /* PlayerRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRealmObject.swift; sourceTree = "<group>"; };
 		B5AFD0E8238D5CA900EA88B8 /* eosLund.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eosLund.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5AFD0EB238D5CA900EA88B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5AFD0ED238D5CA900EA88B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScheduleVC.swift; sourceTree = "<group>"; };
-		B5AFD0F1238D5CA900EA88B8 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		B5AFD0F1238D5CA900EA88B8 /* TeamInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInformationVC.swift; sourceTree = "<group>"; };
 		B5AFD0F4238D5CA900EA88B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5AFD0F6238D5CAC00EA88B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5AFD0F9238D5CAC00EA88B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,9 +44,10 @@
 		B5AFD10B238EC25700EA88B8 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B5AFD10D238EC2AF00EA88B8 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesTableViewCell.swift; sourceTree = "<group>"; };
-		B5B7A3EF2391939F00D2419F /* MenOrWomenTeamSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenOrWomenTeamSelector.swift; sourceTree = "<group>"; };
 		B5B7A3F12391A71300D2419F /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		B5B7A3F42393D71200D2419F /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
+		B97EDFBEBF5300C4668C346C /* Pods-eosLund.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.debug.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.debug.xcconfig"; sourceTree = "<group>"; };
+		DD87443120E24E9BAF0F1045 /* Pods_eosLund.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eosLund.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,28 +55,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE1C2FB32637527486D213F9 /* Pods_eosLund.framework in Frameworks */,
+				3CB10A5DA0AF426F091D1EE2 /* Pods_eosLund.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		043AE9E89D62E3231872D890 /* Pods */ = {
+		2303AC81C9B8F3969FA04EBB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				302A32A59546E27D6599AA27 /* Pods-eosLund.debug.xcconfig */,
-				68DC742D299F4DE9259278BE /* Pods-eosLund.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		663368E36587FDC8A20189A5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1455D504268233C900808346 /* Pods_eosLund.framework */,
+				DD87443120E24E9BAF0F1045 /* Pods_eosLund.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD6241853061A2D76CB23BE9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B97EDFBEBF5300C4668C346C /* Pods-eosLund.debug.xcconfig */,
+				0E485E1E154F74389C6199C9 /* Pods-eosLund.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		B5AFD0DF238D5CA900EA88B8 = {
@@ -82,8 +85,8 @@
 			children = (
 				B5AFD0EA238D5CA900EA88B8 /* eosLund */,
 				B5AFD0E9238D5CA900EA88B8 /* Products */,
-				043AE9E89D62E3231872D890 /* Pods */,
-				663368E36587FDC8A20189A5 /* Frameworks */,
+				AD6241853061A2D76CB23BE9 /* Pods */,
+				2303AC81C9B8F3969FA04EBB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,11 +101,11 @@
 		B5AFD0EA238D5CA900EA88B8 /* eosLund */ = {
 			isa = PBXGroup;
 			children = (
-				B5B7A3F32393D6E900D2419F /* Ext */,
-				B5AFD10A238EC23700EA88B8 /* Utilities */,
 				B5AFD104238EB7A400EA88B8 /* Model */,
 				B5AFD105238EB7AC00EA88B8 /* View */,
 				B5AFD103238EB79D00EA88B8 /* Controller */,
+				B5AFD10A238EC23700EA88B8 /* Utilities */,
+				B5B7A3F32393D6E900D2419F /* Ext */,
 				B5AFD0EB238D5CA900EA88B8 /* AppDelegate.swift */,
 				B5AFD0ED238D5CA900EA88B8 /* SceneDelegate.swift */,
 				B5AFD0F3238D5CA900EA88B8 /* Main.storyboard */,
@@ -118,7 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */,
-				B5AFD0F1238D5CA900EA88B8 /* SecondViewController.swift */,
+				B5AFD0F1238D5CA900EA88B8 /* TeamInformationVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -127,8 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				B5AFD10D238EC2AF00EA88B8 /* Game.swift */,
-				B5B7A3EF2391939F00D2419F /* MenOrWomenTeamSelector.swift */,
 				B5B7A3F12391A71300D2419F /* Team.swift */,
+				B59E75E92399C3A900191EB5 /* PlayerRealmObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			children = (
 				B5AFD108238EB7F300EA88B8 /* RoundedShadowButton.swift */,
 				B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */,
+				B59E75E72399AE9A00191EB5 /* TeamCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -165,11 +169,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5AFD0FE238D5CAC00EA88B8 /* Build configuration list for PBXNativeTarget "eosLund" */;
 			buildPhases = (
-				D2DEFC1519B67DE56E4AA527 /* [CP] Check Pods Manifest.lock */,
+				8B8A3DC80E75CCB84E3300F6 /* [CP] Check Pods Manifest.lock */,
 				B5AFD0E4238D5CA900EA88B8 /* Sources */,
 				B5AFD0E5238D5CA900EA88B8 /* Frameworks */,
 				B5AFD0E6238D5CA900EA88B8 /* Resources */,
-				F458BBC470BD5CF95AB25D45 /* [CP] Embed Pods Frameworks */,
+				A98B4D30A1F1D78831B63B34 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -228,16 +232,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D2DEFC1519B67DE56E4AA527 /* [CP] Check Pods Manifest.lock */ = {
+		8B8A3DC80E75CCB84E3300F6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-eosLund-checkManifestLockResult.txt",
 			);
@@ -246,36 +254,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F458BBC470BD5CF95AB25D45 /* [CP] Embed Pods Frameworks */ = {
+		A98B4D30A1F1D78831B63B34 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-eosLund/Pods-eosLund-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-eosLund/Pods-eosLund-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-eosLund/Pods-eosLund-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eosLund/Pods-eosLund-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eosLund/Pods-eosLund-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -285,15 +278,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5AFD0F2238D5CA900EA88B8 /* SecondViewController.swift in Sources */,
+				B5AFD0F2238D5CA900EA88B8 /* TeamInformationVC.swift in Sources */,
 				B5AFD109238EB7F300EA88B8 /* RoundedShadowButton.swift in Sources */,
 				B5AFD0F0238D5CA900EA88B8 /* GameScheduleVC.swift in Sources */,
 				B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */,
 				B5B7A3F52393D71200D2419F /* ViewExt.swift in Sources */,
 				B5AFD10E238EC2AF00EA88B8 /* Game.swift in Sources */,
 				B5AFD0EC238D5CA900EA88B8 /* AppDelegate.swift in Sources */,
+				B59E75EA2399C3A900191EB5 /* PlayerRealmObject.swift in Sources */,
 				B5AFD0EE238D5CA900EA88B8 /* SceneDelegate.swift in Sources */,
-				B5B7A3F02391939F00D2419F /* MenOrWomenTeamSelector.swift in Sources */,
+				B59E75E82399AE9A00191EB5 /* TeamCollectionViewCell.swift in Sources */,
 				B5B7A3F22391A71300D2419F /* Team.swift in Sources */,
 				B5AFD10C238EC25700EA88B8 /* Constant.swift in Sources */,
 			);
@@ -437,7 +431,7 @@
 		};
 		B5AFD0FF238D5CAC00EA88B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 302A32A59546E27D6599AA27 /* Pods-eosLund.debug.xcconfig */;
+			baseConfigurationReference = B97EDFBEBF5300C4668C346C /* Pods-eosLund.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -457,7 +451,7 @@
 		};
 		B5AFD100238D5CAC00EA88B8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68DC742D299F4DE9259278BE /* Pods-eosLund.release.xcconfig */;
+			baseConfigurationReference = 0E485E1E154F74389C6199C9 /* Pods-eosLund.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
