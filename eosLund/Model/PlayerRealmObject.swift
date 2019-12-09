@@ -11,24 +11,34 @@ import RealmSwift
 
 class PlayerRealmObject: Object {
     
-    @objc dynamic public private(set) var id: String = ""
+    @objc dynamic public private(set) var id: String = UUID().uuidString
     @objc dynamic public private(set) var playerName: String = ""
     @objc dynamic public private(set) var playerNumber: String = ""
     @objc dynamic public private(set) var playerPosition: String = ""
     @objc dynamic public private(set) var playerImage: Data = Data()
+    @objc dynamic public private(set) var playerUpdateDate: Date = Date()
     
-    convenience init( playerName: String, playerNumber: String, playerPosition: String, playerImage: Data) {
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    override static func indexedProperties() -> [String] {
+        return ["playerNumber"]
+    }
+    
+    convenience init(playerId: String, playerName: String, playerNumber: String, playerPosition: String, playerImage: Data, playerUpdateDate: Date) {
         self.init()
-        self.id = UUID().uuidString.lowercased()
+        self.id = playerId
         self.playerNumber = playerNumber
         self.playerName = playerName
         self.playerPosition = playerPosition
         self.playerImage = playerImage
+        self.playerUpdateDate = playerUpdateDate
     }
     
-    static func addPlayerToTable(playerName:String, playerNumber: String, playerPosition: String, playerImage: Data) {
+    static func addPlayerToRealmBase(playerId:String, playerName:String, playerNumber: String, playerPosition: String, playerImage: Data, playerUpdateDate: Date) {
         REALM_QUEUE.sync {
-             let player = PlayerRealmObject(playerName: playerName, playerNumber: playerNumber, playerPosition: playerPosition, playerImage: playerImage)
+             let player = PlayerRealmObject(playerId: playerId, playerName: playerName, playerNumber: playerNumber, playerPosition: playerPosition, playerImage: playerImage, playerUpdateDate: playerUpdateDate)
                    
                    do {
                        let realm = try Realm()
@@ -41,15 +51,46 @@ class PlayerRealmObject: Object {
         }
     }
     
+    static func updatePlayerInfo( player: Player, playerImage: UIImage, completionHandler:(Bool)->()) {
+        let playerObject = PlayerRealmObject()
+        playerObject.id = player.playerId
+        playerObject.playerName = player.playerName
+        playerObject.playerNumber = player.playerNumber
+        playerObject.playerPosition = player.playerPosition
+        let dataImage = playerImage.pngData()
+        playerObject.playerImage = dataImage!
+        playerObject.playerUpdateDate = Date()
+        
+        do {
+           let realm =  try Realm()
+            try realm.write {
+                realm.add(playerObject, update: .modified)
+            }
+            completionHandler(true)
+        } catch  {
+            debugPrint("Can`t update player")
+        }
+    }
+    
     static func getAllPlayers () -> Results<PlayerRealmObject>?{
         do {
            let realm = try Realm()
             let players = realm.objects(PlayerRealmObject.self)
-            print(players)
+//            print(players.first?.playerName)
             return players
         } catch  {
-            debugPrint("Can`t fetch data")
+            debugPrint("Can`t fetch data", error)
             return nil
         }
     }
+    
+//   static func getPlayer(for id: String) -> p? {
+//        do {
+//            let realm = try Realm(configuration: RealmConfig.runDataConfig)
+//            
+//            return realm.object(ofType: Run.self, forPrimaryKey: id)
+//        } catch {
+//            return nil
+//        }
+//    }
 }

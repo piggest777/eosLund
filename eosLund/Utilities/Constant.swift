@@ -10,6 +10,7 @@ import Foundation
 
 
 let GAMES_REF = "games"
+let PLAYERS_REF = "players"
 
 let REALM_QUEUE = DispatchQueue(label: "realmQueue")
 
@@ -25,3 +26,9 @@ let GAME_DATE_AND_TIME = "gameDateAndTime"
 let IS_MEN_TEAM = "isMenTeam"
 let TEAM_1 = "team1"
 let TEAM_2 = "team2"
+
+let PLAYER_NAME = "playerName"
+let PLAYER_NUMBER = "playerNumber"
+let PLAYER_POSITION = "playerPosition"
+let PLAYER_IMAGE_URL = "playerImageURL"
+let PLAYER_UPDATE_DATE = "playerUpdateDate"
