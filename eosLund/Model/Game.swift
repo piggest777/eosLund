@@ -19,11 +19,11 @@ class Game {
     private(set) var gameCity: String!
     private(set) var gamePlace: String!
     private(set) var gameDateAndTime: Date!
-    private(set) var isMenTeam: Bool!
+    private(set) var teamLeague: String!
     private(set) var documentId: String!
     
     
-    init(team1: Team, team2: Team, team1Score: Int, team2Score: Int, gameCity: String!, gamePlace: String!, gameDateAndTime: Date, isMenTeam: Bool, documentId: String) {
+    init(team1: Team, team2: Team, team1Score: Int, team2Score: Int, gameCity: String!, gamePlace: String!, gameDateAndTime: Date, teamLeague: String, documentId: String) {
         self.team1Name = team1.name
         self.team2Name = team2.name
         self.team1City = team1.city
@@ -33,7 +33,7 @@ class Game {
         self.gameCity = gameCity
         self.gamePlace = gamePlace
         self.gameDateAndTime = gameDateAndTime
-        self.isMenTeam = isMenTeam
+        self.teamLeague = teamLeague
         self.documentId = documentId
     }
     
@@ -54,13 +54,13 @@ class Game {
             let dateAndTimeTimestamp: Timestamp = data[GAME_DATE_AND_TIME] as? Timestamp ?? Timestamp()
 //           Need to add date convert to empty string if date return nil
             let gameDateAndTime = dateAndTimeTimestamp.dateValue()
-            let isMenTeam: Bool = data[IS_MEN_TEAM] as? Bool ?? true
+            let teamLeague: String = data[TEAM_LEAGUE] as? String ?? "undefined"
             let documentId = document.documentID
             let team1 = Team(name: team1Name, city: team1City)
             let team2 = Team(name: team2Name, city: team2City)
             
             
-            let newGame = Game(team1: team1, team2: team2, team1Score: team1Score, team2Score: team2Score, gameCity: gameCity, gamePlace: gamePlace, gameDateAndTime: gameDateAndTime, isMenTeam: isMenTeam, documentId: documentId)
+            let newGame = Game(team1: team1, team2: team2, team1Score: team1Score, team2Score: team2Score, gameCity: gameCity, gamePlace: gamePlace, gameDateAndTime: gameDateAndTime, teamLeague: teamLeague, documentId: documentId)
             
             games.append(newGame)
         }

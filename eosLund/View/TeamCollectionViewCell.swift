@@ -16,11 +16,11 @@ class TeamCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var playerPositionLbl: UILabel!
     
     
-    func configureCell (playerName: String, playerNumber: String, playerPosition: String, playerImage: UIImage) {
+    func configureCell (playerName: String, playerNumber: Int, playerPosition: String, playerImage: UIImage) {
         
         playerImgView.image = playerImage
         playerNameLbl.text = playerName
-        playerNumberLbl.text = playerNumber
+        playerNumberLbl.text = "Nr \(playerNumber)"
         playerPositionLbl.text = playerPosition
     }
 }

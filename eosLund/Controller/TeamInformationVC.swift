@@ -23,18 +23,21 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
     let firebaseStorage = Storage.storage()
     var playerArrayFetchedFromFireBase = [Player]()
     var realmFetchedArray: Results<PlayerRealmObject>?
+    var choosenLeague: String = "SBLD"
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        realmFetchedArray = PlayerRealmObject.getAllPlayers()
+        let leaguePredicate = NSPredicate(format: "playerLeague = %@", choosenLeague)
+        realmFetchedArray = PlayerRealmObject.getAllPlayers()?.filter(leaguePredicate).sorted(byKeyPath: "playerNumber")
         fetchInfoFromFireBase { (returnedPlayerArray) in
             self.trackFirebaseUpdate(playerArray: returnedPlayerArray) { (success) in
                 if success {
-                     print("Update complete")
-                    self.realmFetchedArray = PlayerRealmObject.getAllPlayers()
+                    print("Update complete")
+                    self.realmFetchedArray = PlayerRealmObject.getAllPlayers()?.filter(leaguePredicate).sorted(byKeyPath: "playerNumber")
                     self.collectionView.reloadData()
                 }
             }
@@ -47,12 +50,20 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
     }
     
     @IBAction func teamChangedSegmentControl(_ sender: Any) {
+        
+        switch teamSelectorSegmentControl.selectedSegmentIndex {
+        case 0:
+            choosenLeague = "SBLD"
+        case 1:
+            choosenLeague = "BE Herr"
+        case 2:
+            choosenLeague = "BE Dam"
+        default:
+            choosenLeague = "SBLD"
+        }
+        realmFetchedArray = PlayerRealmObject.getAllPlayers()?.filter("playerLeague = '\(choosenLeague)'").sorted(byKeyPath: "playerNumber")
+        collectionView.reloadData()
     }
-    
-    @IBAction func addTestPlayer(_ sender: Any) {
-
-    }
-    
     
     func fetchInfoFromFireBase(returnedPlayerArray: @escaping ([Player])-> ()) {
         firebaseDB.collection(PLAYERS_REF).getDocuments { (snapshot, error) in
@@ -62,8 +73,8 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
             } else {
                 self.playerArrayFetchedFromFireBase.removeAll()
                 
-                let PlayerArray = Player.parsePlayerData(snapShot: snapshot)
-                returnedPlayerArray(PlayerArray)
+                let playerArray = Player.parsePlayerData(snapShot: snapshot)
+                returnedPlayerArray(playerArray)
             }
         }
     }
@@ -77,45 +88,52 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
                 let _ = player.playerNumber,
                 let _ = player.playerPosition
                 
-                else {return}
+                else {
+                    print("error to fetch player from firebase")
+                    return
+                    
+            }
+            
+//            print(updateDate, player.playerName)
             
             guard let playersArrayFromRealmBase = PlayerRealmObject.getAllPlayers() else {
                 debugPrint("Can`t get realm base to compare")
                 return
             }
+            
             if playersArrayFromRealmBase.isEmpty == false {
                 let idsBase = getAllRealmBaseIds()
                 if idsBase.contains(id) {
                     let realmsPlayer = getPlayerFromRealm(for: id, realmPlayerArray: playersArrayFromRealmBase)
-
-                        if realmsPlayer.playerUpdateDate < updateDate {
-                            getImageFromFirebaseStorage(imageURL: playerImageUrl) { (image, succeed) in
-                                if succeed {
-                                    PlayerRealmObject.updatePlayerInfo(player: player, playerImage: image!) { (success) in
-                                        if success {
-                                            self.collectionView.reloadData()
-                                            }
-                                        }
-                                    print("Information updated succesfully")
-                                } else {
-                                    debugPrint("Image dowload error")
-                                    //                                add try again later func
+                    
+                    if realmsPlayer.playerUpdateDate < updateDate {
+                        getImageFromFirebaseStorage(imageURL: playerImageUrl) { (image, succeed) in
+                            if succeed {
+                                PlayerRealmObject.updatePlayerInfo(player: player, playerImage: image!) { (success) in
+                                    if success {
+                                        self.collectionView.reloadData()
+                                    }
                                 }
+                                print("Information updated succesfully")
+                            } else {
+                                debugPrint("Image dowload error")
+                                //                                add try again later func
                             }
-                        } else {
-                            debugPrint("Player found and no need to update")
                         }
                     } else {
-                        print("try to create after")
-                        createPlayerRealmObject(player: player)
+                        debugPrint("Player found and no need to update")
                     }
+                } else {
+                    print("try to create after")
+                    createPlayerRealmObject(player: player)
+                }
                 
             } else {
                 createPlayerRealmObject(player: player)
             }
         }
-         completionHandler(true)
-       
+        completionHandler(true)
+        
     }
     
     func getAllRealmBaseIds() -> [String]{
@@ -132,7 +150,7 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         var playerToReturn = PlayerRealmObject()
         for player in  realmPlayerArray {
             if player.id == id {
-                 playerToReturn = player
+                playerToReturn = player
                 break
             }
         }
@@ -145,7 +163,7 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
             if succed {
                 let dataImage = image!.pngData()
                 let date = Date()
-                PlayerRealmObject.addPlayerToRealmBase(playerId: player.playerId, playerName: player.playerName, playerNumber: player.playerNumber, playerPosition: player.playerPosition, playerImage: dataImage!, playerUpdateDate: date)
+                PlayerRealmObject.addPlayerToRealmBase(playerId: player.playerId, playerName: player.playerName, playerNumber: player.playerNumber, playerPosition: player.playerPosition, playerImage: dataImage!, playerLeague: player.playerLeague, playerUpdateDate: date)
             }
         }
     }
@@ -155,7 +173,7 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         var image = UIImage()
         playerImageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
             if error != nil {
-                debugPrint("can`t download image", error)
+                debugPrint("can`t download image", error!)
                 completionHandler(nil, false)
             } else {
                 image = UIImage(data: data!)!
@@ -165,8 +183,13 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         
     }
     
+    @IBAction func couchInfoBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "toCoachVC", sender: Any?.self)
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return PlayerRealmObject.getAllPlayers()?.count ?? 0
+        return realmFetchedArray?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -196,7 +219,34 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         return CGSize(width: cellDimension, height: hightCellDimension)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toPlayerDetailVC", sender: realmFetchedArray![indexPath.row])
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPlayerDetailVC" {
+            if let destinationVC = segue.destination as? PlayerInfoVC {
+                if let player = sender as? PlayerRealmObject{
+                    destinationVC.player = player
+                }
+            }
+        } else if segue.identifier == "toCoachVC" {
+            if let destinationVC = segue.destination as? CoachVC {
+                destinationVC.choosenLeague = choosenLeague
+            }
+        }
+    }
+    
+     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if (kind == UICollectionView.elementKindSectionFooter) {
+        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CoachFooterCollectionReusableView", for: indexPath)
+
+        return footerView
+        }
+    fatalError()
+    }
     
     
 }
-

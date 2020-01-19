@@ -13,8 +13,9 @@ class PlayerRealmObject: Object {
     
     @objc dynamic public private(set) var id: String = UUID().uuidString
     @objc dynamic public private(set) var playerName: String = ""
-    @objc dynamic public private(set) var playerNumber: String = ""
+    @objc dynamic public private(set) var playerNumber: Int = 0
     @objc dynamic public private(set) var playerPosition: String = ""
+    @objc dynamic public private(set) var playerLeague: String = "undefined"
     @objc dynamic public private(set) var playerImage: Data = Data()
     @objc dynamic public private(set) var playerUpdateDate: Date = Date()
     
@@ -26,19 +27,20 @@ class PlayerRealmObject: Object {
         return ["playerNumber"]
     }
     
-    convenience init(playerId: String, playerName: String, playerNumber: String, playerPosition: String, playerImage: Data, playerUpdateDate: Date) {
+    convenience init(playerId: String, playerName: String, playerNumber: Int, playerPosition: String, playerImage: Data, playerLeague: String, playerUpdateDate: Date) {
         self.init()
         self.id = playerId
         self.playerNumber = playerNumber
         self.playerName = playerName
         self.playerPosition = playerPosition
         self.playerImage = playerImage
+        self.playerLeague = playerLeague
         self.playerUpdateDate = playerUpdateDate
     }
     
-    static func addPlayerToRealmBase(playerId:String, playerName:String, playerNumber: String, playerPosition: String, playerImage: Data, playerUpdateDate: Date) {
+    static func addPlayerToRealmBase(playerId:String, playerName:String, playerNumber: Int, playerPosition: String, playerImage: Data, playerLeague: String, playerUpdateDate: Date) {
         REALM_QUEUE.sync {
-             let player = PlayerRealmObject(playerId: playerId, playerName: playerName, playerNumber: playerNumber, playerPosition: playerPosition, playerImage: playerImage, playerUpdateDate: playerUpdateDate)
+             let player = PlayerRealmObject(playerId: playerId, playerName: playerName, playerNumber: playerNumber, playerPosition: playerPosition, playerImage: playerImage, playerLeague: playerLeague, playerUpdateDate: playerUpdateDate)
                    
                    do {
                        let realm = try Realm()
@@ -59,12 +61,14 @@ class PlayerRealmObject: Object {
         playerObject.playerPosition = player.playerPosition
         let dataImage = playerImage.pngData()
         playerObject.playerImage = dataImage!
+        playerObject.playerLeague = player.playerLeague
         playerObject.playerUpdateDate = Date()
         
         do {
            let realm =  try Realm()
             try realm.write {
                 realm.add(playerObject, update: .modified)
+                print(playerObject)
             }
             completionHandler(true)
         } catch  {

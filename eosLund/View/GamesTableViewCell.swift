@@ -22,17 +22,19 @@ class GamesTableViewCell: UITableViewCell {
         
         team1NameLbl.text = "\(game.team1Name!) \n \(game.team1City!)"
         team2NameLbl.text = "\(game.team2Name!) \n \(game.team2City!)"
+                    team1ScoreLbl.text = String(game.team1Score)
+                    team2ScoreLbl.text = String(game.team2Score)
         
-        let currentDate = Date()
-        if currentDate < game.gameDateAndTime {
-            team1GameScoreView.isHidden = true
-            team2GameScoreView.isHidden = true
-        } else {
-            team1GameScoreView.isHidden = false
-            team2GameScoreView.isHidden = false
-            team1ScoreLbl.text = String(game.team1Score)
-            team2ScoreLbl.text = String(game.team2Score)
-        }
+//        let currentDate = Date()
+//        if currentDate < game.gameDateAndTime {
+//            team1GameScoreView.isHidden = true
+//            team2GameScoreView.isHidden = true
+//        } else {
+//            team1GameScoreView.isHidden = false
+//            team2GameScoreView.isHidden = false
+//            team1ScoreLbl.text = String(game.team1Score)
+//            team2ScoreLbl.text = String(game.team2Score)
+//        }
         
 
         

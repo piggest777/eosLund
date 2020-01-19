@@ -15,7 +15,7 @@ class GameScheduleVC: UIViewController {
     @IBOutlet weak var manBG: UIImageView!
     @IBOutlet weak var nextGamePlaceLbl: UILabel!
     @IBOutlet weak var nextGameDateAndTimeLbl: UILabel!
-    @IBOutlet weak var manOrWomanSegmentControl: UISegmentedControl!
+    @IBOutlet weak var leagueSegmentControl: UISegmentedControl!
     @IBOutlet weak var firstTeamLogotipeImg: UIImageView!
     @IBOutlet weak var seconTeamLogotipeImg: UIImageView!
     @IBOutlet weak var firstTeamNameLbl: UILabel!
@@ -28,6 +28,14 @@ class GameScheduleVC: UIViewController {
     @IBOutlet weak var scheduleTableView: UITableView!
     @IBOutlet weak var viewHidhConstraint: NSLayoutConstraint!
     @IBOutlet weak var fullScheduleBtn: UIButton!
+    @IBOutlet weak var noGameCover: UIView!
+    @IBOutlet weak var smalScreenGameInfoStackView: UIStackView!
+    @IBOutlet weak var bigScreenGameInfoStackView: UIStackView!
+    @IBOutlet weak var firstTeamLogoBigImg: UIImageView!
+    @IBOutlet weak var firstTeamNameBigLbl: UILabel!
+    @IBOutlet weak var secondTeamNameBigLbl: UILabel!
+    @IBOutlet weak var secondTeamLogoBigImg: UIImageView!
+    
     
     private var gamesArray = [Game]()
     private lazy var gamesReference:CollectionReference = Firestore.firestore().collection(GAMES_REF)
@@ -38,6 +46,8 @@ class GameScheduleVC: UIViewController {
     private var isFullScheduleOpen = false
     private let halfHeightOfScreenSize = UIScreen.main.bounds.height/2 - 45
     
+    var choosenLeague: String = "SBLD"
+    
     override var preferredStatusBarStyle : UIStatusBarStyle {
 //        return UIStatusBarStyle.lightContent
         return UIStatusBarStyle.default   // Make dark again
@@ -47,9 +57,16 @@ class GameScheduleVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewHidhConstraint.constant = halfHeightOfScreenSize
+        if UIScreen.main.bounds.height > 667 {
+            bigScreenGameInfoStackView.isHidden = false
+            smalScreenGameInfoStackView.isHidden = true
+        } else {
+            bigScreenGameInfoStackView.isHidden = true
+            smalScreenGameInfoStackView.isHidden = false
+        }
         scheduleTableView.dataSource = self
         scheduleTableView.delegate = self
-        manOrWomanSegmentControl.layer.cornerRadius = 5
+        leagueSegmentControl.layer.cornerRadius = 5
         swipeNextGame()
     }
     
@@ -78,12 +95,13 @@ class GameScheduleVC: UIViewController {
     
     func setListener () {
         gameScheduleListener = gamesReference
-        .whereField(IS_MEN_TEAM, isEqualTo: isMenTeam)
+        .whereField(TEAM_LEAGUE, isEqualTo: choosenLeague)
         .order(by: GAME_DATE_AND_TIME, descending: false)
         .addSnapshotListener({ (snapshot, error) in
             if let error = error {
                 debugPrint("error fetching docs: \(error)")
             } else {
+                self.noGameCover.isHidden = true
                 self.gamesArray.removeAll()
                 self.gamesArray = Game.parseData(snapshot: snapshot)
                 self.scheduleTableView.reloadData()
@@ -96,7 +114,10 @@ class GameScheduleVC: UIViewController {
 
         
 //        need to add function to hide nextgame section if no games on future or change next game information
-        guard gamesArray.count != 0 else { return }
+        guard gamesArray.count != 0 else {
+            noGameCover.isHidden = false
+            return
+        }
         let filteredGamesArray = gamesArray.filter { (game) -> Bool in
             let currentDate = Date()
             if game.gameDateAndTime > currentDate {
@@ -106,10 +127,13 @@ class GameScheduleVC: UIViewController {
             }
         }
         
-        let nextGame: Game = filteredGamesArray.first!
+        if let nextGame: Game = filteredGamesArray.first {
+            noGameCover.isHidden = true
         
         firstTeamNameLbl.text = nextGame.team1Name
+            firstTeamNameBigLbl.text = firstTeamNameLbl.text
         secondTeamNameLbl.text = nextGame.team2Name
+            secondTeamNameBigLbl.text = secondTeamNameLbl.text
         nextGamePlaceLbl.text = "\(nextGame.gameCity!), \(nextGame.gamePlace!)"
         let formatter = DateFormatter()
         
@@ -122,6 +146,11 @@ class GameScheduleVC: UIViewController {
         timeIntervalToNextGame = nextGame.gameDateAndTime.timeIntervalSince(currentDate)
         updateTimerLbl(timeInterval: timeIntervalToNextGame)
         timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        } else if filteredGamesArray.first == nil {
+            isFullScheduleOpen = false
+            fullScheduleOpener()
+            noGameCover.isHidden = false
+        }
     }
     
     @objc func updateTimer() {
@@ -191,14 +220,16 @@ class GameScheduleVC: UIViewController {
     }
     
     @IBAction func segmentControlWasSwitched(_ sender: Any) {
-        switch manOrWomanSegmentControl.selectedSegmentIndex {
-        case 0:
-            isMenTeam = true
-        case 1:
-            isMenTeam = false
-        default:
-             isMenTeam = true
-        }
+        switch leagueSegmentControl.selectedSegmentIndex{
+    case 0:
+        choosenLeague = "SBLD"
+    case 1:
+        choosenLeague = "BE Herr"
+    case 2:
+        choosenLeague = "BE Dam"
+    default:
+        choosenLeague = "SBLD"
+    }
         
         gameScheduleListener.remove()
         timer.invalidate()

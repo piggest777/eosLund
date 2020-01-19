@@ -9,7 +9,7 @@
 import Foundation
 
 class Team {
-   private(set)var name: String
+   private(set) var name: String
    private(set) var city: String
   
     init(name: String, city:String) {

@@ -3,10 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1242CA12F9F8988B0DB67FE9 /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B5BA7887D690FA802C12C5 /* Pods_eosLund.framework */; };
+		B515D9E523CBF2B9000913F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B515D9E423CBF2B9000913F6 /* ViewController.swift */; };
+		B5529B1E23C8E1B1009149BC /* NewsInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5529B1D23C8E1B1009149BC /* NewsInstance.swift */; };
+		B5529B2023C8E5D5009149BC /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5529B1F23C8E5D5009149BC /* NewsCell.swift */; };
+		B5529B2223C8F124009149BC /* RoundedBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5529B2123C8F124009149BC /* RoundedBtn.swift */; };
+		B558613F23C6B1F200EAC330 /* CoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558613E23C6B1F200EAC330 /* CoachVC.swift */; };
+		B558614123C6B45100EAC330 /* CoachCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558614023C6B45100EAC330 /* CoachCollectionViewCell.swift */; };
+		B558614323C6BD8F00EAC330 /* Couch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558614223C6BD8F00EAC330 /* Couch.swift */; };
+		B558614623C7949700EAC330 /* NetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558614523C7949700EAC330 /* NetService.swift */; };
+		B558614823C7EC5400EAC330 /* NewsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558614723C7EC5400EAC330 /* NewsVC.swift */; };
+		B574950323B16DA500E1BCDD /* PlayerInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B574950223B16DA500E1BCDD /* PlayerInfoVC.swift */; };
+		B58D651C23CCB94700A4A2A0 /* dateFormatStringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */; };
+		B595D94E23C9042500A720B4 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */; };
+		B595D95023C912D700A720B4 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595D94F23C912D700A720B4 /* PaddingLabel.swift */; };
 		B59E75E82399AE9A00191EB5 /* TeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E75E72399AE9A00191EB5 /* TeamCollectionViewCell.swift */; };
 		B59E75EA2399C3A900191EB5 /* PlayerRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E75E92399C3A900191EB5 /* PlayerRealmObject.swift */; };
 		B5A6BFE1239C775E00B5E9F4 /* PlayerFirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A6BFE0239C775E00B5E9F4 /* PlayerFirestoreModel.swift */; };
@@ -24,11 +38,24 @@
 		B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */; };
 		B5B7A3F22391A71300D2419F /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F12391A71300D2419F /* Team.swift */; };
 		B5B7A3F52393D71200D2419F /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F42393D71200D2419F /* ViewExt.swift */; };
-		BE185008B2384FE43B7EBC7E /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D3A159A8A63610B34C5CE3 /* Pods_eosLund.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		52D3A159A8A63610B34C5CE3 /* Pods_eosLund.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eosLund.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		10B5BA7887D690FA802C12C5 /* Pods_eosLund.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eosLund.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A33F39363BFAAD6C5AB0D8DB /* Pods-eosLund.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.debug.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.debug.xcconfig"; sourceTree = "<group>"; };
+		B515D9E423CBF2B9000913F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5529B1D23C8E1B1009149BC /* NewsInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInstance.swift; sourceTree = "<group>"; };
+		B5529B1F23C8E5D5009149BC /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		B5529B2123C8F124009149BC /* RoundedBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBtn.swift; sourceTree = "<group>"; };
+		B558613E23C6B1F200EAC330 /* CoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachVC.swift; sourceTree = "<group>"; };
+		B558614023C6B45100EAC330 /* CoachCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachCollectionViewCell.swift; sourceTree = "<group>"; };
+		B558614223C6BD8F00EAC330 /* Couch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Couch.swift; sourceTree = "<group>"; };
+		B558614523C7949700EAC330 /* NetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetService.swift; sourceTree = "<group>"; };
+		B558614723C7EC5400EAC330 /* NewsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsVC.swift; sourceTree = "<group>"; };
+		B574950223B16DA500E1BCDD /* PlayerInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfoVC.swift; sourceTree = "<group>"; };
+		B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateFormatStringExt.swift; sourceTree = "<group>"; };
+		B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
+		B595D94F23C912D700A720B4 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		B59E75E72399AE9A00191EB5 /* TeamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCollectionViewCell.swift; sourceTree = "<group>"; };
 		B59E75E92399C3A900191EB5 /* PlayerRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRealmObject.swift; sourceTree = "<group>"; };
 		B5A6BFE0239C775E00B5E9F4 /* PlayerFirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerFirestoreModel.swift; sourceTree = "<group>"; };
@@ -48,8 +75,7 @@
 		B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesTableViewCell.swift; sourceTree = "<group>"; };
 		B5B7A3F12391A71300D2419F /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		B5B7A3F42393D71200D2419F /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
-		C4EEB1B8349914BF6C036A4A /* Pods-eosLund.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.release.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.release.xcconfig"; sourceTree = "<group>"; };
-		F3F2E973D63B18D7F0BF11C2 /* Pods-eosLund.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.debug.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.debug.xcconfig"; sourceTree = "<group>"; };
+		BB2472A3A2BF4E625510320F /* Pods-eosLund.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.release.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,28 +83,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE185008B2384FE43B7EBC7E /* Pods_eosLund.framework in Frameworks */,
+				1242CA12F9F8988B0DB67FE9 /* Pods_eosLund.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A61370DC115CE17C58562A6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				52D3A159A8A63610B34C5CE3 /* Pods_eosLund.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		AD6241853061A2D76CB23BE9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F3F2E973D63B18D7F0BF11C2 /* Pods-eosLund.debug.xcconfig */,
-				C4EEB1B8349914BF6C036A4A /* Pods-eosLund.release.xcconfig */,
+				A33F39363BFAAD6C5AB0D8DB /* Pods-eosLund.debug.xcconfig */,
+				BB2472A3A2BF4E625510320F /* Pods-eosLund.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B558614423C7947E00EAC330 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B558614523C7949700EAC330 /* NetService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		B5AFD0DF238D5CA900EA88B8 = {
@@ -87,7 +113,7 @@
 				B5AFD0EA238D5CA900EA88B8 /* eosLund */,
 				B5AFD0E9238D5CA900EA88B8 /* Products */,
 				AD6241853061A2D76CB23BE9 /* Pods */,
-				2A61370DC115CE17C58562A6 /* Frameworks */,
+				FCB7BEB09EF7A463429ECDBE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +128,7 @@
 		B5AFD0EA238D5CA900EA88B8 /* eosLund */ = {
 			isa = PBXGroup;
 			children = (
+				B558614423C7947E00EAC330 /* Services */,
 				B5AFD104238EB7A400EA88B8 /* Model */,
 				B5AFD105238EB7AC00EA88B8 /* View */,
 				B5AFD103238EB79D00EA88B8 /* Controller */,
@@ -123,6 +150,10 @@
 			children = (
 				B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */,
 				B5AFD0F1238D5CA900EA88B8 /* TeamInformationVC.swift */,
+				B574950223B16DA500E1BCDD /* PlayerInfoVC.swift */,
+				B558613E23C6B1F200EAC330 /* CoachVC.swift */,
+				B558614723C7EC5400EAC330 /* NewsVC.swift */,
+				B515D9E423CBF2B9000913F6 /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -131,9 +162,11 @@
 			isa = PBXGroup;
 			children = (
 				B5AFD10D238EC2AF00EA88B8 /* Game.swift */,
+				B558614223C6BD8F00EAC330 /* Couch.swift */,
 				B5B7A3F12391A71300D2419F /* Team.swift */,
 				B59E75E92399C3A900191EB5 /* PlayerRealmObject.swift */,
 				B5A6BFE0239C775E00B5E9F4 /* PlayerFirestoreModel.swift */,
+				B5529B1D23C8E1B1009149BC /* NewsInstance.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +177,10 @@
 				B5AFD108238EB7F300EA88B8 /* RoundedShadowButton.swift */,
 				B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */,
 				B59E75E72399AE9A00191EB5 /* TeamCollectionViewCell.swift */,
+				B558614023C6B45100EAC330 /* CoachCollectionViewCell.swift */,
+				B5529B1F23C8E5D5009149BC /* NewsCell.swift */,
+				B5529B2123C8F124009149BC /* RoundedBtn.swift */,
+				B595D94F23C912D700A720B4 /* PaddingLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -160,8 +197,18 @@
 			isa = PBXGroup;
 			children = (
 				B5B7A3F42393D71200D2419F /* ViewExt.swift */,
+				B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */,
+				B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */,
 			);
 			path = Ext;
+			sourceTree = "<group>";
+		};
+		FCB7BEB09EF7A463429ECDBE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10B5BA7887D690FA802C12C5 /* Pods_eosLund.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,11 +218,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5AFD0FE238D5CAC00EA88B8 /* Build configuration list for PBXNativeTarget "eosLund" */;
 			buildPhases = (
-				40C0A70F89C87E9625FD3916 /* [CP] Check Pods Manifest.lock */,
+				127CA1ADB227E1FC8262D472 /* [CP] Check Pods Manifest.lock */,
 				B5AFD0E4238D5CA900EA88B8 /* Sources */,
 				B5AFD0E5238D5CA900EA88B8 /* Frameworks */,
 				B5AFD0E6238D5CA900EA88B8 /* Resources */,
-				8435758CF3628A2FD9A9294B /* [CP] Embed Pods Frameworks */,
+				708515589079A838EE21FB09 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -234,7 +281,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		40C0A70F89C87E9625FD3916 /* [CP] Check Pods Manifest.lock */ = {
+		127CA1ADB227E1FC8262D472 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -256,7 +303,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8435758CF3628A2FD9A9294B /* [CP] Embed Pods Frameworks */ = {
+		708515589079A838EE21FB09 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -280,18 +327,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B515D9E523CBF2B9000913F6 /* ViewController.swift in Sources */,
 				B5AFD0F2238D5CA900EA88B8 /* TeamInformationVC.swift in Sources */,
+				B558614823C7EC5400EAC330 /* NewsVC.swift in Sources */,
+				B558614623C7949700EAC330 /* NetService.swift in Sources */,
+				B558614123C6B45100EAC330 /* CoachCollectionViewCell.swift in Sources */,
 				B5AFD109238EB7F300EA88B8 /* RoundedShadowButton.swift in Sources */,
 				B5AFD0F0238D5CA900EA88B8 /* GameScheduleVC.swift in Sources */,
 				B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */,
 				B5A6BFE1239C775E00B5E9F4 /* PlayerFirestoreModel.swift in Sources */,
+				B595D94E23C9042500A720B4 /* UIViewControllerExt.swift in Sources */,
+				B5529B2223C8F124009149BC /* RoundedBtn.swift in Sources */,
 				B5B7A3F52393D71200D2419F /* ViewExt.swift in Sources */,
+				B558614323C6BD8F00EAC330 /* Couch.swift in Sources */,
+				B595D95023C912D700A720B4 /* PaddingLabel.swift in Sources */,
+				B5529B2023C8E5D5009149BC /* NewsCell.swift in Sources */,
 				B5AFD10E238EC2AF00EA88B8 /* Game.swift in Sources */,
 				B5AFD0EC238D5CA900EA88B8 /* AppDelegate.swift in Sources */,
+				B58D651C23CCB94700A4A2A0 /* dateFormatStringExt.swift in Sources */,
 				B59E75EA2399C3A900191EB5 /* PlayerRealmObject.swift in Sources */,
 				B5AFD0EE238D5CA900EA88B8 /* SceneDelegate.swift in Sources */,
 				B59E75E82399AE9A00191EB5 /* TeamCollectionViewCell.swift in Sources */,
+				B574950323B16DA500E1BCDD /* PlayerInfoVC.swift in Sources */,
 				B5B7A3F22391A71300D2419F /* Team.swift in Sources */,
+				B558613F23C6B1F200EAC330 /* CoachVC.swift in Sources */,
+				B5529B1E23C8E1B1009149BC /* NewsInstance.swift in Sources */,
 				B5AFD10C238EC25700EA88B8 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,16 +494,79 @@
 		};
 		B5AFD0FF238D5CAC00EA88B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3F2E973D63B18D7F0BF11C2 /* Pods-eosLund.debug.xcconfig */;
+			baseConfigurationReference = A33F39363BFAAD6C5AB0D8DB /* Pods-eosLund.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83G4KB5W5L;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = eosLund/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseFirestore\"",
+					"-framework",
+					"\"FirebaseFirestoreSwift\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleDataTransportCCTSupport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SwiftSoup\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"absl\"",
+					"-framework",
+					"\"grpc\"",
+					"-framework",
+					"\"grpcpp\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-framework",
+					"\"openssl_grpc\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = se.eosLund.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -454,16 +577,79 @@
 		};
 		B5AFD100238D5CAC00EA88B8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4EEB1B8349914BF6C036A4A /* Pods-eosLund.release.xcconfig */;
+			baseConfigurationReference = BB2472A3A2BF4E625510320F /* Pods-eosLund.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83G4KB5W5L;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = eosLund/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseFirestore\"",
+					"-framework",
+					"\"FirebaseFirestoreSwift\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleDataTransportCCTSupport\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Realm\"",
+					"-framework",
+					"\"RealmSwift\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SwiftSoup\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"absl\"",
+					"-framework",
+					"\"grpc\"",
+					"-framework",
+					"\"grpcpp\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-framework",
+					"\"openssl_grpc\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = se.eosLund.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -11,5 +11,10 @@ target 'eosLund' do
   pod 'FirebaseFirestoreSwift'
   pod 'RealmSwift'
   pod 'Firebase/Storage'
+  pod 'SwiftSoup'
+  pod 'Alamofire', '~> 5.0.0-rc.3'
+  pod 'AlamofireImage', '~> 4.0.0-beta.6'
+  pod 'SwiftyJSON'
+  pod 'YoutubePlayer-in-WKWebView'
 
 end
