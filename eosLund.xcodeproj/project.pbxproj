@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1242CA12F9F8988B0DB67FE9 /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B5BA7887D690FA802C12C5 /* Pods_eosLund.framework */; };
-		B515D9E523CBF2B9000913F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B515D9E423CBF2B9000913F6 /* ViewController.swift */; };
 		B5529B1E23C8E1B1009149BC /* NewsInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5529B1D23C8E1B1009149BC /* NewsInstance.swift */; };
 		B5529B2023C8E5D5009149BC /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5529B1F23C8E5D5009149BC /* NewsCell.swift */; };
 		B5529B2223C8F124009149BC /* RoundedBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5529B2123C8F124009149BC /* RoundedBtn.swift */; };
@@ -17,6 +16,8 @@
 		B558614323C6BD8F00EAC330 /* Couch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558614223C6BD8F00EAC330 /* Couch.swift */; };
 		B558614623C7949700EAC330 /* NetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558614523C7949700EAC330 /* NetService.swift */; };
 		B558614823C7EC5400EAC330 /* NewsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558614723C7EC5400EAC330 /* NewsVC.swift */; };
+		B569D82723DF1FC800FDA022 /* GameInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569D82623DF1FC800FDA022 /* GameInfoVC.swift */; };
+		B56FFCC023E8588100A3526C /* stringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FFCBF23E8588100A3526C /* stringExt.swift */; };
 		B574950323B16DA500E1BCDD /* PlayerInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B574950223B16DA500E1BCDD /* PlayerInfoVC.swift */; };
 		B58D651C23CCB94700A4A2A0 /* dateFormatStringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */; };
 		B595D94E23C9042500A720B4 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */; };
@@ -43,7 +44,6 @@
 /* Begin PBXFileReference section */
 		10B5BA7887D690FA802C12C5 /* Pods_eosLund.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eosLund.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33F39363BFAAD6C5AB0D8DB /* Pods-eosLund.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.debug.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.debug.xcconfig"; sourceTree = "<group>"; };
-		B515D9E423CBF2B9000913F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5529B1D23C8E1B1009149BC /* NewsInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInstance.swift; sourceTree = "<group>"; };
 		B5529B1F23C8E5D5009149BC /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		B5529B2123C8F124009149BC /* RoundedBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBtn.swift; sourceTree = "<group>"; };
@@ -52,6 +52,8 @@
 		B558614223C6BD8F00EAC330 /* Couch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Couch.swift; sourceTree = "<group>"; };
 		B558614523C7949700EAC330 /* NetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetService.swift; sourceTree = "<group>"; };
 		B558614723C7EC5400EAC330 /* NewsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsVC.swift; sourceTree = "<group>"; };
+		B569D82623DF1FC800FDA022 /* GameInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoVC.swift; sourceTree = "<group>"; };
+		B56FFCBF23E8588100A3526C /* stringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringExt.swift; sourceTree = "<group>"; };
 		B574950223B16DA500E1BCDD /* PlayerInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfoVC.swift; sourceTree = "<group>"; };
 		B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateFormatStringExt.swift; sourceTree = "<group>"; };
 		B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
@@ -149,11 +151,11 @@
 			isa = PBXGroup;
 			children = (
 				B5AFD0EF238D5CA900EA88B8 /* GameScheduleVC.swift */,
+				B569D82623DF1FC800FDA022 /* GameInfoVC.swift */,
 				B5AFD0F1238D5CA900EA88B8 /* TeamInformationVC.swift */,
 				B574950223B16DA500E1BCDD /* PlayerInfoVC.swift */,
 				B558613E23C6B1F200EAC330 /* CoachVC.swift */,
 				B558614723C7EC5400EAC330 /* NewsVC.swift */,
-				B515D9E423CBF2B9000913F6 /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -175,12 +177,12 @@
 			isa = PBXGroup;
 			children = (
 				B5AFD108238EB7F300EA88B8 /* RoundedShadowButton.swift */,
+				B5529B2123C8F124009149BC /* RoundedBtn.swift */,
+				B595D94F23C912D700A720B4 /* PaddingLabel.swift */,
 				B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */,
 				B59E75E72399AE9A00191EB5 /* TeamCollectionViewCell.swift */,
 				B558614023C6B45100EAC330 /* CoachCollectionViewCell.swift */,
 				B5529B1F23C8E5D5009149BC /* NewsCell.swift */,
-				B5529B2123C8F124009149BC /* RoundedBtn.swift */,
-				B595D94F23C912D700A720B4 /* PaddingLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -199,6 +201,7 @@
 				B5B7A3F42393D71200D2419F /* ViewExt.swift */,
 				B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */,
 				B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */,
+				B56FFCBF23E8588100A3526C /* stringExt.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -327,7 +330,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B515D9E523CBF2B9000913F6 /* ViewController.swift in Sources */,
 				B5AFD0F2238D5CA900EA88B8 /* TeamInformationVC.swift in Sources */,
 				B558614823C7EC5400EAC330 /* NewsVC.swift in Sources */,
 				B558614623C7949700EAC330 /* NetService.swift in Sources */,
@@ -335,6 +337,7 @@
 				B5AFD109238EB7F300EA88B8 /* RoundedShadowButton.swift in Sources */,
 				B5AFD0F0238D5CA900EA88B8 /* GameScheduleVC.swift in Sources */,
 				B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */,
+				B569D82723DF1FC800FDA022 /* GameInfoVC.swift in Sources */,
 				B5A6BFE1239C775E00B5E9F4 /* PlayerFirestoreModel.swift in Sources */,
 				B595D94E23C9042500A720B4 /* UIViewControllerExt.swift in Sources */,
 				B5529B2223C8F124009149BC /* RoundedBtn.swift in Sources */,
@@ -350,6 +353,7 @@
 				B59E75E82399AE9A00191EB5 /* TeamCollectionViewCell.swift in Sources */,
 				B574950323B16DA500E1BCDD /* PlayerInfoVC.swift in Sources */,
 				B5B7A3F22391A71300D2419F /* Team.swift in Sources */,
+				B56FFCC023E8588100A3526C /* stringExt.swift in Sources */,
 				B558613F23C6B1F200EAC330 /* CoachVC.swift in Sources */,
 				B5529B1E23C8E1B1009149BC /* NewsInstance.swift in Sources */,
 				B5AFD10C238EC25700EA88B8 /* Constant.swift in Sources */,

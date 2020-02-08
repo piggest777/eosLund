@@ -112,8 +112,6 @@ class GameScheduleVC: UIViewController {
     
     func loadInfoToNextGameView() {
 
-        
-//        need to add function to hide nextgame section if no games on future or change next game information
         guard gamesArray.count != 0 else {
             noGameCover.isHidden = false
             return
@@ -135,13 +133,7 @@ class GameScheduleVC: UIViewController {
         secondTeamNameLbl.text = nextGame.team2Name
             secondTeamNameBigLbl.text = secondTeamNameLbl.text
         nextGamePlaceLbl.text = "\(nextGame.gameCity!), \(nextGame.gamePlace!)"
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "d MMM yyyy, HH:mm"
-        formatter.locale = .current
-        formatter.timeZone = TimeZone(identifier: "Europe/Stockholm")
-        
-        nextGameDateAndTimeLbl.text = formatter.string(from: nextGame.gameDateAndTime)
+            nextGameDateAndTimeLbl.text = nextGame.gameDateAndTime.toString()
         let currentDate = Date()
         timeIntervalToNextGame = nextGame.gameDateAndTime.timeIntervalSince(currentDate)
         updateTimerLbl(timeInterval: timeIntervalToNextGame)
@@ -224,7 +216,7 @@ class GameScheduleVC: UIViewController {
     case 0:
         choosenLeague = "SBLD"
     case 1:
-        choosenLeague = "BE Herr"
+        choosenLeague = "SE Herr"
     case 2:
         choosenLeague = "BE Dam"
     default:
@@ -251,6 +243,23 @@ extension GameScheduleVC: UITableViewDelegate, UITableViewDataSource {
         cell.configureCell(game: gamesArray[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toGameInfoVC", sender: gamesArray[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toGameInfoVC" {
+            if let destinationVC = segue.destination as? GameInfoVC {
+                if let game = sender as? Game {
+                    destinationVC.game = game
+                } else {
+                    print("couldn`t find game")
+                }
+            }
+            else { return }
+        } else {return}
     }
   
 }

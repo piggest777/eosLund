@@ -8,24 +8,15 @@
 
 import Foundation
 
-extension String {
+extension Date {
     
-    func dateFormateFrom(string: String) -> String {
-        
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-
-        let dateFormatterOut = DateFormatter()
-        dateFormatterOut.dateFormat = "MMM dd,yyyy"
-
-        if let date = dateFormatterGet.date(from: string) {
-           let dateToReturn = dateFormatterOut.string(from: date)
-            return dateToReturn
-        } else {
-           return " "
-        }
-        
+    func toString(format: String = "d MMMM yyyy, HH:mm") -> String {
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.timeZone = TimeZone(identifier: "Europe/Stockholm")
+        formatter.dateFormat = format
+        return formatter.string(from: self)
     }
+    
     
 }

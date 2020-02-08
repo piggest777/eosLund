@@ -36,22 +36,15 @@ class GamesTableViewCell: UITableViewCell {
 //            team2ScoreLbl.text = String(game.team2Score)
 //        }
         
+        guard let gameDateAndTime = game.gameDateAndTime,
+            let gameCity = game.gameCity,
+            let gamePlace = game.gamePlace
+            else { return }
 
-        
-        let gameCity = game.gameCity!
-        let gamePlace = game.gamePlace!
-        let gameDateAndTime = game.gameDateAndTime
-        
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "d MMM yyyy, HH:mm"
-        formatter.locale = .current
-        formatter.timeZone = TimeZone(identifier: "Europe/Stockholm")
-        
-        let gametime = formatter.string(from: gameDateAndTime!)
+        let gameTime = gameDateAndTime.toString(format: "d MMM yyyy, HH:mm")
         
         
-        gameDateTImeAndPlaceLbl.text = "\(String(describing: gameCity)), \(String(describing: gamePlace)), \(gametime)" 
+        gameDateTImeAndPlaceLbl.text = "\(gameCity), \(gamePlace), \(gameTime)"
     }
 
 

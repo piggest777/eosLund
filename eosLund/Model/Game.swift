@@ -16,6 +16,10 @@ class Game {
     private(set) var team2City: String!
     private(set) var team1Score: Int!
     private(set) var team2Score: Int!
+    private(set) var team1Players: String?
+    private(set) var team2Players: String?
+    private(set) var statsLink: String?
+    private(set) var gameDescription: String?
     private(set) var gameCity: String!
     private(set) var gamePlace: String!
     private(set) var gameDateAndTime: Date!
@@ -23,7 +27,7 @@ class Game {
     private(set) var documentId: String!
     
     
-    init(team1: Team, team2: Team, team1Score: Int, team2Score: Int, gameCity: String!, gamePlace: String!, gameDateAndTime: Date, teamLeague: String, documentId: String) {
+    init(team1: Team, team2: Team, team1Score: Int, team2Score: Int, gameCity: String!, gamePlace: String!, gameDateAndTime: Date, teamLeague: String, documentId: String, team1Players: String?, team2Players: String?, statsLink: String?, gameDesc: String?) {
         self.team1Name = team1.name
         self.team2Name = team2.name
         self.team1City = team1.city
@@ -35,6 +39,10 @@ class Game {
         self.gameDateAndTime = gameDateAndTime
         self.teamLeague = teamLeague
         self.documentId = documentId
+        self.team1Players = team1Players
+        self.team2Players = team2Players
+        self.statsLink = statsLink
+        self.gameDescription = gameDesc
     }
     
     class func parseData (snapshot: QuerySnapshot?) -> [Game]{
@@ -56,11 +64,58 @@ class Game {
             let gameDateAndTime = dateAndTimeTimestamp.dateValue()
             let teamLeague: String = data[TEAM_LEAGUE] as? String ?? "undefined"
             let documentId = document.documentID
-            let team1 = Team(name: team1Name, city: team1City)
-            let team2 = Team(name: team2Name, city: team2City)
+            let team1Players: String? = data[TEAM_1_PLAYERS] as? String ?? nil
+            let team2Players: String? = data[TEAM_2_PlAYERS] as? String ?? nil
+            let gameDesc: String? = data[GAME_DESCRIPTION] as? String ?? nil
+            let statsLink: String? = data[STATISTIC_LINK] as? String ?? nil
             
             
-            let newGame = Game(team1: team1, team2: team2, team1Score: team1Score, team2Score: team2Score, gameCity: gameCity, gamePlace: gamePlace, gameDateAndTime: gameDateAndTime, teamLeague: teamLeague, documentId: documentId)
+            
+            var team1:Team?
+            var team2: Team?
+            var homeTeamScore: Int = 0
+            var guestTeamScore: Int = 0
+            var homeTeamPlayers: String?
+            var guestTeamPlayers: String?
+            
+            func setupTeams(isTeam1HomeTeam: Bool) {
+                if isTeam1HomeTeam {
+                    team1 = Team(name: team1Name, city: team1City)
+                    team2 = Team(name: team2Name, city: team2City)
+                    homeTeamScore = team1Score
+                    guestTeamScore = team2Score
+                    homeTeamPlayers = team1Players
+                    guestTeamPlayers = team2Players
+                } else {
+                    team1 = Team(name: team2Name, city: team2City)
+                    team2 = Team(name: team1Name, city: team1City)
+                    homeTeamScore = team2Score
+                    guestTeamScore = team1Score
+                    homeTeamPlayers = team2Players
+                    guestTeamPlayers = team1Players
+                }
+
+            }
+            
+            if gameCity == "Lund" {
+                if team1City == "Lund"{
+                    setupTeams(isTeam1HomeTeam: true)
+                } else if team2City == "Lund" {
+                    setupTeams(isTeam1HomeTeam: false)
+                } else {
+                    setupTeams(isTeam1HomeTeam: true)
+                }
+            } else {
+                if team1City == "Lund"{
+                    setupTeams(isTeam1HomeTeam: false)
+                } else if team2City == "Lund" {
+                    setupTeams(isTeam1HomeTeam: true)
+                } else {
+                    setupTeams(isTeam1HomeTeam: false)
+                }
+            }
+            
+            let newGame = Game(team1: team1!, team2: team2!, team1Score: homeTeamScore, team2Score: guestTeamScore, gameCity: gameCity, gamePlace: gamePlace, gameDateAndTime: gameDateAndTime, teamLeague: teamLeague, documentId: documentId, team1Players: homeTeamPlayers, team2Players: guestTeamPlayers, statsLink: statsLink, gameDesc: gameDesc )
             
             games.append(newGame)
         }

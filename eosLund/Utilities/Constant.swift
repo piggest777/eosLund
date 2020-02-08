@@ -26,6 +26,11 @@ let GAME_DATE_AND_TIME = "gameDateAndTime"
 let TEAM_1 = "team1"
 let TEAM_2 = "team2"
 let TEAM_LEAGUE = "teamLeague"
+let TEAM_1_PLAYERS = "team1Players"
+let TEAM_2_PlAYERS = "team2Players"
+let GAME_DESCRIPTION = "gameDescription"
+let STATISTIC_LINK = "statsLink"
+
 
 let PLAYER_NAME = "playerName"
 let PLAYER_NUMBER = "playerNumber"

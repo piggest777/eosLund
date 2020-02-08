@@ -33,8 +33,8 @@ class CoachVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         switch choosenLeague {
         case "SBLD":
             leagueLbl.text = "SWEDISH BASKETBALL LEAGUE WOMAN"
-        case "BE Herr":
-            leagueLbl.text = "BASKETETTAN MAN"
+        case "SE Herr":
+            leagueLbl.text = "SUPERETTAN MAN"
         case "BE Dam":
             leagueLbl.text = "BASKETETTAN WOMAN"
         default:

@@ -66,8 +66,8 @@ class PlayerInfoVC: UIViewController {
         switch player.playerLeague {
         case "SBLD":
             playerLeague.text = "SWEDISH BASKETBALL LEAGUE WOMAN"
-        case "BE Herr":
-            playerLeague.text = "BASKETETTAN MAN"
+        case "SE Herr":
+            playerLeague.text = "SUPERETTAN MAN"
         case "BE Dam":
             playerLeague.text = "BASKETETTAN WOMAN"
         default:
