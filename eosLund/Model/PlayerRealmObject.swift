@@ -68,7 +68,7 @@ class PlayerRealmObject: Object {
            let realm =  try Realm()
             try realm.write {
                 realm.add(playerObject, update: .modified)
-                print(playerObject)
+                
             }
             completionHandler(true)
         } catch  {

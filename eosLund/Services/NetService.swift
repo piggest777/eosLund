@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Alamofire
+import AlamofireImage
 
 class NetService {
     
@@ -26,7 +28,37 @@ class NetService {
                 completionHandler(image, true)
             }
         }
-        
     }
     
+    func getImageBy(url: String, completionHandler: @escaping (UIImage?)->()) {
+
+        AF.request(url).responseImage { (response) in
+            if response.error == nil {
+                if let responseImge = response.value {
+                    completionHandler(responseImge)
+                } else {
+                    completionHandler(nil)
+                }
+            } else {
+                completionHandler(nil)
+            }
+        }
+    }
+    
+    func getTournamentTableUrl(league: String, completionHandler: @escaping (String?)->()) {
+        
+
+        Firestore.firestore().collection("tournamentTablesUrl").document("\(league)").getDocument { (snapshot, error) in
+            if error == nil {
+                guard let data = snapshot?.data() else { return }
+                let returnedUrl: String? = data["url"] as? String ?? nil
+               completionHandler(returnedUrl)
+            }
+            else {
+            debugPrint("can`t get tournament url", error as Any)
+                completionHandler(nil)
+        }
+        }
+    }
+   
 }

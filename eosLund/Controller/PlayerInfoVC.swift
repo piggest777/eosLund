@@ -39,7 +39,7 @@ class PlayerInfoVC: UIViewController {
                 debugPrint("problem to get player`s info")
             } else {
                 guard let data = snapshot?.data() else {return}
-                self.ageLbl.text = data[PLAYER_AGE] as? String ?? "NO INFO"
+                self.ageLbl.text = data[DAY_OF_BIRTH] as? String ?? "NO INFO"
                 self.heightLbl.text = data[PLAYER_HEIGHT] as? String ?? "NO INFO"
                 let nationalityData = data[PLAYER_NATIONALITY] as? String ?? "NO INFO"
                 if nationalityData == "NO INFO" {

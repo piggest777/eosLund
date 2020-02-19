@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GamesTableViewCell: UITableViewCell {
 
@@ -20,10 +21,48 @@ class GamesTableViewCell: UITableViewCell {
     
     func configureCell(game: Game) {
         
-        team1NameLbl.text = "\(game.team1Name!) \n \(game.team1City!)"
-        team2NameLbl.text = "\(game.team2Name!) \n \(game.team2City!)"
-                    team1ScoreLbl.text = String(game.team1Score)
-                    team2ScoreLbl.text = String(game.team2Score)
+        var oppositeTeam: TeamRealmObject?
+        
+        do {
+             oppositeTeam = try Realm().object(ofType: TeamRealmObject.self, forPrimaryKey: game.oppositeTeamCode)
+            print(oppositeTeam?.id)
+        } catch  {
+            debugPrint("Can`t get realm object by key")
+
+        }
+        
+        if oppositeTeam == nil {
+             oppositeTeam = TeamRealmObject(id: "NULL", teamName: "Team", teamCity: "", homeArena: "", logoPathName: "defaultLogo.png")
+        }
+
+        if game.isHomeGame {
+            team1NameLbl.text = "\(EOS_TEAM.teamName!) \n \(EOS_TEAM.teamCity!)"
+            team2NameLbl.text = "\(oppositeTeam!.teamName) \n \(oppositeTeam!.teamCity)"
+            team1ScoreLbl.text = "\(game.eosScore!)"
+            team2ScoreLbl.text = "\(game.oppositeTeamScore!)"
+            let gameCity = EOS_TEAM.teamCity
+            let gamePlace = EOS_TEAM.homeArena
+            if let gameDateAndTime = game.gameDateAndTime {
+                let gameTime = gameDateAndTime.toString(format: "d MMM yyyy, HH:mm")
+                gameDateTImeAndPlaceLbl.text = "\(gameCity!), \(gamePlace!), \(gameTime)"
+            } else {
+                 gameDateTImeAndPlaceLbl.text = "\(gameCity!), \(gamePlace!)"
+            }
+        } else {
+            team2NameLbl.text = "\(EOS_TEAM.teamName!) \n \(EOS_TEAM.teamCity!)"
+            team1NameLbl.text = "\(oppositeTeam!.teamName) \n \(oppositeTeam!.teamCity)"
+            team2ScoreLbl.text = "\(game.eosScore!)"
+            team1ScoreLbl.text = "\(game.oppositeTeamScore!)"
+            let gameCity = oppositeTeam!.teamCity
+            let gamePlace = oppositeTeam!.homeArena
+            if let gameDateAndTime = game.gameDateAndTime {
+                let gameTime = gameDateAndTime.toString(format: "d MMM yyyy, HH:mm")
+                gameDateTImeAndPlaceLbl.text = "\(gameCity), \(gamePlace), \(gameTime)"
+            } else {
+                 gameDateTImeAndPlaceLbl.text = "\(gameCity), \(gamePlace)"
+            }
+        }
+        
         
 //        let currentDate = Date()
 //        if currentDate < game.gameDateAndTime {
@@ -36,15 +75,6 @@ class GamesTableViewCell: UITableViewCell {
 //            team2ScoreLbl.text = String(game.team2Score)
 //        }
         
-        guard let gameDateAndTime = game.gameDateAndTime,
-            let gameCity = game.gameCity,
-            let gamePlace = game.gamePlace
-            else { return }
-
-        let gameTime = gameDateAndTime.toString(format: "d MMM yyyy, HH:mm")
-        
-        
-        gameDateTImeAndPlaceLbl.text = "\(gameCity), \(gamePlace), \(gameTime)"
     }
 
 

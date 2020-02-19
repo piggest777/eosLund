@@ -146,6 +146,7 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         return idsBase
     }
     
+//    rewrite get player by Id func
     func getPlayerFromRealm(for id: String, realmPlayerArray: Results<PlayerRealmObject>) -> PlayerRealmObject {
         var playerToReturn = PlayerRealmObject()
         for player in  realmPlayerArray {
@@ -247,6 +248,7 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         }
     fatalError()
     }
+    
     
     
 }

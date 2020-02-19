@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import RealmSwift
 
 class GameInfoVC: UIViewController {
 
@@ -46,18 +47,89 @@ class GameInfoVC: UIViewController {
     
     func setupBasicInfo () {
         setupBasicInfoView()
+        switchLeague()
+        let realmBasedOppositeTeam = TeamRealmObject.getTeamInfoById(id: game.oppositeTeamCode)
         if let game = game {
-            scorelbl.text = "\(game.team1Score ?? 0) : \(game.team2Score ?? 0)"
-            teamsNamelbl.text = "\(game.team1Name ?? "Team 1") vs \(game.team2Name ?? "Team 2")"
-            if let gameDate: Date = game.gameDateAndTime {
-                gameTimelbl.text = gameDate.toString()
+            if game.isHomeGame{
+                scorelbl.text = "\(game.eosScore ?? 0) : \(game.oppositeTeamScore ?? 0)"
+                teamsNamelbl.text = "\(EOS_TEAM.teamName ?? "Eos Basket") vs \(realmBasedOppositeTeam.teamName)"
+                if let gameDate: Date = game.gameDateAndTime {
+                    gameTimelbl.text = gameDate.toString()
+                } else {
+                    gameTimelbl.isHidden = true
+                }
+                
+                if let gameCity = EOS_TEAM.teamCity, let homeArena = EOS_TEAM.homeArena {
+                    gamePlaceLbl.text = "\(gameCity), \(homeArena)"
+                } else {
+                    gamePlaceLbl.isHidden = true
+                }
+                
+                guestTeamLogoimg.setLogoImg(logoPath: realmBasedOppositeTeam.logoPathName)
+                homeTeamLogoImg.setLogoImg(logoPath: EOS_TEAM.logoPathName)
+                
+                    
             } else {
-                gameTimelbl.isHidden = true
+                scorelbl.text = "\(game.oppositeTeamScore ?? 0) : \(game.eosScore ?? 0)"
+                teamsNamelbl.text = "\(realmBasedOppositeTeam.teamName) vs \(EOS_TEAM.teamName ?? "Eos Basket")"
+                if let gameDate: Date = game.gameDateAndTime {
+                    gameTimelbl.text = gameDate.toString()
+                } else {
+                    gameTimelbl.isHidden = true
+                }
+                
+                if realmBasedOppositeTeam.teamCity != "" && realmBasedOppositeTeam.homeArena != "" {
+                    gamePlaceLbl.text = "\(realmBasedOppositeTeam.teamCity), \(realmBasedOppositeTeam.homeArena)"
+                        } else {
+                            gamePlaceLbl.isHidden = true
+                        }
+                guestTeamLogoimg.setLogoImg(logoPath: EOS_TEAM.logoPathName)
+                homeTeamLogoImg.setLogoImg(logoPath: realmBasedOppositeTeam.logoPathName)
             }
-                gamePlaceLbl.text = "\(game.gameCity ?? " "), \(game.gamePlace ?? " ")"
+            
         }
     }
     
+    func switchLeague() {
+        let gameLeague = game.teamLeague
+        
+        switch gameLeague {
+        case "SBLD":
+            leagueLbl.text = "SWEDISH BASKETBAL LEAGUE WOMEN"
+            if let image = UIImage(named: "defaultCoverSBLD.jpg") {
+                gameImg.image = image
+            } else {
+                print("no image")
+            }
+        case "SE Herr":
+                leagueLbl.text = "SUPERETTAN MEN"
+                gameImg.image = UIImage(named: "defaultCoverSEH.jpg")
+        case "BE Dam":
+            leagueLbl.text = "BASKETETTAN WOMEN"
+            gameImg.image = UIImage(named: "defaultCoverBED.jpg")
+        default:
+            leagueLbl.text = ""
+            gameImg.image = UIImage(named: "defaultCoverSBLD.jpg")
+        }
+        
+        if let gameCoverLink = game.gameCoverUrl {
+            NetService.instance.getImageBy(url: gameCoverLink) { (image) in
+                if let coverImage = image {
+                    self.gameImg.image = coverImage
+                }
+            }
+        }
+        
+    }
+    
+    func setLogoImg(logoPath: String) -> UIImage {
+        if let logo = UIImage(named: "\(logoPath)") {
+            return logo
+        } else  {
+            return UIImage(named: "defaultLogo.png")!
+        }
+    }
+        
     func setupBasicInfoView () {
         mainGameInfoView.layer.cornerRadius = 30
         mainGameInfoView.layer.shadowColor = UIColor.darkGray.cgColor
@@ -93,6 +165,7 @@ class GameInfoVC: UIViewController {
     func chooseViewsToDisplay () {
         gameDescriptionTextView.isHidden = true
         statsButtonView.isHidden = true
+        let realmBasedOppositeTeam = TeamRealmObject.getTeamInfoById(id: game.oppositeTeamCode)
         
         if let gameStatHtml = game.statsLink {
             if gameStatHtml.isValidURL {
@@ -113,16 +186,16 @@ class GameInfoVC: UIViewController {
             gameDescriptionTextView.isHidden = true
         }
         
-        if let teamPlayersListForFirstTeam = game.team1Players {
+        if let teamPlayersListForFirstTeam = game.eosPlayers {
             if firstTeamPlayersInfoLoaded == false {
-                addTeamList(for: game.team1Name, teamText: teamPlayersListForFirstTeam)
+                addTeamList(for: "Eos Basket", teamText: teamPlayersListForFirstTeam)
                 firstTeamPlayersInfoLoaded = true
             }
         }
         
-        if let teamPlayersForSeconTeam = game.team2Players {
+        if let teamPlayersForSeconTeam = game.oppositeTeamPlayers {
             if secondTeamPlayersInfoLoaded == false{
-                addTeamList(for: game.team1Name, teamText: teamPlayersForSeconTeam)
+                addTeamList(for: realmBasedOppositeTeam.teamName, teamText: teamPlayersForSeconTeam)
                 secondTeamPlayersInfoLoaded = true
             }
         }
