@@ -40,7 +40,7 @@ class Player {
             let playerName: String = data[PLAYER_NAME] as? String ?? " "
             let playerNumber: Int = data[PLAYER_NUMBER] as? Int ?? 0
             let playerPosition: String = data[PLAYER_POSITION] as? String ?? " "
-            let playerImageURL: String = data[PLAYER_IMAGE_URL] as? String ?? " "
+            let playerImageURL: String = data[PLAYER_IMAGE_URL] as? String ?? "gs://eoslund-4ceb4.appspot.com/defaultAvatar.png"
             let timestamp: Timestamp = data[PLAYER_UPDATE_DATE] as? Timestamp ?? Timestamp()
             let playerLeague: String = data[TEAM_LEAGUE] as? String ?? "undefined"
             let date: Date = timestamp.dateValue()

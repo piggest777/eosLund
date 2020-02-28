@@ -38,15 +38,19 @@ class PlayerRealmObject: Object {
         self.playerUpdateDate = playerUpdateDate
     }
     
-    static func addPlayerToRealmBase(playerId:String, playerName:String, playerNumber: Int, playerPosition: String, playerImage: Data, playerLeague: String, playerUpdateDate: Date) {
+    static func addPlayerToRealmBase(playerId:String, playerName:String, playerNumber: Int, playerPosition: String, playerImage: Data, playerLeague: String, playerUpdateDate: Date, completionHandler:(Bool)->()) {
         REALM_QUEUE.sync {
              let player = PlayerRealmObject(playerId: playerId, playerName: playerName, playerNumber: playerNumber, playerPosition: playerPosition, playerImage: playerImage, playerLeague: playerLeague, playerUpdateDate: playerUpdateDate)
                    
                    do {
                        let realm = try Realm()
-                        try realm.write {
-                           realm.add(player)
-                       }
+                        try realm.write (
+                            transaction: {
+                                realm.add(player)
+                            },
+                            completion: {
+                                completionHandler(true)
+                        })
                    } catch {
                        debugPrint("Can`t save player")
                    }
@@ -66,11 +70,13 @@ class PlayerRealmObject: Object {
         
         do {
            let realm =  try Realm()
-            try realm.write {
-                realm.add(playerObject, update: .modified)
-                
-            }
-            completionHandler(true)
+            try realm.write (
+                transaction: {
+                    realm.add(playerObject, update: .modified)
+                },
+                completion: {
+                    completionHandler(true)
+            })
         } catch  {
             debugPrint("Can`t update player")
         }

@@ -47,8 +47,10 @@ class Coach {
             let name = data["coachName"] as? String ?? " "
             let position = data["coachPosition"] as? String ?? " "
             
+            
             let newStaff = Coach(imageViewURL: imageURL, staffName: name, staffPosition: position)
             coachArray.append(newStaff)
+            print(newStaff.imageViewURL)
         }
         let newArray = makeCoachesFirstInArray(coachesArray: coachArray)
         return newArray

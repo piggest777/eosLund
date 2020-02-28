@@ -18,12 +18,21 @@ class CoachCollectionViewCell: UICollectionViewCell {
         profileImageView.image = UIImage(named: "defaultAvatar.png")
         nameLbl.text = staff.staffName
         positionLbl.text = staff.staffPosition
-        NetService.instance.getImageFromFirebaseStorage(imageURL: staff.imageViewURL) { (downloadedImage, success) in
-            if success {
-                self.profileImageView.image = downloadedImage!
+        
+        if staff.imageViewURL != "NO IMAGE" {
+            if staff.imageViewURL.isValidURL {
+                NetService.instance.getImageFromFirebaseStorage(imageURL: staff.imageViewURL) { (downloadedImage, success) in
+                    if success {
+                        self.profileImageView.image = downloadedImage!
+                    } else {
+                        print("Can`t get staff image")
+                    }
+                }
             } else {
-                print("Can`t get staff image")
+                profileImageView.image = UIImage(named:"defaultAvatar.png")
             }
+        } else {
+            profileImageView.image = UIImage(named:"defaultAvatar.png")
         }
     }
 }

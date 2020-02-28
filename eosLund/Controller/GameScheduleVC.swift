@@ -18,7 +18,7 @@ class GameScheduleVC: UIViewController {
     @IBOutlet weak var nextGameDateAndTimeLbl: UILabel!
     @IBOutlet weak var leagueSegmentControl: UISegmentedControl!
     @IBOutlet weak var firstTeamLogotipeImg: UIImageView!
-    @IBOutlet weak var seconTeamLogotipeImg: UIImageView!
+    @IBOutlet weak var secondTeamLogotipeImg: UIImageView!
     @IBOutlet weak var firstTeamNameLbl: UILabel!
     @IBOutlet weak var secondTeamNameLbl: UILabel!
     @IBOutlet weak var leftDaysToGameLbl: UILabel!
@@ -36,6 +36,10 @@ class GameScheduleVC: UIViewController {
     @IBOutlet weak var firstTeamNameBigLbl: UILabel!
     @IBOutlet weak var secondTeamNameBigLbl: UILabel!
     @IBOutlet weak var secondTeamLogoBigImg: UIImageView!
+    @IBOutlet weak var moreThanAGameView: UIView!
+    @IBOutlet weak var tournamentTableBtn: UIButton!
+    @IBOutlet weak var counterStackView: UIStackView!
+    @IBOutlet weak var nextGamePlaceAndTimeStackViewConstraint: NSLayoutConstraint!
     
     
     private var gamesArray = [Game]()
@@ -71,18 +75,32 @@ class GameScheduleVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewHidhConstraint.constant = halfHeightOfScreenSize
+
         if UIScreen.main.bounds.height > 667 {
+            viewHidhConstraint.constant = halfHeightOfScreenSize - 50
             bigScreenGameInfoStackView.isHidden = false
             smalScreenGameInfoStackView.isHidden = true
+            moreThanAGameView.isHidden = false
+            nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 20)
+            nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 17)
+            nextGamePlaceAndTimeStackViewConstraint.constant = 50
+//            counterStackView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         } else {
+            viewHidhConstraint.constant = halfHeightOfScreenSize
             bigScreenGameInfoStackView.isHidden = true
             smalScreenGameInfoStackView.isHidden = false
+            moreThanAGameView.isHidden = true
+
+            nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
+            nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 12)
+            nextGamePlaceAndTimeStackViewConstraint.constant = 35
+//            counterStackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
         scheduleTableView.dataSource = self
         scheduleTableView.delegate = self
         leagueSegmentControl.layer.cornerRadius = 5
         swipeNextGame()
+//        roundedTopCorners()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,7 +127,14 @@ class GameScheduleVC: UIViewController {
     
     @objc func hideNextGameView () {
         fullScheduleOpener()
-        
+    }
+    
+    func roundedTopCorners() {
+        if #available(iOS 11.0, *) {
+                tournamentTableBtn.clipsToBounds = true
+                tournamentTableBtn.layer.cornerRadius = 10
+                tournamentTableBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            }
     }
     
     func setListener () {
@@ -162,7 +187,7 @@ class GameScheduleVC: UIViewController {
                     
 //                    add add else if can`t get firebase updatedate
 //                    add control if date succesfully updated base doesn`t get
-//                    add transaktion control
+//                    add transaction control
                 } else { debugPrint("Can`t get updateDate from Firebase", error as Any)}
             }
         } else {
@@ -176,13 +201,24 @@ class GameScheduleVC: UIViewController {
     
     func upadateTeamRealmBase (updaterStatus: @escaping (Bool)->() ) {
         loadTeamInfoFromFirebase { (returnedArray) in
+            var index = 1
             for team in returnedArray {
-                TeamRealmObject.updateTeamInfo(team: team)
+                if index != returnedArray.count {
+                    TeamRealmObject.updateTeamInfo(team: team)
+                    index += 1
+                } else {
+                    TeamRealmObject.realmWriteWithCallback(team: team) { (success) in
+                        if success {
+                            updaterStatus(true)
+                        }
+                    }
+                }
+                
             }
             self.deleteUnnecessaryTeamsFromRealm(firebaseOriginalTeamsList: returnedArray)
         }
         updateDate = Date()
-        updaterStatus(true)
+//        updaterStatus(true)
     }
     
     func deleteUnnecessaryTeamsFromRealm(firebaseOriginalTeamsList: [TeamFirestoreModel]) {
@@ -227,6 +263,7 @@ class GameScheduleVC: UIViewController {
             return
         }
         let filteredGamesArray = gamesArray.filter { (game) -> Bool in
+            
             let currentDate = Date()
             if game.gameDateAndTime > currentDate {
                 return true
@@ -237,6 +274,22 @@ class GameScheduleVC: UIViewController {
         
         if let nextGame: Game = filteredGamesArray.first {
             noGameCover.isHidden = true
+            
+            let gameId  = nextGame.documentId
+            let indexOf = gamesArray.firstIndex { (game) -> Bool in
+                if game.documentId == gameId {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            
+            if let index = indexOf {
+                let indexPath = IndexPath(row: index, section: 0)
+                
+                self.scheduleTableView.scrollToRow(at: indexPath, at: .middle, animated: false)
+            }
+            
             
             let oppositeTeam = TeamRealmObject.getTeamInfoById(id: nextGame.oppositeTeamCode)
             
@@ -255,9 +308,9 @@ class GameScheduleVC: UIViewController {
                 secondTeamNameBigLbl.text = secondTeamNameLbl.text
                 nextGamePlaceLbl.text = "\(EOS_TEAM.teamCity!), \(EOS_TEAM.homeArena!)"
                 firstTeamLogoBigImg.setLogoImg(logoPath: EOS_TEAM.logoPathName)
-                firstTeamLogotipeImg = firstTeamLogoBigImg
+                firstTeamLogotipeImg.setLogoImg(logoPath: EOS_TEAM.logoPathName)
                 secondTeamLogoBigImg.setLogoImg(logoPath: oppositeTeam.logoPathName)
-                seconTeamLogotipeImg = secondTeamLogoBigImg
+                secondTeamLogotipeImg.setLogoImg(logoPath: oppositeTeam.logoPathName)
             } else {
                 firstTeamNameLbl.text = oppositeTeam.teamName
                 firstTeamNameBigLbl.text = firstTeamNameLbl.text
@@ -265,9 +318,9 @@ class GameScheduleVC: UIViewController {
                 secondTeamNameBigLbl.text = secondTeamNameLbl.text
                 nextGamePlaceLbl.text = "\(oppositeTeam.teamCity), \(oppositeTeam.homeArena)"
                 secondTeamLogoBigImg.setLogoImg(logoPath: EOS_TEAM.logoPathName)
-                seconTeamLogotipeImg = secondTeamLogoBigImg
+                secondTeamLogotipeImg.setLogoImg(logoPath: EOS_TEAM.logoPathName)
                 firstTeamLogoBigImg.setLogoImg(logoPath: oppositeTeam.logoPathName)
-                firstTeamLogotipeImg = firstTeamLogoBigImg
+                firstTeamLogotipeImg.setLogoImg(logoPath: oppositeTeam.logoPathName)
             }
             nextGameDateAndTimeLbl.text = nextGame.gameDateAndTime.toString()
             let currentDate = Date()

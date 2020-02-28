@@ -25,7 +25,6 @@ class GameInfoVC: UIViewController {
     @IBOutlet weak var statsButtonView: UIView!
     @IBOutlet weak var statisticBtn: UIButton!
     @IBOutlet weak var mainGameInfoView: UIView!
-    @IBOutlet weak var descriptionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var contentView: UIView!
@@ -156,10 +155,10 @@ class GameInfoVC: UIViewController {
     {
         arg.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
         arg.translatesAutoresizingMaskIntoConstraints = true
-        arg.sizeToFit()
         arg.isScrollEnabled = false
-        let textViewHeight = arg.contentSize.height
-        descriptionViewHeight.constant = textViewHeight
+        arg.frame.size.width = UIScreen.main.bounds.width
+        arg.sizeToFit()
+
     }
     
     func chooseViewsToDisplay () {

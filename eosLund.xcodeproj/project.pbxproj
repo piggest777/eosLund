@@ -26,6 +26,7 @@
 		B5801CA523F55E4900C19A44 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5801CA423F55E4900C19A44 /* TestViewController.swift */; };
 		B5801CA723F74C7600C19A44 /* TournamentTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5801CA623F74C7600C19A44 /* TournamentTableVC.swift */; };
 		B5801CA923F74FA900C19A44 /* TournamentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5801CA823F74FA900C19A44 /* TournamentTableCell.swift */; };
+		B58066FB2400B47E0088C643 /* RealmExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58066FA2400B47E0088C643 /* RealmExt.swift */; };
 		B58D651C23CCB94700A4A2A0 /* dateFormatStringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */; };
 		B595D94E23C9042500A720B4 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */; };
 		B595D95023C912D700A720B4 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595D94F23C912D700A720B4 /* PaddingLabel.swift */; };
@@ -46,6 +47,7 @@
 		B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */; };
 		B5B7A3F22391A71300D2419F /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F12391A71300D2419F /* Team.swift */; };
 		B5B7A3F52393D71200D2419F /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F42393D71200D2419F /* ViewExt.swift */; };
+		B5CED11E23FDA91C00B9E663 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CED11D23FDA91C00B9E663 /* RoundedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,7 @@
 		B5801CA423F55E4900C19A44 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		B5801CA623F74C7600C19A44 /* TournamentTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentTableVC.swift; sourceTree = "<group>"; };
 		B5801CA823F74FA900C19A44 /* TournamentTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentTableCell.swift; sourceTree = "<group>"; };
+		B58066FA2400B47E0088C643 /* RealmExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExt.swift; sourceTree = "<group>"; };
 		B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateFormatStringExt.swift; sourceTree = "<group>"; };
 		B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		B595D94F23C912D700A720B4 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 		B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesTableViewCell.swift; sourceTree = "<group>"; };
 		B5B7A3F12391A71300D2419F /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		B5B7A3F42393D71200D2419F /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
+		B5CED11D23FDA91C00B9E663 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		BB2472A3A2BF4E625510320F /* Pods-eosLund.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.release.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -202,6 +206,7 @@
 				B558614023C6B45100EAC330 /* CoachCollectionViewCell.swift */,
 				B5529B1F23C8E5D5009149BC /* NewsCell.swift */,
 				B5801CA823F74FA900C19A44 /* TournamentTableCell.swift */,
+				B5CED11D23FDA91C00B9E663 /* RoundedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				B56FFCBF23E8588100A3526C /* stringExt.swift */,
 				B5801CA023F02F9600C19A44 /* ArrayExt.swift */,
 				B5801CA223F377D600C19A44 /* UIImageExt.swift */,
+				B58066FA2400B47E0088C643 /* RealmExt.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -370,10 +376,12 @@
 				B558614323C6BD8F00EAC330 /* Couch.swift in Sources */,
 				B595D95023C912D700A720B4 /* PaddingLabel.swift in Sources */,
 				B5529B2023C8E5D5009149BC /* NewsCell.swift in Sources */,
+				B58066FB2400B47E0088C643 /* RealmExt.swift in Sources */,
 				B5801CA523F55E4900C19A44 /* TestViewController.swift in Sources */,
 				B5AFD10E238EC2AF00EA88B8 /* Game.swift in Sources */,
 				B5AFD0EC238D5CA900EA88B8 /* AppDelegate.swift in Sources */,
 				B58D651C23CCB94700A4A2A0 /* dateFormatStringExt.swift in Sources */,
+				B5CED11E23FDA91C00B9E663 /* RoundedView.swift in Sources */,
 				B59E75EA2399C3A900191EB5 /* PlayerRealmObject.swift in Sources */,
 				B5AFD0EE238D5CA900EA88B8 /* SceneDelegate.swift in Sources */,
 				B59E75E82399AE9A00191EB5 /* TeamCollectionViewCell.swift in Sources */,

@@ -102,4 +102,26 @@ class TeamRealmObject: Object {
              return defaultOppositeTeam
          }
      }
+    
+    static func realmWriteWithCallback(team: TeamFirestoreModel, completion: @escaping (Bool)->()) {
+        let realmTeam = TeamRealmObject()
+        realmTeam.id = team.id
+        realmTeam.teamName = team.teamName
+        realmTeam.teamCity = team.teamCity
+        realmTeam.homeArena = team.homeArena
+        realmTeam.logoPathName = team.logoPathName
+        
+        do {
+           let realm =  try Realm()
+            try realm.write(
+                transaction: {
+                    realm.add(realmTeam)
+                },
+                completion: {
+                    completion(true)
+            })
+        } catch  {
+            debugPrint("can`t update team info", error)
+        }
+    }
 }

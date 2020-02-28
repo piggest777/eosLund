@@ -39,7 +39,9 @@ class PlayerInfoVC: UIViewController {
                 debugPrint("problem to get player`s info")
             } else {
                 guard let data = snapshot?.data() else {return}
-                self.ageLbl.text = data[DAY_OF_BIRTH] as? String ?? "NO INFO"
+                let birthDate = data[DAY_OF_BIRTH] as? String ?? "NO INFO"
+                let age = self.calculateAgeFromDateOfBirth(date: birthDate)
+                self.ageLbl.text = age
                 self.heightLbl.text = data[PLAYER_HEIGHT] as? String ?? "NO INFO"
                 let nationalityData = data[PLAYER_NATIONALITY] as? String ?? "NO INFO"
                 if nationalityData == "NO INFO" {
@@ -56,6 +58,39 @@ class PlayerInfoVC: UIViewController {
         }
     }
     
+    func calculateAgeFromDateOfBirth (date: String) -> String {
+        
+        let formatter  = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dateFromString = formatter.date(from: date)
+        
+        let currentDate = Date()
+
+        let componentsFormatter = DateComponentsFormatter()
+        componentsFormatter.maximumUnitCount = 1
+        componentsFormatter.unitsStyle = .full
+        componentsFormatter.allowedUnits = [.year]
+        
+        
+        guard dateFromString != nil  else {
+            return "NO INFO"
+        }
+        
+        let yearString = componentsFormatter.string(from: dateFromString!, to: currentDate)
+        let charArray = Array(yearString!)
+        var numericString = String()
+        for i in 0...charArray.count {
+            let character = charArray[i]
+            if let _ = Int(String (character)) {
+                numericString.append(character)
+            } else {
+                break
+            }
+
+        }
+        return numericString
+    }
+    
     func setupMainPlayerInfo() {
         guard let player = player else { return }
         
@@ -66,16 +101,20 @@ class PlayerInfoVC: UIViewController {
         switch player.playerLeague {
         case "SBLD":
             playerLeague.text = "SWEDISH BASKETBALL LEAGUE WOMAN"
+            playerImageView.image = UIImage(named: "defaultBigPlayerImage")
         case "SE Herr":
             playerLeague.text = "SUPERETTAN MAN"
+            playerImageView.image = UIImage(named: "defaultBigPlayerImageMan")
         case "BE Dam":
             playerLeague.text = "BASKETETTAN WOMAN"
+            playerImageView.image = UIImage(named: "defaultBigPlayerImage")
         default:
             playerLeague.text = ""
         }
         
     }
     
+//    if valid url check?
     func getBigPlayerImage(imageURL: String) {
         if imageURL != "NO IMAGE DATA" {
             let imageRef = firebaseStorage.reference(forURL: imageURL)

@@ -52,7 +52,7 @@ class TournamentTableVC: UIViewController, UITableViewDelegate, UITableViewDataS
             let doc: Document = try SwiftSoup.parse(html)
             let table: Element? = try doc.getElementById("11-301-standings-container")
             
-            print(table)
+
 //            for news in newsCards {
 //                var imgLink: String = " "
 //                if let img = try news.select("img").first(){

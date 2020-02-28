@@ -17,4 +17,9 @@ extension String {
             return false
         }
     }
+    
+    func removingWhiteSpace() -> String {
+        return components(separatedBy: .whitespaces).joined()
+    }
+    
 }

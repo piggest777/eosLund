@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,15 +13,51 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LundaSpelen" translatesAutoresizingMaskIntoConstraints="NO" id="Ru1-Ln-HAd">
+                                <rect key="frame" x="127.66666666666669" y="64" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="Jb6-ac-JxN"/>
+                                    <constraint firstAttribute="height" constant="120" id="is8-kZ-djo"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moreThenGame" translatesAutoresizingMaskIntoConstraints="NO" id="xPX-vh-sFb">
+                                <rect key="frame" x="20" y="599" width="335" height="129"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EOS LOGO" translatesAutoresizingMaskIntoConstraints="NO" id="xFD-WE-iRE">
+                                <rect key="frame" x="20" y="238.66666666666663" width="335" height="335"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xFD-WE-iRE" secondAttribute="height" multiplier="1:1" id="4A6-ar-GYL"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0039215686269999999" green="0.38431372549999998" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="xFD-WE-iRE" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="2qf-9e-HZ5"/>
+                            <constraint firstItem="Ru1-Ln-HAd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="9EO-dP-frS"/>
+                            <constraint firstItem="xFD-WE-iRE" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PsM-l5-G9A"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xPX-vh-sFb" secondAttribute="trailing" constant="20" id="Rpx-Fn-43V"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xPX-vh-sFb" secondAttribute="bottom" constant="50" id="TmW-pa-lgd"/>
+                            <constraint firstItem="xFD-WE-iRE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="20" id="ZAR-iJ-YcO"/>
+                            <constraint firstItem="Ru1-Ln-HAd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eTQ-yb-ORA"/>
+                            <constraint firstAttribute="trailing" secondItem="xFD-WE-iRE" secondAttribute="trailing" constant="20" id="f17-KO-Lkm"/>
+                            <constraint firstItem="xPX-vh-sFb" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gGe-Ox-R0r"/>
+                            <constraint firstItem="xPX-vh-sFb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xFD-WE-iRE" secondAttribute="bottom" constant="10" id="nOX-Vs-pKN"/>
+                            <constraint firstItem="xPX-vh-sFb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="tvN-kE-CLe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="EOS LOGO" width="1200" height="1296"/>
+        <image name="LundaSpelen" width="136" height="199"/>
+        <image name="moreThenGame" width="354" height="129"/>
+    </resources>
 </document>
