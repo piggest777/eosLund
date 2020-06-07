@@ -1,5 +1,5 @@
 //
-//  Couch.swift
+//  Coach.swift
 //  eosLund
 //
 //  Created by Denis Rakitin on 2020-01-09.
@@ -20,12 +20,13 @@ class Coach {
         self.staffPosition = staffPosition
     }
     
+    //get information about coaches and staff from firebase snapshot
     class func parseData(snapshot: QuerySnapshot?) -> [Coach] {
         var coachArray = [Coach]()
         
         func makeCoachesFirstInArray(coachesArray: [Coach]) -> [Coach] {
             var index = 0
-           var sortedArray = coachesArray
+            var sortedArray = coachesArray
             for staff in coachesArray {
                 if staff.staffPosition == "Coach" {
                     sortedArray.remove(at: index)
@@ -55,7 +56,4 @@ class Coach {
         let newArray = makeCoachesFirstInArray(coachesArray: coachArray)
         return newArray
     }
-    
-
-    
 }

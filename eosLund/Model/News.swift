@@ -1,5 +1,5 @@
 //
-//  NewsInstance.swift
+//  News.swift
 //  eosLund
 //
 //  Created by Denis Rakitin on 2020-01-10.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NewsInstance {
+class News {
     public private (set)  var header: String
     private (set) public var date: String
     private (set) public var text: String

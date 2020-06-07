@@ -19,33 +19,90 @@ enum RealmBaseStatus {
 
 class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
-    
-    
-    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var teamSelectorSegmentControl: UISegmentedControl!
+    @IBOutlet weak var progressBar: UIProgressView!
     
     let firebaseDB = Firestore.firestore()
     let firebaseStorage = Storage.storage()
-//    var playerArrayFetchedFromFireBase = [Player]()
     var realmFetchedArray: Results<PlayerRealmObject>?
     var choosenLeague: String = "SBLD"
-
     
+    let defaults = UserDefaults.standard
+    
+    //save or get player update base date
+    var playerBaseUpdateDate: Date? {
+        get
+        {
+            return defaults.value(forKey: "PlayersBaseUpdateDate") as? Date
+        }
+        set
+        {
+            defaults.set(newValue, forKey: "PlayersBaseUpdateDate")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        let leaguePredicate = NSPredicate(format: "playerLeague = %@", choosenLeague)
-        realmFetchedArray = PlayerRealmObject.getAllPlayers()?.filter(leaguePredicate).sorted(byKeyPath: "playerNumber")
-        fetchInfoFromFireBase { (returnedPlayerArray) in
-            self.trackFirebaseUpdate(playerArray: returnedPlayerArray) { (success) in
-                if success {
-                    print("Update complete")
-                    self.realmFetchedArray = PlayerRealmObject.getAllPlayers()?.filter(leaguePredicate).sorted(byKeyPath: "playerNumber")
-//                    self.collectionView.reloadData()
+        progressBar.isHidden = true
+        realmFetchedArray = PlayerRealmObject.getRealmPredicatePlayerListForTable(league: choosenLeague)
+        
+        //update player base according base status
+        trackFirebaseUpdateDate() { (baseStatus) in
+            
+            switch baseStatus {
+            case .notExist:
+                print("All players need to be update")
+                self.fetchInfoFromFireBase { (returnedPlayerArray) in
+                    self.updateRealmBase(players: returnedPlayerArray)
                 }
+            case .needToBeUpdate:
+                self.fetchInfoFromFireBase { (returnedPlayerArray) in
+                    var IDsToUpdate = [String]()
+                    var IDsToDelete = [String]()
+                    guard let playersArrayFromRealmBase = PlayerRealmObject.getAllPlayers() else {
+                        debugPrint("Can`t get realm base to compare")
+                        return
+                    }
+                    var realmIds = self.getAllRealmBaseIds(realmArray: playersArrayFromRealmBase)
+                    let firebasIds = self.getAllFirIds(firArray: returnedPlayerArray)
+                    
+                    for id in firebasIds {
+                        let firID = id.0
+                        let firUpdateDate = id.1
+                        
+                        if let realmUpdateDate = realmIds[firID]  {
+                            if firUpdateDate > realmUpdateDate {
+                                IDsToUpdate.append(firID)
+                                realmIds.removeValue(forKey: firID)
+                            } else {
+                                realmIds.removeValue(forKey: firID)
+                            }
+                        } else {
+                            IDsToUpdate.append(id.0)
+                        }
+                    }
+                    IDsToDelete.append(contentsOf: Array(realmIds.keys))
+                    
+                    if IDsToDelete.isEmpty && IDsToUpdate.isEmpty {
+                        return
+                    } else {
+                        let playerArrayToUpdate: [Player] = returnedPlayerArray.filter {
+                            if IDsToUpdate.contains($0.id) {
+                                return true
+                            } else {
+                                return false
+                            }
+                        }
+                        self.updateRealmBase(players: playerArrayToUpdate)
+                        self.deleteObjectsFromRealm(iDsToDelete: IDsToDelete)
+                        print("some players was updated")
+                    }
+                }
+            case .readyToUse:
+                print("All players already updated")
             }
         }
     }
@@ -71,196 +128,96 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.reloadData()
     }
     
+    //get players from firebase
     func fetchInfoFromFireBase(returnedPlayerArray: @escaping ([Player])-> ()) {
         firebaseDB.collection(PLAYERS_REF).getDocuments { (snapshot, error) in
             if error != nil {
-                debugPrint("can`t fetch documents")
+                debugPrint("can`t fetch players from firebase")
                 return
             } else {
-//                self.playerArrayFetchedFromFireBase.removeAll()
-                
                 let playerArray = Player.parsePlayerData(snapShot: snapshot)
                 returnedPlayerArray(playerArray)
             }
         }
     }
     
-    func trackFirebaseUpdate(playerArray: [Player], completionHandler: (Bool)->()) {
-        
-        var baseStatus: RealmBaseStatus
-        var IDsToUpdate = [String]()
-        var IDsToDelete = [String]()
-        
+    //track if firebase has new version of player base
+    func trackFirebaseUpdateDate(completionHandler: @escaping (RealmBaseStatus)->()) {
         guard let playersArrayFromRealmBase = PlayerRealmObject.getAllPlayers() else {
             debugPrint("Can`t get realm base to compare")
             return
         }
         
-        if playersArrayFromRealmBase.isEmpty {
-            baseStatus = .notExist
-            let firIds = playerArray.map { $0.playerId! }
-            IDsToUpdate.append(contentsOf: firIds)
+        if playersArrayFromRealmBase.isEmpty || playerBaseUpdateDate == nil  {
+            completionHandler(.notExist)
         } else {
-            var realmIds = getAllRealmBaseIds(realmArray: playersArrayFromRealmBase)
-            let firebasIds = getAllFirIds(firArray: playerArray)
-            
-            for id in firebasIds {
-                let fbID = id.0
-                let fbUpdateDate = id.1
-                
-                if let realmUpdateDate = realmIds[fbID]  {
-                    if fbUpdateDate > realmUpdateDate {
-                        IDsToUpdate.append(fbID)
-                        realmIds.removeValue(forKey: fbID)
-                    } else {
-                        realmIds.removeValue(forKey: fbID)
-                    }
-                } else {
-                    IDsToUpdate.append(id.0)
-                }
-            }
-            IDsToDelete.append(contentsOf: Array(realmIds.keys))
-            
-            if IDsToDelete.isEmpty && IDsToUpdate.isEmpty {
-                baseStatus = .readyToUse
-            } else {
-                baseStatus = .needToBeUpdate
-            }
-        }
-        
-        let playerArrayToUpdate: [Player] = playerArray.filter {
-            if IDsToUpdate.contains($0.playerId) {
-                return true
-            } else {
-                return false
-            }
-        }
-
-        switch baseStatus {
-        case .notExist:
-            print("All players need to be update")
-            updateRealmBase(players: playerArrayToUpdate)
-        case .readyToUse:
-            print("All players already updated")
-        case .needToBeUpdate:
-            updateRealmBase(players: playerArrayToUpdate)
-            deleteObjectsFromRealm(iDsToDelete: IDsToDelete)
-            print("some players was updated")
-            
-        }
-        
-        completionHandler(true)
-        
-//        for player in playerArray {
-//
-//            guard let id = player.playerId,
-//                let updateDate = player.playerUpdateDate,
-//                let playerImageUrl = player.playerImageUrl,
-//                let _ = player.playerName,
-//                let _ = player.playerNumber,
-//                let _ = player.playerPosition
-////                Check does  player have leauge???
-//
-//                else {
-//                    print("error to fetch player from firebase")
-//                    return
-//
-//            }
-//
-//            guard let playersArrayFromRealmBase = PlayerRealmObject.getAllPlayers() else {
-//                debugPrint("Can`t get realm base to compare")
-//                return
-//            }
-//
-//            if playersArrayFromRealmBase.isEmpty == false {
-//                let idsBase = getAllRealmBaseIds()
-//                if idsBase.contains(id) {
-//                    var realmsPlayer: PlayerRealmObject?
-//                    do {
-//                    let player = try Realm().object(ofType: PlayerRealmObject.self, forPrimaryKey: id)
-//                        realmsPlayer = player
-//                    } catch  {
-//                        debugPrint("Can`t find Player in RealmBase by id", error)
-//                    }
-//
-//                    guard let unwPlayer = realmsPlayer else {
-//                        return
-//                    }
-//
-//                    if unwPlayer.playerUpdateDate < updateDate {
-////                        check valid URL
-//                        getImageFromFirebaseStorage(imageURL: playerImageUrl) { (image, succeed) in
-//                            if succeed {
-//                                PlayerRealmObject.updatePlayerInfo(player: player, playerImage: image!) { (success) in
-//                                    if success {
-//                                        self.collectionView.reloadData()
-//                                    }
-//                                }
-//                                print("Information updated succesfully")
-//                            } else {
-//                                debugPrint("Image dowload error")
-//                                //                                add try again later func
-//                            }
-//                        }
-//                    } else {
-//                        debugPrint("Player found and no need to update")
-//                    }
-//                } else {
-//                    print("try to create after")
-//                    createPlayerRealmObject(player: player)
-//                }
-//
-//            } else {
-//                createPlayerRealmObject(player: player)
-//            }
-//        }
-//        completionHandler(true)
-        
-    }
-    
-    
-    func updateRealmBase(players: [Player]) {
-        var index = 1
-        for player in players {
-            print(player.playerName)
-            getImageFromFirebaseStorage(imageURL: player.playerImageUrl) { (image, succees) in
-                    if succees {
-                        if index == players.count {
-                            PlayerRealmObject.updatePlayerInfo(player: player, playerImage: image!) { (succees) in
-                                if succees {
-                                    self.collectionView.reloadData()
-                                }
+            firebaseDB.collection("baseUpdateDate").document("playersBaseUpdateDate").getDocument { (snapshot, error) in
+                if error == nil {
+                    if let data = snapshot?.data(), let updateTimestamp = data["date"] as? Timestamp {
+                        let updateDateFromFir = updateTimestamp.dateValue()
+                        if let clientUpdateDate = self.playerBaseUpdateDate {
+                            if updateDateFromFir > clientUpdateDate {
+                                completionHandler(.needToBeUpdate)
+                            } else {
+                                completionHandler(.readyToUse)
                             }
                         } else {
-                            PlayerRealmObject.updatePlayerInfo(player: player, playerImage: image!) { (success) in
-                                if succees {
-                                    index += 1
-                                }
+                            completionHandler(.notExist)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    //load player information from firebase to realm base
+    func updateRealmBase(players: [Player]) {
+        progressBar.isHidden = false
+        let playersCount = players.count
+        var index = 1
+        for player in players {
+            getImageFromFirebaseStorage(imageURL: player.imageUrl) { (image, succees) in
+                if succees {
+                    if index == players.count {
+                        PlayerRealmObject.updatePlayerInfo(player: player, playerImage: image!) { (succees) in
+                            if succees {
+                                self.collectionView.reloadData()
+                                self.progressBar.isHidden = true
+                                self.playerBaseUpdateDate = Date()
+                            }
+                        }
+                    } else {
+                        PlayerRealmObject.updatePlayerInfo(player: player, playerImage: image!) { (success) in
+                            if succees {
+                                index += 1
+                                self.progressBar.setProgress(Float(index)/Float(playersCount), animated: true)
                             }
                         }
                     }
                 }
+            }
         }
     }
     
+    //delete player from realm base if player not exist in firebase
     func deleteObjectsFromRealm (iDsToDelete: [String]) {
         for id in iDsToDelete {
             do {
                 guard let realmObject = try Realm().object(ofType: PlayerRealmObject.self, forPrimaryKey: id) else {
-                    print("can`t find player to delete")
+                    print("can`t find player in realm base to delete")
                     continue
-
                 }
                 let realm = try Realm()
                 try realm.write {
                     realm.delete(realmObject)
                 }
             } catch  {
-                debugPrint("Can`t delete Player from Realm", error)
+                debugPrint("Can`t delete player from Realm", error)
             }
         }
     }
     
+    //get all players ids from realm
     func getAllRealmBaseIds(realmArray: Results<PlayerRealmObject>) -> [String: Date]{
         let playersArray = realmArray
         var idsBase = [String: Date]()
@@ -272,46 +229,20 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         return idsBase
     }
     
+    //get all players ids from firebase
     func getAllFirIds (firArray: [Player]) -> [(String, Date)] {
         var base = [(String, Date)]()
         for player in firArray {
-            let id = player.playerId
-            let updateDate = player.playerUpdateDate
+            let id = player.id
+            let updateDate = player.updateDate
             base.append((id!, updateDate!))
         }
         return base
     }
     
-//    rewrite get player by Id func
-    func getPlayerFromRealm(for id: String, realmPlayerArray: Results<PlayerRealmObject>) -> PlayerRealmObject {
-        var playerToReturn = PlayerRealmObject()
-        for player in  realmPlayerArray {
-            if player.id == id {
-                playerToReturn = player
-                break
-            }
-        }
-        return playerToReturn
-    }
     
-    func createPlayerRealmObject(player: Player) {
-        let playerImageUrl = player.playerImageUrl!
-//        Check if url is valid
-        getImageFromFirebaseStorage(imageURL: playerImageUrl) { (image, succeed) in
-            if succeed {
-                let dataImage = image!.pngData()
-                let date = Date()
-                PlayerRealmObject.addPlayerToRealmBase(playerId: player.playerId, playerName: player.playerName, playerNumber: player.playerNumber, playerPosition: player.playerPosition, playerImage: dataImage!, playerLeague: player.playerLeague, playerUpdateDate: date) { (success) in
-                    if success {
-                        self.collectionView.reloadData()
-                    }
-                }
-            }
-        }
-    }
-    
+    //get player image from firebase storage or load default
     func getImageFromFirebaseStorage(imageURL: String, completionHandler: @escaping (UIImage?, Bool) -> ()) {
-        
         let playerImageRef = firebaseStorage.reference(forURL: imageURL)
         var image = UIImage()
         
@@ -330,8 +261,6 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
             image = UIImage(named: "defaultAvatar")!
             completionHandler(image, true)
         }
-
-        
     }
     
     @IBAction func couchInfoBtnPressed(_ sender: Any) {
@@ -366,7 +295,6 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         
         let hightCellDimension = cellDimension * 1.33 + 50
         
-        
         return CGSize(width: cellDimension, height: hightCellDimension)
     }
     
@@ -390,15 +318,12 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         }
     }
     
-     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if (kind == UICollectionView.elementKindSectionFooter) {
-        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CoachFooterCollectionReusableView", for: indexPath)
-
-        return footerView
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CoachFooterCollectionReusableView", for: indexPath)
+            
+            return footerView
         }
-    fatalError()
+        fatalError()
     }
-    
-    
-    
 }

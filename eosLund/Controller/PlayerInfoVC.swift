@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class PlayerInfoVC: UIViewController {
-
+    
     @IBOutlet weak var playerNameLbl: UILabel!
     @IBOutlet weak var playerNumberLbl: UILabel!
     @IBOutlet weak var playerImageView: UIImageView!
@@ -31,12 +31,14 @@ class PlayerInfoVC: UIViewController {
         loadPlayerInfo()
     }
     
+    
+    //get information about player direct from firebase by player id
     func loadPlayerInfo(){
         let playerInfoRef = Firestore.firestore()
         setupMainPlayerInfo()
         playerInfoRef.collection("players").document(player.id).getDocument { (snapshot, error) in
             if error != nil {
-                debugPrint("problem to get player`s info")
+                debugPrint("problem to get player`s information from firebase")
             } else {
                 guard let data = snapshot?.data() else {return}
                 let birthDate = data[DAY_OF_BIRTH] as? String ?? "NO INFO"
@@ -53,24 +55,22 @@ class PlayerInfoVC: UIViewController {
                 self.inEOSFromLbl.text = data[PLAYER_INEOS_FROM] as? String ?? "NO INFO"
                 let imageUrl: String = data[PLAYER_BIG_IMAGE_URL] as? String ?? "NO IMAGE DATA"
                 self.getBigPlayerImage(imageURL: imageUrl)
-
             }
         }
     }
     
+    //get age by date of birth
     func calculateAgeFromDateOfBirth (date: String) -> String {
-        
         let formatter  = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateFromString = formatter.date(from: date)
         
         let currentDate = Date()
-
+        
         let componentsFormatter = DateComponentsFormatter()
         componentsFormatter.maximumUnitCount = 1
         componentsFormatter.unitsStyle = .full
         componentsFormatter.allowedUnits = [.year]
-        
         
         guard dateFromString != nil  else {
             return "NO INFO"
@@ -86,7 +86,6 @@ class PlayerInfoVC: UIViewController {
             } else {
                 break
             }
-
         }
         return numericString
     }
@@ -114,7 +113,7 @@ class PlayerInfoVC: UIViewController {
         
     }
     
-//    if valid url check?
+    // FIXME:   if valid url check?
     func getBigPlayerImage(imageURL: String) {
         if imageURL != "NO IMAGE DATA" {
             let imageRef = firebaseStorage.reference(forURL: imageURL)
@@ -137,19 +136,20 @@ class PlayerInfoVC: UIViewController {
         }
     }
     
+    //change font size for flag emoji depend from exist information or not
     func setFontSize(isNoInfoAboutNationality: Bool, nationalityData: String) {
         if isNoInfoAboutNationality == true {
             self.nationalityLbl.font = UIFont(name: "AvenirNext-UltraLight", size: 20)
         } else {
             self.nationalityLbl.font = UIFont(name: "AvenirNext-UltraLight", size: 33)
         }
-         nationalityLbl.text = nationalityData
+        nationalityLbl.text = nationalityData
     }
     
     func setDefaultImage(){
-         playerImageView.image = UIImage(named: "defaultBigPlayerImage.png")
+        playerImageView.image = UIImage(named: "defaultBigPlayerImage.png")
     }
-
+    
     @IBAction func backBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

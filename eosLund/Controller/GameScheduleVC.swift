@@ -12,6 +12,7 @@ import SafariServices
 
 class GameScheduleVC: UIViewController {
     
+    @IBOutlet weak var tournamentBtnView: UIView!
     @IBOutlet weak var nextGameView: UIView!
     @IBOutlet weak var gameCoverImgView: UIImageView!
     @IBOutlet weak var nextGamePlaceLbl: UILabel!
@@ -47,7 +48,6 @@ class GameScheduleVC: UIViewController {
     private lazy var gamesReference:CollectionReference = Firestore.firestore().collection(GAMES_REF)
     private var teamsReference = Firestore.firestore().collection("teams")
     private var gameScheduleListener: ListenerRegistration!
-    private var isMenTeam: Bool = true
     private var timer = Timer()
     private var timeIntervalToNextGame: Double = 0.0
     private var isFullScheduleOpen = false
@@ -66,16 +66,11 @@ class GameScheduleVC: UIViewController {
         }
     }
     
-    
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        //        return UIStatusBarStyle.lightContent
-        return UIStatusBarStyle.default   // Make dark again
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
+        //adopt information according iphone screen size
         if UIScreen.main.bounds.height > 667 {
             viewHidhConstraint.constant = halfHeightOfScreenSize - 50
             bigScreenGameInfoStackView.isHidden = false
@@ -84,23 +79,20 @@ class GameScheduleVC: UIViewController {
             nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 20)
             nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 17)
             nextGamePlaceAndTimeStackViewConstraint.constant = 50
-//            counterStackView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         } else {
             viewHidhConstraint.constant = halfHeightOfScreenSize
             bigScreenGameInfoStackView.isHidden = true
             smalScreenGameInfoStackView.isHidden = false
             moreThanAGameView.isHidden = true
-
             nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
             nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 12)
             nextGamePlaceAndTimeStackViewConstraint.constant = 35
-//            counterStackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
         scheduleTableView.dataSource = self
         scheduleTableView.delegate = self
         leagueSegmentControl.layer.cornerRadius = 5
         swipeNextGame()
-//        roundedTopCorners()
+        tournamentBtnView.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,6 +111,7 @@ class GameScheduleVC: UIViewController {
         timer.invalidate()
     }
     
+    //add swipe gesture to cover next game information
     func swipeNextGame () {
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(hideNextGameView))
         swipe.direction = .up
@@ -129,31 +122,40 @@ class GameScheduleVC: UIViewController {
         fullScheduleOpener()
     }
     
+    //FIXME:   Do I really need this func?
     func roundedTopCorners() {
         if #available(iOS 11.0, *) {
-                tournamentTableBtn.clipsToBounds = true
-                tournamentTableBtn.layer.cornerRadius = 10
-                tournamentTableBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            }
+            tournamentTableBtn.clipsToBounds = true
+            tournamentTableBtn.layer.cornerRadius = 10
+            tournamentTableBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
     }
     
+    // create firebase listener for track changes in game online
     func setListener () {
-        gameScheduleListener = gamesReference
-            .whereField(TEAM_LEAGUE, isEqualTo: choosenLeague)
-            .order(by: GAME_DATE_AND_TIME, descending: false)
-            .addSnapshotListener({ (snapshot, error) in
-                if let error = error {
-                    debugPrint("error fetching docs: \(error)")
-                } else {
-                    self.noGameCover.isHidden = true
-                    self.gamesArray.removeAll()
-                    self.gamesArray = Game.parseData(snapshot: snapshot)
-                    self.scheduleTableView.reloadData()
-                    self.loadInfoToNextGameView()
-                }
-            })
+        var leaugePredicate: [String] = ["SBLD"]
+        if choosenLeague == "All" {
+            leaugePredicate = ["SBLD", "SE Herr", "BE Dam"]
+        } else {
+            leaugePredicate = [choosenLeague]
+        }
+            gameScheduleListener = gamesReference
+                .whereField(TEAM_LEAGUE, in: leaugePredicate)
+                .order(by: GAME_DATE_AND_TIME, descending: false)
+                .addSnapshotListener({ (snapshot, error) in
+                    if let error = error {
+                        debugPrint("error fetching docs: \(error)")
+                    } else {
+                        self.noGameCover.isHidden = true
+                        self.gamesArray.removeAll()
+                        self.gamesArray = Game.parseData(snapshot: snapshot)
+                        self.scheduleTableView.reloadData()
+                        self.loadInfoToNextGameView()
+                    }
+                })
     }
     
+    //get information about team from firebase and return team array
     func loadTeamInfoFromFirebase(returnedTeamsArray: @escaping ([TeamFirestoreModel])-> ()) {
         teamsReference.getDocuments { (snapshot, error) in
             if error == nil {
@@ -165,8 +167,10 @@ class GameScheduleVC: UIViewController {
         }
     }
     
+    
+    //check if need to update team list information
     func checkTeamsUpdatePossibility(completionHandler: @escaping (Bool)->())  {
-        if updateDate != nil {
+        if updateDate != nil, let teamRealmBase = TeamRealmObject.getAllRealmTeam(), !teamRealmBase.isEmpty {
             teamsReference.document("teamInfoUpdateDate").getDocument { (snapshot, error) in
                 if error == nil {
                     guard let snapshot = snapshot else { return }
@@ -176,29 +180,32 @@ class GameScheduleVC: UIViewController {
                         if firebaseUpdateDate > self.updateDate! {
                             self.upadateTeamRealmBase { success in
                                 if success {
-                                     completionHandler(true)
+                                    completionHandler(true)
                                 }
                             }
                         } else {
-                        print("Realm base already updated")
-                        completionHandler(true)
+                            print("Realm base already updated")
+                            completionHandler(true)
                         }
                     }
                     
-//                    add add else if can`t get firebase updatedate
-//                    add control if date succesfully updated base doesn`t get
-//                    add transaction control
+                    //                    add add else if can`t get firebase updatedate
+                    //                    add control if date succesfully updated base doesn`t get
+                    //                    add transaction control
                 } else { debugPrint("Can`t get updateDate from Firebase", error as Any)}
             }
         } else {
+            print("Updating team base")
             upadateTeamRealmBase { success in
                 if success {
-                     completionHandler(true)
+                    completionHandler(true)
                 }
             }
         }
     }
     
+    
+    //update iformation about team in realm local base
     func upadateTeamRealmBase (updaterStatus: @escaping (Bool)->() ) {
         loadTeamInfoFromFirebase { (returnedArray) in
             var index = 1
@@ -213,14 +220,13 @@ class GameScheduleVC: UIViewController {
                         }
                     }
                 }
-                
             }
             self.deleteUnnecessaryTeamsFromRealm(firebaseOriginalTeamsList: returnedArray)
         }
         updateDate = Date()
-//        updaterStatus(true)
     }
     
+    //delete team from realm if team don`t exist in firebase
     func deleteUnnecessaryTeamsFromRealm(firebaseOriginalTeamsList: [TeamFirestoreModel]) {
         
         func getDifferenceToDeleteFromRealmBase(firebaseIdsArray: [String], realmIdsArray: [String]) -> [String] {
@@ -254,8 +260,7 @@ class GameScheduleVC: UIViewController {
         }
     }
     
-
-    
+    //load game information about next game by time
     func loadInfoToNextGameView() {
         
         guard gamesArray.count != 0 else {
@@ -289,7 +294,6 @@ class GameScheduleVC: UIViewController {
                 
                 self.scheduleTableView.scrollToRow(at: indexPath, at: .middle, animated: false)
             }
-            
             
             let oppositeTeam = TeamRealmObject.getTeamInfoById(id: nextGame.oppositeTeamCode)
             
@@ -336,13 +340,6 @@ class GameScheduleVC: UIViewController {
         }
     }
     
-    func setLogoImg(logoPath: String) -> UIImage {
-        if let logo = UIImage(named: "\(logoPath)") {
-            return logo
-        } else  {
-            return UIImage(named: "defaultLogo.png")!
-        }
-    }
     
     @objc func updateTimer() {
         if timeIntervalToNextGame > 0.0 {
@@ -367,7 +364,6 @@ class GameScheduleVC: UIViewController {
             } else {
                 daysGameLbl.text = "Days"
             }
-            
             if hours <= 1 {
                 hoursGameLbl.text = "Hour"
             } else {
@@ -380,20 +376,19 @@ class GameScheduleVC: UIViewController {
         }
     }
     
-    
+    //load tournament table by url in safari browser
     @IBAction func tournamentBtnWasPressed(_ sender: Any) {
-        
-        NetService.instance.getTournamentTableUrl(league: choosenLeague) { (returnedUrl) in
-            if let urlString = returnedUrl {
-                if urlString.isValidURL {
-                    let url =  URL(string:  urlString)
-                    let safariVC = SFSafariViewController(url: url!)
-                    self.present(safariVC, animated: true, completion: nil)
+        if choosenLeague != "All" {
+            NetService.instance.getTournamentTableUrl(league: choosenLeague) { (returnedUrl) in
+                if let urlString = returnedUrl {
+                    if urlString.isValidURL {
+                        let url =  URL(string:  urlString)
+                        let safariVC = SFSafariViewController(url: url!)
+                        self.present(safariVC, animated: true, completion: nil)
+                    }
                 }
             }
         }
-        
-//        performSegue(withIdentifier: "toTournamentTableVC", sender: sender)
     }
     
     
@@ -401,38 +396,46 @@ class GameScheduleVC: UIViewController {
         fullScheduleOpener()
     }
     
+    //detect open or close information about next game and animate
     func fullScheduleOpener () {
         if isFullScheduleOpen == false {
-            
             setupNextGameViewShowAndHide(view: nextGameView, hidden: !isFullScheduleOpen)
             isFullScheduleOpen = true
             fullScheduleBtn.setTitle("NEXT GAME INFO", for: .normal)
-            
-        } else {
+        } else if isFullScheduleOpen == true{
             setupNextGameViewShowAndHide(view: nextGameView, hidden: !isFullScheduleOpen)
             isFullScheduleOpen = false
             fullScheduleBtn.setTitle("REVEAL SCHEDULE", for: .normal)
         }
-        
     }
     
     func setupNextGameViewShowAndHide(view: UIView, hidden: Bool) {
-        UIView.transition(with: view, duration: 0.5, options: .showHideTransitionViews, animations: {
-            view.isHidden = hidden
-        })
+        DispatchQueue.main.async {
+            UIView.transition(with: view, duration: 0.5, options: .showHideTransitionViews, animations: {
+                view.isHidden = hidden
+            })
+        }
     }
     
+    //setup view depend from league
     @IBAction func segmentControlWasSwitched(_ sender: Any) {
         switch leagueSegmentControl.selectedSegmentIndex{
         case 0:
             choosenLeague = "SBLD"
             gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
+            tournamentBtnView.isHidden = false
         case 1:
             choosenLeague = "SE Herr"
             gameCoverImgView.image = UIImage(named: "defaultCoverSEH.jpg")
+            tournamentBtnView.isHidden = false
         case 2:
             choosenLeague = "BE Dam"
             gameCoverImgView.image = UIImage(named: "defaultCoverBED.jpg")
+            tournamentBtnView.isHidden = false
+        case 3:
+            choosenLeague = "All"
+            gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
+            tournamentBtnView.isHidden = true
         default:
             choosenLeague = "SBLD"
             gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
@@ -445,9 +448,6 @@ class GameScheduleVC: UIViewController {
         timer.invalidate()
         setListener()
     }
-    
-
-    
 }
 
 extension GameScheduleVC: UITableViewDelegate, UITableViewDataSource {
@@ -479,17 +479,7 @@ extension GameScheduleVC: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             else { return }
-        } else if segue.identifier == "toTournamentTableVC" {
-            if let destinationVC = segue.destination as? TournamentTableVC {
-                destinationVC.league = choosenLeague
-            } else {
-                return
-            }
         }
         else {return}
     }
 }
-
-
-
-

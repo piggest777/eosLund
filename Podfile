@@ -9,6 +9,7 @@ target 'eosLund' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
+  pod 'Firebase/Messaging'
   pod 'RealmSwift'
   pod 'Firebase/Storage'
   pod 'SwiftSoup'

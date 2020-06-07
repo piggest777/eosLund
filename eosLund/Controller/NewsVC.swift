@@ -19,12 +19,11 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var newsTypeSegmentControl: UISegmentedControl!
     
     let refreshControl = UIRefreshControl()
-    var newsArray = [NewsInstance]()
+    var newsArray = [News]()
     var pageNumber: Int = 1
     var maxYoutubeSearchResult: Int = 50
     var responseArrayCount: Int = 0
     private (set) var segmentControlStatus = "news"
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +35,11 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 500
         tableView.rowHeight = UITableView.automaticDimension
-        
         setFooterView()
     }
     
     @objc func fetchNews() {
-        //        need to add number of pages control
+        //TODO: need to add number of pages control
         if segmentControlStatus == "news" {
             pageNumber += 1
             getNewsHTMLResponse()
@@ -60,13 +58,13 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    //get json response from youtube channel
     func getVideoHTMLResponse() {
         loadingView.isHidden = false
         spinner.startAnimating()
         AF.request("https://www.googleapis.com/youtube/v3/search?key=\(API_KEY)&channelId=UCfoQAv5xCoEEEutwU998--w&part=snippet,id&order=date&maxResults=\(maxYoutubeSearchResult)").responseJSON { (response) in
             switch response.result {
             case .success(let value):
-                
                 let json = JSON(value)
                 var videoIdLink: String?
                 guard let itemsArray = json["items"].array else {return}
@@ -89,13 +87,13 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                         
                         let videoDate = self.dateFormateFrom(string: publishedAt!)
                     
-                       let newVideo = NewsInstance(header: title!, date: videoDate, text: description!, imageLink: videoIdLink!, newsLink: "https://www.youtube.com/watch?v=\(videoIdLink!)")
+                       let newVideo = News(header: title!, date: videoDate, text: description!, imageLink: videoIdLink!, newsLink: "https://www.youtube.com/watch?v=\(videoIdLink!)")
                         self.newsArray.append(newVideo)
                     }
                 }
                 self.loadingView.isHidden = true
                 self.spinner.stopAnimating()
-                 self.tableView.reloadData()
+                self.tableView.reloadData()
                 
             case .failure(let error):
                 print(error)
@@ -103,7 +101,8 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func getNewsHTMLResponse () {
+    //get news from eos news webpage
+    func getNewsHTMLResponse() {
         loadingView.isHidden = false
         loadingLbl.text = "LOADING NEWS..."
         AF.request("https://www.eoslund.se/om-eos/nyheter?page=\(pageNumber)").responseString { (response) in
@@ -113,6 +112,7 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    //parse news HTML
     func parseHTML(htmlData: String) {
         do {
             let html = htmlData
@@ -130,7 +130,7 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 let newsText = try news.getElementsByClass("mt-3").first()?.text() ?? " "
                 let link = try news.select("a").first()?.attr("href") ?? "https://www.eoslund.se/404"
                 
-                let newNews: NewsInstance = NewsInstance(header: newsHeader, date: newsDate, text: newsText, imageLink: imgLink, newsLink: link)
+                let newNews: News = News(header: newsHeader, date: newsDate, text: newsText, imageLink: imgLink, newsLink: link)
                 
                 newsArray.append(newNews)
             }
@@ -166,12 +166,12 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
     }
     
+    //setup button to load new news or video in footer of table
     func setFooterView() {
         let footerView = UIView()
         footerView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         footerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height:
             80)
-        
         let button = UIButton()
         button.layer.cornerRadius = 20
         button.layer.shadowColor = UIColor.darkGray.cgColor
@@ -190,7 +190,6 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 button.addTarget(self, action: #selector(fetchVideo), for: .touchUpInside)
             }
         }
-       
         footerView.addSubview(button)
         tableView.tableFooterView = footerView
     }
@@ -214,19 +213,16 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         loadCellContent()
     }
     
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as? NewsCell else { return UITableViewCell()}
-        
+        //TODO: check cells arrange before configure
         cell.configureCell(news: newsArray[indexPath.row], segmentControlStatus: segmentControlStatus)
         
         return cell
     }
-    
 }
 

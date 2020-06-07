@@ -16,5 +16,4 @@ class RoundedView: UIView {
         layer.borderWidth = 2
         layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
-    
 }

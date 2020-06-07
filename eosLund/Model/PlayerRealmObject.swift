@@ -13,11 +13,18 @@ class PlayerRealmObject: Object {
     
     @objc dynamic public private(set) var id: String = UUID().uuidString
     @objc dynamic public private(set) var playerName: String = ""
-    @objc dynamic public private(set) var playerNumber: Int = 0
+    @objc dynamic public private(set) var playerNumber: Int = 404
     @objc dynamic public private(set) var playerPosition: String = ""
     @objc dynamic public private(set) var playerLeague: String = "undefined"
     @objc dynamic public private(set) var playerImage: Data = Data()
     @objc dynamic public private(set) var playerUpdateDate: Date = Date()
+    @objc dynamic public private(set) var playerHeight: String = ""
+    @objc dynamic public private(set) var playerDateOfBirth: String = ""
+    @objc dynamic public private(set) var playerNationality: String = ""
+    @objc dynamic public private(set) var playerOriginalClub: String = ""
+    @objc dynamic public private(set) var playerInEosFrom: String = ""
+    @objc dynamic public private(set) var playerBigImageUrl: String = ""
+    
     
     override static func primaryKey() -> String? {
         return "id"
@@ -27,7 +34,7 @@ class PlayerRealmObject: Object {
         return ["playerNumber"]
     }
     
-    convenience init(playerId: String, playerName: String, playerNumber: Int, playerPosition: String, playerImage: Data, playerLeague: String, playerUpdateDate: Date) {
+    convenience init(playerId: String, playerName: String, playerNumber: Int, playerPosition: String, playerImage: Data, playerLeague: String, playerUpdateDate: Date, playerHeight: String, playerDateOfBirth: String, playerOriginalClub: String, playerInEosFrom: String, playerNationality: String, playerBigImageUrl: String) {
         self.init()
         self.id = playerId
         self.playerNumber = playerNumber
@@ -36,71 +43,61 @@ class PlayerRealmObject: Object {
         self.playerImage = playerImage
         self.playerLeague = playerLeague
         self.playerUpdateDate = playerUpdateDate
+        self.playerHeight = playerHeight
+        self.playerDateOfBirth = playerDateOfBirth
+        self.playerNationality = playerNationality
+        self.playerOriginalClub = playerOriginalClub
+        self.playerInEosFrom = playerInEosFrom
+        self.playerBigImageUrl = playerBigImageUrl
     }
     
-    static func addPlayerToRealmBase(playerId:String, playerName:String, playerNumber: Int, playerPosition: String, playerImage: Data, playerLeague: String, playerUpdateDate: Date, completionHandler:(Bool)->()) {
-        REALM_QUEUE.sync {
-             let player = PlayerRealmObject(playerId: playerId, playerName: playerName, playerNumber: playerNumber, playerPosition: playerPosition, playerImage: playerImage, playerLeague: playerLeague, playerUpdateDate: playerUpdateDate)
-                   
-                   do {
-                       let realm = try Realm()
-                        try realm.write (
-                            transaction: {
-                                realm.add(player)
-                            },
-                            completion: {
-                                completionHandler(true)
-                        })
-                   } catch {
-                       debugPrint("Can`t save player")
-                   }
-        }
-    }
-    
+    //update or add information about player in realm base
     static func updatePlayerInfo( player: Player, playerImage: UIImage, completionHandler:(Bool)->()) {
         let playerObject = PlayerRealmObject()
-        playerObject.id = player.playerId
-        playerObject.playerName = player.playerName
-        playerObject.playerNumber = player.playerNumber
-        playerObject.playerPosition = player.playerPosition
+        playerObject.id = player.id
+        playerObject.playerName = player.name
+        playerObject.playerNumber = player.number
+        playerObject.playerPosition = player.position
         let dataImage = playerImage.pngData()
         playerObject.playerImage = dataImage!
         playerObject.playerLeague = player.playerLeague
         playerObject.playerUpdateDate = Date()
+        playerObject.playerHeight = player.height
+        playerObject.playerDateOfBirth = player.dateOfBirth
+        playerObject.playerNationality = player.nationality
+        playerObject.playerOriginalClub = player.originalClub
+        playerObject.playerInEosFrom = player.inEosFrom
+        playerObject.playerBigImageUrl = player.bigImageURL
         
         do {
-           let realm =  try Realm()
+            let realm =  try Realm()
             try realm.write (
                 transaction: {
                     realm.add(playerObject, update: .modified)
-                },
+            },
                 completion: {
                     completionHandler(true)
             })
         } catch  {
-            debugPrint("Can`t update player")
+            debugPrint("Can`t update player in realm base")
         }
     }
     
+//    get information about all players from realm base
     static func getAllPlayers () -> Results<PlayerRealmObject>?{
         do {
-           let realm = try Realm()
+            let realm = try Realm()
             let players = realm.objects(PlayerRealmObject.self)
-//            print(players.first?.playerName)
             return players
         } catch  {
-            debugPrint("Can`t fetch data", error)
+            debugPrint("Can`t fetch data from realm base", error)
             return nil
         }
     }
     
-//   static func getPlayer(for id: String) -> p? {
-//        do {
-//            let realm = try Realm(configuration: RealmConfig.runDataConfig)
-//            
-//            return realm.object(ofType: Run.self, forPrimaryKey: id)
-//        } catch {
-//            return nil
-//        }
-//    }
+    //get players from realm base filtered by specific league
+    static func getRealmPredicatePlayerListForTable(league: String) -> Results<PlayerRealmObject>? {
+        let leaguePredicate = NSPredicate(format: "playerLeague = %@", league)
+        return PlayerRealmObject.getAllPlayers()?.filter(leaguePredicate).sorted(byKeyPath: "playerNumber")
+    }
 }

@@ -14,12 +14,9 @@ class CoachVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet weak var leagueLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    
     var choosenLeague: String!
     let firebaseDB = Firestore.firestore()
     var coachesArray = [Coach]()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +80,4 @@ class CoachVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         return CGSize(width: cellDimension, height: hightCellDimension)
     }
-    
-
 }

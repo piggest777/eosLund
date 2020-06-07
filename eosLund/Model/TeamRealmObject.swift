@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 
+//realm class for store team in realm base
 class TeamRealmObject: Object {
     @objc dynamic public private(set) var id: String = "NULL"
     @objc dynamic public private(set) var teamName: String = "Team"
@@ -29,22 +30,7 @@ class TeamRealmObject: Object {
         self.logoPathName = logoPathName
     }
     
-    static func addTeamToRealmBase(id: String, teamName:String, teamCity: String, homeArena: String, logoPatnName: String) {
-        REALM_QUEUE.sync {
-            let newTeam = TeamRealmObject(id: id, teamName: teamName, teamCity: teamCity, homeArena: homeArena, logoPathName: logoPatnName)
-            
-            do{
-                let realm = try Realm()
-                
-                try realm.write {
-                    realm.add(newTeam)
-                }
-            } catch {
-                debugPrint("can`t add new team to Realm Base", error)
-            }
-        }
-    }
-    
+    //save team to real base
     static func updateTeamInfo(team: TeamFirestoreModel) {
         let realmTeam = TeamRealmObject()
         realmTeam.id = team.id
@@ -54,18 +40,19 @@ class TeamRealmObject: Object {
         realmTeam.logoPathName = team.logoPathName
         
         do {
-           let realm =  try Realm()
+            let realm =  try Realm()
             try realm.write {
                 realm.add(realmTeam, update: .modified)
             }
         } catch  {
-            debugPrint("can`t update team info", error)
+            debugPrint("can`t add or update team info", error)
         }
     }
     
+    //get all teams from realm base
     static func getAllRealmTeam() -> Results<TeamRealmObject>?{
         do {
-           let realm = try Realm()
+            let realm = try Realm()
             let teams = realm.objects(TeamRealmObject.self)
             return teams
         } catch  {
@@ -74,9 +61,9 @@ class TeamRealmObject: Object {
         }
     }
     
+    //delete team by team id
     static func deleteRealmTeamBy(id: String) {
         do {
-            
             let realm = try Realm()
             let objectToDelete = realm.object(ofType: TeamRealmObject.self, forPrimaryKey: id)
             
@@ -86,23 +73,25 @@ class TeamRealmObject: Object {
             }
             
         } catch  {
-            debugPrint("Can`t delete RealmTeamObject", error)
+            debugPrint("Can`t delete team by id", error)
+        }
+    }
+   
+    //get team by info
+    static func getTeamInfoById(id: String) -> TeamRealmObject {
+        
+        let defaultOppositeTeam = TeamRealmObject(id: "", teamName: "Team", teamCity: "", homeArena: "", logoPathName: "defaultLogo.png")
+        
+        do {
+            let realmOppositeTeam = try Realm().object(ofType: TeamRealmObject.self, forPrimaryKey: id)
+            return realmOppositeTeam ?? defaultOppositeTeam
+        } catch  {
+            debugPrint("Can`t get team info from Realm Base", error)
+            return defaultOppositeTeam
         }
     }
     
-    static func getTeamInfoById(id: String) -> TeamRealmObject {
-
-        let defaultOppositeTeam = TeamRealmObject(id: "", teamName: "Team", teamCity: "", homeArena: "", logoPathName: "defaultLogo.png")
-        
-         do {
-            let realmOppositeTeam = try Realm().object(ofType: TeamRealmObject.self, forPrimaryKey: id)
-             return realmOppositeTeam ?? defaultOppositeTeam
-         } catch  {
-            debugPrint("Can`t get team info from Realm Base", error)
-             return defaultOppositeTeam
-         }
-     }
-    
+    //add team to realm base and wait while write transaction will be finished before update
     static func realmWriteWithCallback(team: TeamFirestoreModel, completion: @escaping (Bool)->()) {
         let realmTeam = TeamRealmObject()
         realmTeam.id = team.id
@@ -112,16 +101,16 @@ class TeamRealmObject: Object {
         realmTeam.logoPathName = team.logoPathName
         
         do {
-           let realm =  try Realm()
+            let realm =  try Realm()
             try realm.write(
                 transaction: {
                     realm.add(realmTeam)
-                },
+            },
                 completion: {
                     completion(true)
             })
         } catch  {
-            debugPrint("can`t update team info", error)
+            debugPrint("can`t add or update team info in Realm base", error)
         }
     }
 }

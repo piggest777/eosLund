@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension UIImageView {
     
     func setLogoImg(logoPath: String) {

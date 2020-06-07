@@ -30,7 +30,6 @@ class Game {
         self.eosTeamCode = eosTeamCode
         self.oppositeTeamCode = oppositeTeamCode
         self.isHomeGame = isHomeGame
-       
         self.eosScore = eosScore
         self.oppositeTeamScore = oppositeTeamScore
         self.gameDateAndTime = gameDateAndTime
@@ -43,8 +42,10 @@ class Game {
         self.gameCoverUrl = gameCoverUrl
     }
     
+    //Get information about games from firebase snapshot
     class func parseData (snapshot: QuerySnapshot?) -> [Game]{
         var games = [Game]()
+        
         guard let snapshot = snapshot else { return games }
         
         for document in snapshot.documents {
@@ -54,9 +55,7 @@ class Game {
             let isHomeGame: Bool = data[IS_HOME_GAME] as? Bool ?? true
             let eosScore: Int = data[EOS_SCORES] as? Int ?? 0
             let oppositeTeamScores: Int = data[OPPOSITE_TEAM_SCORES] as? Int ?? 0
-            let dateAndTimeTimestamp: Timestamp = data[GAME_DATE_AND_TIME] as? Timestamp ?? Timestamp()
-//           Need to add date convert to empty string if date return nil
-            let gameDateAndTime = dateAndTimeTimestamp.dateValue()
+            let dateAndTimeTimestamp: Timestamp? = data[GAME_DATE_AND_TIME] as? Timestamp ?? nil
             let teamLeague: String = data[TEAM_LEAGUE] as? String ?? "undefined"
             let documentId = document.documentID
             let eosPlayers: String? = data[EOS_PLAYERS] as? String ?? nil
@@ -64,58 +63,15 @@ class Game {
             let gameDesc: String? = data[GAME_DESCRIPTION] as? String ?? nil
             let statsLink: String? = data[STATISTIC_LINK] as? String ?? nil
             let gameCoverUrl: String?  = data[GAME_COVER_URL] as? String ?? nil
-            
-            
-            
-//            var team1:Team?
-//            var team2: Team?
-//            var homeTeamScore: Int = 0
-//            var guestTeamScore: Int = 0
-//            var homeTeamPlayers: String?
-//            var guestTeamPlayers: String?
-            
-//            func setupTeams(isTeam1HomeTeam: Bool) {
-//                if isTeam1HomeTeam {
-//                    team1 = Team(name: team1Name, city: team1City)
-//                    team2 = Team(name: team2Name, city: team2City)
-//                    homeTeamScore = team1Score
-//                    guestTeamScore = team2Score
-//                    homeTeamPlayers = team1Players
-//                    guestTeamPlayers = team2Players
-//                } else {
-//                    team1 = Team(name: team2Name, city: team2City)
-//                    team2 = Team(name: team1Name, city: team1City)
-//                    homeTeamScore = team2Score
-//                    guestTeamScore = team1Score
-//                    homeTeamPlayers = team2Players
-//                    guestTeamPlayers = team1Players
-//                }
-//
-//            }
-            
-//            if gameCity == "Lund" {
-//                if team1City == "Lund"{
-//                    setupTeams(isTeam1HomeTeam: true)
-//                } else if team2City == "Lund" {
-//                    setupTeams(isTeam1HomeTeam: false)
-//                } else {
-//                    setupTeams(isTeam1HomeTeam: true)
-//                }
-//            } else {
-//                if team1City == "Lund"{
-//                    setupTeams(isTeam1HomeTeam: false)
-//                } else if team2City == "Lund" {
-//                    setupTeams(isTeam1HomeTeam: true)
-//                } else {
-//                    setupTeams(isTeam1HomeTeam: false)
-//                }
-//            }
-            
-            let newGame = Game(eosTeamCode: eosTeamCode, oppositeTeamCode: oppositeTeamCode, eosScore: eosScore, oppositeTeamScore: oppositeTeamScores, isHomeGame: isHomeGame, gameDateAndTime: gameDateAndTime, teamLeague: teamLeague, documentId: documentId, eosPlayers: eosPlayers, oppositeTeamPlayers: oppositeTeamPlayers, statsLink: statsLink, gameDesc: gameDesc, gameCoverUrl: gameCoverUrl)
-            
-            games.append(newGame)
+            if dateAndTimeTimestamp != nil {
+                let gameDateAndTime = dateAndTimeTimestamp!.dateValue()
+                let newGame = Game(eosTeamCode: eosTeamCode, oppositeTeamCode: oppositeTeamCode, eosScore: eosScore, oppositeTeamScore: oppositeTeamScores, isHomeGame: isHomeGame, gameDateAndTime: gameDateAndTime, teamLeague: teamLeague, documentId: documentId, eosPlayers: eosPlayers, oppositeTeamPlayers: oppositeTeamPlayers, statsLink: statsLink, gameDesc: gameDesc, gameCoverUrl: gameCoverUrl)
+                
+                games.append(newGame)
+            } else {
+                print("out information about game date and time, can`t add to array. Game id: \(documentId)")
+            }
         }
-        
         return games   
     }
 }

@@ -11,7 +11,7 @@ import SafariServices
 import RealmSwift
 
 class GameInfoVC: UIViewController {
-
+    
     @IBOutlet weak var leagueLbl: UILabel!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var gameImg: UIImageView!
@@ -28,12 +28,9 @@ class GameInfoVC: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var oppositePlayerListBtn: RoundedShadowButton!
     
     var game: Game!
-    var firstTeamPlayersInfoLoaded: Bool = false
-    var secondTeamPlayersInfoLoaded: Bool = false
-    
-
     
     override func viewDidLayoutSubviews() {
         chooseViewsToDisplay()
@@ -44,7 +41,7 @@ class GameInfoVC: UIViewController {
         setupBasicInfo()
     }
     
-    func setupBasicInfo () {
+    func setupBasicInfo() {
         setupBasicInfoView()
         switchLeague()
         let realmBasedOppositeTeam = TeamRealmObject.getTeamInfoById(id: game.oppositeTeamCode)
@@ -66,8 +63,6 @@ class GameInfoVC: UIViewController {
                 
                 guestTeamLogoimg.setLogoImg(logoPath: realmBasedOppositeTeam.logoPathName)
                 homeTeamLogoImg.setLogoImg(logoPath: EOS_TEAM.logoPathName)
-                
-                    
             } else {
                 scorelbl.text = "\(game.oppositeTeamScore ?? 0) : \(game.eosScore ?? 0)"
                 teamsNamelbl.text = "\(realmBasedOppositeTeam.teamName) vs \(EOS_TEAM.teamName ?? "Eos Basket")"
@@ -79,9 +74,9 @@ class GameInfoVC: UIViewController {
                 
                 if realmBasedOppositeTeam.teamCity != "" && realmBasedOppositeTeam.homeArena != "" {
                     gamePlaceLbl.text = "\(realmBasedOppositeTeam.teamCity), \(realmBasedOppositeTeam.homeArena)"
-                        } else {
-                            gamePlaceLbl.isHidden = true
-                        }
+                } else {
+                    gamePlaceLbl.isHidden = true
+                }
                 guestTeamLogoimg.setLogoImg(logoPath: EOS_TEAM.logoPathName)
                 homeTeamLogoImg.setLogoImg(logoPath: realmBasedOppositeTeam.logoPathName)
             }
@@ -98,11 +93,11 @@ class GameInfoVC: UIViewController {
             if let image = UIImage(named: "defaultCoverSBLD.jpg") {
                 gameImg.image = image
             } else {
-                print("no image")
+                print("no cover image")
             }
         case "SE Herr":
-                leagueLbl.text = "SUPERETTAN MEN"
-                gameImg.image = UIImage(named: "defaultCoverSEH.jpg")
+            leagueLbl.text = "SUPERETTAN MEN"
+            gameImg.image = UIImage(named: "defaultCoverSEH.jpg")
         case "BE Dam":
             leagueLbl.text = "BASKETETTAN WOMEN"
             gameImg.image = UIImage(named: "defaultCoverBED.jpg")
@@ -118,17 +113,8 @@ class GameInfoVC: UIViewController {
                 }
             }
         }
-        
     }
     
-    func setLogoImg(logoPath: String) -> UIImage {
-        if let logo = UIImage(named: "\(logoPath)") {
-            return logo
-        } else  {
-            return UIImage(named: "defaultLogo.png")!
-        }
-    }
-        
     func setupBasicInfoView () {
         mainGameInfoView.layer.cornerRadius = 30
         mainGameInfoView.layer.shadowColor = UIColor.darkGray.cgColor
@@ -140,7 +126,6 @@ class GameInfoVC: UIViewController {
     }
     
     func setupBtnView () {
-
         statisticBtn.layer.cornerRadius = statisticBtn.layer.frame.size.height/2
         statisticBtn.layer.shadowColor = UIColor.darkGray.cgColor
         statisticBtn.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
@@ -149,30 +134,30 @@ class GameInfoVC: UIViewController {
         statisticBtn.layer.borderColor = #colorLiteral(red: 0.4922404289, green: 0.7722371817, blue: 0.4631441236, alpha: 1)
         statisticBtn.layer.borderWidth = 5
         statisticBtn.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        statisticBtn.isEnabled = true
     }
     
-    func adjustUITextViewHeight(arg : UITextView)
+    func adjustUITextViewHeight(textView : UITextView)
     {
-        arg.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
-        arg.translatesAutoresizingMaskIntoConstraints = true
-        arg.isScrollEnabled = false
-        arg.frame.size.width = UIScreen.main.bounds.width
-        arg.sizeToFit()
-
+        textView.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
+        textView.translatesAutoresizingMaskIntoConstraints = true
+        textView.isScrollEnabled = false
+        textView.frame.size.width = UIScreen.main.bounds.width
+        textView.sizeToFit()
     }
     
     func chooseViewsToDisplay () {
         gameDescriptionTextView.isHidden = true
         statsButtonView.isHidden = true
-        let realmBasedOppositeTeam = TeamRealmObject.getTeamInfoById(id: game.oppositeTeamCode)
+        oppositePlayerListBtn.isHidden = true
         
         if let gameStatHtml = game.statsLink {
             if gameStatHtml.isValidURL {
+                statisticBtn.isHidden = false
                 setupBtnView()
-                statsButtonView.isHidden = false
             }
         } else {
-            statsButtonView.isHidden = true
+            statisticBtn.isHidden = true
         }
         
         if game.gameDescription != nil {
@@ -180,82 +165,37 @@ class GameInfoVC: UIViewController {
             let stringWithNewLine = gameDesc!.replacingOccurrences(of: "\\n", with: "\n")
             gameDescriptionTextView.isHidden = false
             gameDescriptionTextView.text = stringWithNewLine
-            adjustUITextViewHeight(arg: gameDescriptionTextView)
+            adjustUITextViewHeight(textView: gameDescriptionTextView)
         } else {
             gameDescriptionTextView.isHidden = true
         }
         
-        if let teamPlayersListForFirstTeam = game.eosPlayers {
-            if firstTeamPlayersInfoLoaded == false {
-                addTeamList(for: "Eos Basket", teamText: teamPlayersListForFirstTeam)
-                firstTeamPlayersInfoLoaded = true
-            }
+        if game.oppositeTeamPlayers != nil {
+            oppositePlayerListBtn.isHidden = false
         }
-        
-        if let teamPlayersForSeconTeam = game.oppositeTeamPlayers {
-            if secondTeamPlayersInfoLoaded == false{
-                addTeamList(for: realmBasedOppositeTeam.teamName, teamText: teamPlayersForSeconTeam)
-                secondTeamPlayersInfoLoaded = true
-            }
-        }
-        
         scrollView.contentSize.height = stackView.frame.height
     }
     
-    func addTeamList(for team: String, teamText: String) {
+    
+    func presentPlayerList(isEosPlayers: Bool) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let playersDetailsVC = storyBoard.instantiateViewController(withIdentifier: "playerDetailsVC") as! PlayerDetailsVC
+        playersDetailsVC.game = game
+        playersDetailsVC.isEosTeam = isEosPlayers
+        present(playersDetailsVC, animated: true, completion: nil)
         
-        let teamNameLbl = UILabelPadding()
-        teamNameLbl.text = "\(team) players:"
-        teamNameLbl.textAlignment = .center
-        teamNameLbl.font = UIFont(name: "AvenirNext-DemiBold", size: 25)
-        teamNameLbl.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        teamNameLbl.adjustsFontSizeToFitWidth = true
-        teamNameLbl.minimumScaleFactor = 0.5
-        teamNameLbl.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(teamNameLbl)
-        
-        let textArray = teamText.components(separatedBy: ",")
-        for player in textArray {
-            let componentsArray = player.components(separatedBy: " ")
-            let componentsWithoutSpases = componentsArray.filter { $0 != "" }
-            let playerInfo = componentsWithoutSpases.joined(separator: " ")
-            
-            
-            let playerLabel = UILabelPadding()
-            playerLabel.text = playerInfo
-            playerLabel.font = UIFont(name: "AvenirNext-Regular", size: 17)
-            playerLabel.textAlignment = .justified
-            playerLabel.adjustsFontSizeToFitWidth = true
-            playerLabel.minimumScaleFactor = 0.5
-            playerLabel.heightAnchor.constraint(equalToConstant: 35).isActive = true
-            playerLabel.translatesAutoresizingMaskIntoConstraints = false
-            
-            stackView.addArrangedSubview(playerLabel)
-        }
     }
     
-    let text: String = "Som utlovat blev gårdagens derby en fartfylld historia där båda lagen lade i högsta växeln redan från start. Matchen var i början mycket jämn innan Eos gjorde ett ryck i andra perioden och gick till pausvila med en tiopoängsledning. \n \n TeamQ4 startade bäst efter paus och vann den tredje perioden med sex poäng. En mycket spännande slutperiod av matchen väntade när nu Eos ledning krymp till ynka fyra poäng. Gästerna fortsatta på inslagen väg och åt upp poäng för poäng, med åtta minuter kvar av matchen var TeamQ4 ikapp, 78 – 78. Efter detta växlade Eos upp och tog återigen kommandot i matchen. Med drygt sex minuter kvar begärde gästerna en time-out efter att hemmalaget gjort fem raka poäng. 83 – 78 med 33.56 på matchuret. Pausen gav effekt och TeamQ4 spelade upp sig, jakten var igång! Poäng för poäng närmade sig gästerna hemmalaget i grönt och med 2.43 kvar på klockan var gästerna ikapp, 91 – 91. Närmare än så kom dock inte gästerna. Eos avslutade matchen genom att gasa igenom faran, anfall är som sagt lagets bästa försvar. Med åtta raka poäng och 1.12 kvar av matchen var poängen säkrade och jakten på Fryshuset fortsätter. Slutsiffrorna skrevs till 101 – 93 och ingen kan kräva pengarna tillbaka på grund av bristande underhållning. En stor eloge ska även riktas till de tillresta bortasupportrarna som matchen igenom stöttade sitt lag trots stort numerärt underläge."
-    
-    let teamText: String = """
-    00    Kofi Adanovur 1991 Forward    191    Malbas,
-    2    Adnan Karovic    1988    Guard    188    Malmö IBK,
-    4    Tahe Mahmoud    2000    Guard    189    IK Eos,
-    5    Nils Gjörup    1992    Guard    177    Höken,
-    6    Gustav Sundström    1991    Forward    197    IK Eos,
-    8    Andreas von Uthmann    1996    Forward    197    Djursholm,
-    9    David Niklasson    1995    Guard    193    Täby,
-    10    Marcus Dahlqvist    1996    Guard    191    Djursholm,
-    11    Johan Aasa    1992    Guard    190    Skellefteå,
-    12    Andrew Lundström    1996    Forward    198    Kanada,
-    13    Erik Nilsson    1998    Forward    192    Malbas,
-    22    Joel Svensson    1996    Guard    185    Tureberg,
-    24    Anton Almqvist    1995    Guard    185    Marbo,
-    27    Carl Tjernberg    1998    Guard    187    Djursholm,
-    55    Olle Karlsson (C)    1996    Guard    193    Avans SK
-"""
-    
     @IBAction func backButtonPressed(_ sender: Any) {
-    dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func playerListBtnPressed(_ sender: UIButton) {
+        if sender.tag == 0 {
+            presentPlayerList(isEosPlayers: true)
+        } else if sender.tag == 1 {
+            presentPlayerList(isEosPlayers: false)
+        }
     }
     
     @IBAction func openStatisticBtnPressed(_ sender: Any) {
@@ -268,11 +208,3 @@ class GameInfoVC: UIViewController {
         }
     }
 }
-
-
-extension UIScrollView {
-    func updateContentView() {
-        contentSize.height = subviews.sorted(by: { $0.frame.maxY < $1.frame.maxY }).last?.frame.maxY ?? contentSize.height
-    }
-}
-
