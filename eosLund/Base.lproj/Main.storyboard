@@ -457,7 +457,7 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eos Basket" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="e17-Eb-dIf">
                                                                 <rect key="frame" x="78.5" y="10" width="211.5" height="51"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="37"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" red="0.48627450979999998" green="0.14117647059999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
@@ -471,7 +471,7 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Basket team" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="mjo-gG-Wc2">
                                                                 <rect key="frame" x="0.0" y="10" width="211.5" height="51"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="37"/>
-                                                                <nil key="textColor"/>
+                                                                <color key="textColor" red="0.48627450979999998" green="0.14117647059999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jnQ-DB-mEZ">
@@ -490,7 +490,10 @@
                                             <view hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6at-HX-K40">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="323"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No information about next game" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AqO-CB-aaR">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noGameInfo" translatesAutoresizingMaskIntoConstraints="NO" id="HV1-fi-9JF">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="323"/>
+                                                    </imageView>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No information about next game" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AqO-CB-aaR">
                                                         <rect key="frame" x="30" y="134" width="260" height="55"/>
                                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                                                         <nil key="textColor"/>
@@ -503,6 +506,10 @@
                                                     <constraint firstAttribute="trailing" secondItem="AqO-CB-aaR" secondAttribute="trailing" constant="30" id="DWg-5W-XKG"/>
                                                     <constraint firstItem="AqO-CB-aaR" firstAttribute="centerX" secondItem="6at-HX-K40" secondAttribute="centerX" id="LyR-C9-rP4"/>
                                                     <constraint firstItem="AqO-CB-aaR" firstAttribute="centerY" secondItem="6at-HX-K40" secondAttribute="centerY" id="Sla-tJ-OFo"/>
+                                                    <constraint firstItem="HV1-fi-9JF" firstAttribute="top" secondItem="6at-HX-K40" secondAttribute="top" id="W8D-0x-9I1"/>
+                                                    <constraint firstAttribute="bottom" secondItem="HV1-fi-9JF" secondAttribute="bottom" id="a94-jh-keX"/>
+                                                    <constraint firstAttribute="trailing" secondItem="HV1-fi-9JF" secondAttribute="trailing" id="jM6-5c-jPk"/>
+                                                    <constraint firstItem="HV1-fi-9JF" firstAttribute="leading" secondItem="6at-HX-K40" secondAttribute="leading" id="viL-KX-tca"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -564,7 +571,7 @@
                                                     <constraint firstAttribute="height" constant="2" id="IwR-ue-aRA"/>
                                                 </constraints>
                                             </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LundaSpelen" translatesAutoresizingMaskIntoConstraints="NO" id="L37-Jk-VMl">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lundaSpelenWhite" translatesAutoresizingMaskIntoConstraints="NO" id="L37-Jk-VMl">
                                                 <rect key="frame" x="264" y="2" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="46" id="AZP-VE-rsk"/>
@@ -593,12 +600,12 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TwI-Kp-H1s">
-                                        <rect key="frame" x="0.0" y="373" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="373" width="320" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otk-IQ-dOV" customClass="RoundedShadowButton" customModule="Eos_Lund" customModuleProvider="target">
-                                                <rect key="frame" x="5" y="2" width="310" height="36"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otk-IQ-dOV">
+                                                <rect key="frame" x="0.0" y="2" width="320" height="26"/>
                                                 <color key="backgroundColor" red="0.42745098040000001" green="0.73725490199999999" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="OPEN TOURNAMENT TABLE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -607,17 +614,17 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" red="0.48627450979999998" green="0.14117647059999999" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="otk-IQ-dOV" firstAttribute="top" secondItem="TwI-Kp-H1s" secondAttribute="top" constant="2" id="5TB-YZ-zrf"/>
-                                            <constraint firstAttribute="trailing" secondItem="otk-IQ-dOV" secondAttribute="trailing" constant="5" id="6gZ-4h-eDx"/>
-                                            <constraint firstItem="otk-IQ-dOV" firstAttribute="leading" secondItem="TwI-Kp-H1s" secondAttribute="leading" constant="5" id="ArV-Op-Euw"/>
+                                            <constraint firstAttribute="trailing" secondItem="otk-IQ-dOV" secondAttribute="trailing" id="6gZ-4h-eDx"/>
+                                            <constraint firstItem="otk-IQ-dOV" firstAttribute="leading" secondItem="TwI-Kp-H1s" secondAttribute="leading" id="ArV-Op-Euw"/>
                                             <constraint firstAttribute="bottom" secondItem="otk-IQ-dOV" secondAttribute="bottom" constant="2" id="Xmb-yb-g1Q"/>
-                                            <constraint firstAttribute="height" constant="40" id="cEB-tI-U3t"/>
+                                            <constraint firstAttribute="height" constant="30" id="cEB-tI-U3t"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kIQ-Wi-H98">
-                                        <rect key="frame" x="0.0" y="413" width="320" height="61"/>
+                                        <rect key="frame" x="0.0" y="403" width="320" height="71"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="gameCell" rowHeight="60" id="wJk-as-hZc" customClass="GamesTableViewCell" customModule="Eos_Lund" customModuleProvider="target">
@@ -790,10 +797,11 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sxr-QU-sqZ" customClass="RoundedShadowButton" customModule="Eos_Lund" customModuleProvider="target">
-                                <rect key="frame" x="70" y="484" width="180" height="25"/>
+                                <rect key="frame" x="85" y="484" width="150" height="25"/>
                                 <color key="backgroundColor" red="0.42745098040000001" green="0.73725490199999999" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="0wV-4y-JKv"/>
+                                    <constraint firstAttribute="width" constant="150" id="ggB-jY-B8y"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                 <state key="normal" title="REVEAL SCHEDULE">
@@ -806,11 +814,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Sxr-QU-sqZ" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="85k-g4-EMW"/>
                             <constraint firstItem="njr-Tl-iur" firstAttribute="top" secondItem="Sxr-QU-sqZ" secondAttribute="bottom" constant="10" id="PAe-J7-epC"/>
                             <constraint firstItem="CGt-uS-R3c" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="QG5-Yu-gul"/>
-                            <constraint firstAttribute="trailing" secondItem="Sxr-QU-sqZ" secondAttribute="trailing" constant="70" id="Y6b-hz-sb0"/>
                             <constraint firstItem="CGt-uS-R3c" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailing" id="ZGN-yz-boS"/>
-                            <constraint firstItem="Sxr-QU-sqZ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="70" id="cQA-4q-tyC"/>
                             <constraint firstAttribute="trailing" secondItem="BFR-15-0v0" secondAttribute="trailing" id="eQy-Pw-ppU"/>
                             <constraint firstItem="BFR-15-0v0" firstAttribute="top" secondItem="CGt-uS-R3c" secondAttribute="bottom" id="i89-zc-Q9m"/>
                             <constraint firstItem="BFR-15-0v0" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="kWd-a6-8jk"/>
@@ -1745,7 +1752,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zUu-oU-n9C">
                                         <rect key="frame" x="10" y="15" width="300" height="75"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79p-jw-DGN">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79p-jw-DGN" customClass="RoundedViewForPlayerDetails" customModule="Eos_Lund" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="75"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVP-VD-dM5">
@@ -1762,8 +1769,8 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-tb-Pcx">
-                                                        <rect key="frame" x="59" y="42" width="22.5" height="30"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="20"/>
+                                                        <rect key="frame" x="58.5" y="42" width="23.5" height="30"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1785,7 +1792,7 @@
                                                     <constraint firstItem="oVP-VD-dM5" firstAttribute="bottom" secondItem="hrR-tS-dmo" secondAttribute="bottom" id="uZv-CD-xvx"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="il5-ZR-IWG">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="il5-ZR-IWG" customClass="RoundedViewForPlayerDetails" customModule="Eos_Lund" customModuleProvider="target">
                                                 <rect key="frame" x="160" y="0.0" width="140" height="75"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vVq-9Q-PS3">
@@ -1797,7 +1804,7 @@
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="173 cm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccv-9Z-2Mi">
                                                         <rect key="frame" x="5" y="42" width="130" height="31"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1831,7 +1838,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FX8-Cd-JlV">
                                         <rect key="frame" x="10" y="105" width="300" height="75"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpA-wj-mg8">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpA-wj-mg8" customClass="RoundedViewForPlayerDetails" customModule="Eos_Lund" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="75"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4D-ff-3iY">
@@ -1872,7 +1879,7 @@ Unicode: U+1F1F8 U+1F1EA, UTF-8: F0 9F 87 B8 F0 9F 87 AA</string>
                                                     <constraint firstItem="Xjb-7X-TUd" firstAttribute="leading" secondItem="fpA-wj-mg8" secondAttribute="leading" constant="5" id="vYk-PG-Mai"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z5c-OL-Jap">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z5c-OL-Jap" customClass="RoundedViewForPlayerDetails" customModule="Eos_Lund" customModuleProvider="target">
                                                 <rect key="frame" x="160" y="0.0" width="140" height="75"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJS-iD-DOc">
@@ -1884,7 +1891,7 @@ Unicode: U+1F1F8 U+1F1EA, UTF-8: F0 9F 87 B8 F0 9F 87 AA</string>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forward" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bH-Ab-Oa6">
                                                         <rect key="frame" x="5" y="42" width="130" height="31"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1918,7 +1925,7 @@ Unicode: U+1F1F8 U+1F1EA, UTF-8: F0 9F 87 B8 F0 9F 87 AA</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gPh-sA-rjc">
                                         <rect key="frame" x="10" y="195" width="300" height="75"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63Z-3f-qCI">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63Z-3f-qCI" customClass="RoundedViewForPlayerDetails" customModule="Eos_Lund" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="75"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u15-rl-jxo">
@@ -1936,7 +1943,7 @@ Unicode: U+1F1F8 U+1F1EA, UTF-8: F0 9F 87 B8 F0 9F 87 AA</string>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Täby" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXx-zR-BQm">
                                                         <rect key="frame" x="5" y="42" width="130" height="31"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -1956,7 +1963,7 @@ Unicode: U+1F1F8 U+1F1EA, UTF-8: F0 9F 87 B8 F0 9F 87 AA</string>
                                                     <constraint firstItem="u15-rl-jxo" firstAttribute="top" secondItem="dWL-yg-T8c" secondAttribute="bottom" constant="2" id="ziX-pd-NEb"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PcM-sl-jQH">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PcM-sl-jQH" customClass="RoundedViewForPlayerDetails" customModule="Eos_Lund" customModuleProvider="target">
                                                 <rect key="frame" x="160" y="0.0" width="140" height="75"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7i-mH-ikJ">
@@ -1968,7 +1975,7 @@ Unicode: U+1F1F8 U+1F1EA, UTF-8: F0 9F 87 B8 F0 9F 87 AA</string>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qja-aS-p4V">
                                                         <rect key="frame" x="5" y="42" width="130" height="31"/>
-                                                        <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -2073,7 +2080,6 @@ Unicode: U+1F1F8 U+1F1EA, UTF-8: F0 9F 87 B8 F0 9F 87 AA</string>
     </scenes>
     <resources>
         <image name="EOS LOGO" width="1200" height="1296"/>
-        <image name="LundaSpelen" width="136" height="199"/>
         <image name="Mary_Goulding" width="407" height="612"/>
         <image name="backBtn" width="25" height="25"/>
         <image name="basketballTabBarIcon" width="25" height="25"/>
@@ -2082,7 +2088,9 @@ Unicode: U+1F1F8 U+1F1EA, UTF-8: F0 9F 87 B8 F0 9F 87 AA</string>
         <image name="defaultBigPlayerImage" width="811" height="1024"/>
         <image name="defaultCoverSBLD" width="1944" height="1296"/>
         <image name="defaultLogo" width="100" height="100"/>
+        <image name="lundaSpelenWhite" width="136" height="199"/>
         <image name="moreThenGame" width="354" height="129"/>
+        <image name="noGameInfo" width="1993" height="1772"/>
         <image name="teamTabBarIcon" width="25" height="25"/>
         <image name="youtubeBlackIcon" width="715" height="715"/>
     </resources>

@@ -55,3 +55,6 @@ let API_KEY = "AIzaSyBxQ4uUEYTfTBp72F4EJzYueGLZa3v7Kmc"
 //eos team base team
 let EOS_TEAM: TeamFirestoreModel = TeamFirestoreModel(id: "EOS", teamName: "Eos Basket", teamCity: "Lund", homeArena: "Eoshallen", logoPathName: "eosLogo.png")
 
+
+//team update time in seconds, need to change when local team base update
+let TEAM_INFORMATION_UPDATE_TIME: Int = 1591828301

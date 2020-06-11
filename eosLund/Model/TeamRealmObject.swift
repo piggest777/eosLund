@@ -104,7 +104,7 @@ class TeamRealmObject: Object {
             let realm =  try Realm()
             try realm.write(
                 transaction: {
-                    realm.add(realmTeam)
+                    realm.add(realmTeam, update: .modified)
             },
                 completion: {
                     completion(true)

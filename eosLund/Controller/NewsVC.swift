@@ -38,6 +38,10 @@ class NewsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         setFooterView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        view.setUpStatusBar()
+    }
+    
     @objc func fetchNews() {
         //TODO: need to add number of pages control
         if segmentControlStatus == "news" {

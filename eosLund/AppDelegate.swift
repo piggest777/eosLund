@@ -43,8 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         
+        //let realmPath = Bundle.main.url(forResource: "eosDatabase", withExtension: "realm")!
         let config = Realm.Configuration(
-        schemaVersion: 1,
+            schemaVersion: 1,
         migrationBlock: { migration, oldSchemaVersion in
             if (oldSchemaVersion < 1) {
                 // Nothing to do!
@@ -67,10 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @available (iOS 13.0, *)
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-
     }
-
-
 }
 
 extension AppDelegate : MessagingDelegate {

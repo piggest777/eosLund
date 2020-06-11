@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SafariServices
+import RealmSwift
 
 class GameScheduleVC: UIViewController {
     
@@ -68,31 +69,14 @@ class GameScheduleVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //adopt information according iphone screen size
-        if UIScreen.main.bounds.height > 667 {
-            viewHidhConstraint.constant = halfHeightOfScreenSize - 50
-            bigScreenGameInfoStackView.isHidden = false
-            smalScreenGameInfoStackView.isHidden = true
-            moreThanAGameView.isHidden = false
-            nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 20)
-            nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 17)
-            nextGamePlaceAndTimeStackViewConstraint.constant = 50
-        } else {
-            viewHidhConstraint.constant = halfHeightOfScreenSize
-            bigScreenGameInfoStackView.isHidden = true
-            smalScreenGameInfoStackView.isHidden = false
-            moreThanAGameView.isHidden = true
-            nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
-            nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 12)
-            nextGamePlaceAndTimeStackViewConstraint.constant = 35
-        }
+        setUpViewToDisplayDependOnScreenSize()
         scheduleTableView.dataSource = self
         scheduleTableView.delegate = self
         leagueSegmentControl.layer.cornerRadius = 5
         swipeNextGame()
         tournamentBtnView.isHidden = false
+        
+        checkIfRealmBaseExist()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +112,36 @@ class GameScheduleVC: UIViewController {
             tournamentTableBtn.clipsToBounds = true
             tournamentTableBtn.layer.cornerRadius = 10
             tournamentTableBtn.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+    }
+    
+    func setUpViewToDisplayDependOnScreenSize() {
+        //adopt information according iphone screen size
+        if UIScreen.main.bounds.height >= 812 {
+            viewHidhConstraint.constant = halfHeightOfScreenSize - 50
+            bigScreenGameInfoStackView.isHidden = false
+            smalScreenGameInfoStackView.isHidden = true
+            moreThanAGameView.isHidden = false
+            nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 20)
+            nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 17)
+            nextGamePlaceAndTimeStackViewConstraint.constant = 50
+        } else if UIScreen.main.bounds.height >= 667  {
+            viewHidhConstraint.constant = halfHeightOfScreenSize
+            bigScreenGameInfoStackView.isHidden = false
+            smalScreenGameInfoStackView.isHidden = true
+            moreThanAGameView.isHidden = true
+            nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 20)
+            nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 17)
+            nextGamePlaceAndTimeStackViewConstraint.constant = 50
+        }
+        else {
+            viewHidhConstraint.constant = halfHeightOfScreenSize
+            bigScreenGameInfoStackView.isHidden = true
+            smalScreenGameInfoStackView.isHidden = false
+            moreThanAGameView.isHidden = true
+            nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 14)
+            nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 12)
+            nextGamePlaceAndTimeStackViewConstraint.constant = 35
         }
     }
     
@@ -334,8 +348,8 @@ class GameScheduleVC: UIViewController {
             
             
         } else if filteredGamesArray.first == nil {
-            isFullScheduleOpen = false
-            fullScheduleOpener()
+//            isFullScheduleOpen = false
+//            fullScheduleOpener()
             noGameCover.isHidden = false
         }
     }
@@ -378,6 +392,8 @@ class GameScheduleVC: UIViewController {
     
     //load tournament table by url in safari browser
     @IBAction func tournamentBtnWasPressed(_ sender: Any) {
+        
+        nextGameView.isHidden = false
         if choosenLeague != "All" {
             NetService.instance.getTournamentTableUrl(league: choosenLeague) { (returnedUrl) in
                 if let urlString = returnedUrl {
@@ -414,7 +430,45 @@ class GameScheduleVC: UIViewController {
             UIView.transition(with: view, duration: 0.5, options: .showHideTransitionViews, animations: {
                 view.isHidden = hidden
             })
+            if hidden == false {
+                view.isHidden = hidden
+            }
         }
+    }
+    
+    func checkIfRealmBaseExist() {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+           let url = NSURL(fileURLWithPath: path)
+           if let pathComponent = url.appendingPathComponent("default.realm") {
+               let filePath = pathComponent.path
+               let fileManager = FileManager.default
+               if fileManager.fileExists(atPath: filePath) {
+                   print("FILE AVAILABLE")
+               } else {
+                   print("FILE NOT AVAILABLE")
+                copyBaseToDocumentsFolder()
+               }
+           } else {
+               print("FILE PATH NOT AVAILABLE")
+           }
+    }
+    
+    func copyBaseToDocumentsFolder() {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        let destURL = documentsURL!.appendingPathComponent("default").appendingPathExtension("realm")
+        guard let sourceURL = Bundle.main.url(forResource: "default", withExtension: "realm")
+            else {
+                print("Source File not found.")
+                return
+        }
+            let fileManager = FileManager.default
+            do {
+                try fileManager.copyItem(at: sourceURL, to: destURL)
+                updateDate = Date(timeIntervalSince1970: TimeInterval(TEAM_INFORMATION_UPDATE_TIME))
+                print("Copied")
+            } catch {
+                print("Unable to copy file")
+            }
     }
     
     //setup view depend from league

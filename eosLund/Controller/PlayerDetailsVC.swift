@@ -65,7 +65,7 @@ class PlayerDetailsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             
             var playerInfoString = player.replacingOccurrences(of: "/t", with: " ")
 
-             playerInfoString = normalizePlayerString(player: playerInfoString)
+             
             
             let playerNumberPattern = "\\b[0-9]{1,2}\\b"
             let playerHeightPattern = "\\b[0-9]{3}\\b"
@@ -81,6 +81,8 @@ class PlayerDetailsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             let position = findPatternInString(pattern: positionPattern, sourceString: playerInfoString)
             playerInfoString.removingRegexMatches(pattern: positionPattern, replaceWith: "")
             let positionLetter = convertFullPositionToLetter(positionName: position)
+            
+            playerInfoString = normalizePlayerString(player: playerInfoString)
             
             let newPlayer = BasicPlayer(name: playerInfoString, number: Int(number) ?? 404, dateOfBirth: yearOfBirth, height: height, position: positionLetter)
             playerArray.append(newPlayer)
