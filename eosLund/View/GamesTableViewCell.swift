@@ -36,6 +36,7 @@ class GamesTableViewCell: UITableViewCell {
         if oppositeTeam == nil {
              oppositeTeam = TeamRealmObject(id: "NULL", teamName: "Team", teamCity: "", homeArena: "", logoPathName: "defaultLogo.png")
         }
+        //TODO: check if it really needed to use nullcheck for team
 // if is home game make eos first team in cell another move eos to second position
         if game.isHomeGame {
             team1NameLbl.text = "\(EOS_TEAM.teamName!) \n \(EOS_TEAM.teamCity!)"

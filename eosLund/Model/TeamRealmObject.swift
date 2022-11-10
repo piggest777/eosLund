@@ -77,7 +77,7 @@ class TeamRealmObject: Object {
         }
     }
    
-    //get team by info
+    //get team by id
     static func getTeamInfoById(id: String) -> TeamRealmObject {
         
         let defaultOppositeTeam = TeamRealmObject(id: "", teamName: "Team", teamCity: "", homeArena: "", logoPathName: "defaultLogo.png")

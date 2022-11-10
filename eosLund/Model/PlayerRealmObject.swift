@@ -101,3 +101,4 @@ class PlayerRealmObject: Object {
         return PlayerRealmObject.getAllPlayers()?.filter(leaguePredicate).sorted(byKeyPath: "playerNumber")
     }
 }
+

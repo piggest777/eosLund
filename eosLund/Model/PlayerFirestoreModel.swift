@@ -47,6 +47,7 @@ class Player: BasicPlayer {
             let playerNumber: Int = data[PLAYER_NUMBER] as? Int ?? 0
             let playerPosition: String = data[PLAYER_POSITION] as? String ?? " "
             let playerImageURL: String = data[PLAYER_IMAGE_URL] as? String ?? "gs://eoslund-4ceb4.appspot.com/defaultAvatar.png"
+            //TODO: fix url as constant
             let playerBigImageURL: String = data[PLAYER_BIG_IMAGE_URL] as? String ?? ""
             let timestamp: Timestamp = data[PLAYER_UPDATE_DATE] as? Timestamp ?? Timestamp()
             let date: Date = timestamp.dateValue()

@@ -41,9 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         application.registerForRemoteNotifications()
-        
-        
-        //let realmPath = Bundle.main.url(forResource: "eosDatabase", withExtension: "realm")!
+            
         let config = Realm.Configuration(
             schemaVersion: 1,
         migrationBlock: { migration, oldSchemaVersion in
@@ -55,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         Realm.Configuration.defaultConfiguration = config
+
 
         return true
     }
@@ -73,8 +72,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate : MessagingDelegate {
   // [START refresh_token]
-  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-    let dataDict:[String: String] = ["token": fcmToken]
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+    let dataDict:[String: String] = ["token": fcmToken ?? ""]
     NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
 
   }

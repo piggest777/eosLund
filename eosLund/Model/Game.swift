@@ -50,6 +50,7 @@ class Game {
         
         for document in snapshot.documents {
             let data = document.data()
+            //TODO: fix eos code cause why we need this one?
             let eosTeamCode: String = data[EOS_CODE] as? String ?? "EOS"
             let oppositeTeamCode: String = data[OPPOSITE_TEAM_CODE] as? String ?? "TEAM"
             let isHomeGame: Bool = data[IS_HOME_GAME] as? Bool ?? true
@@ -63,6 +64,7 @@ class Game {
             let gameDesc: String? = data[GAME_DESCRIPTION] as? String ?? nil
             let statsLink: String? = data[STATISTIC_LINK] as? String ?? nil
             let gameCoverUrl: String?  = data[GAME_COVER_URL] as? String ?? nil
+            //TODO: check more conditions like home  game and league
             if dateAndTimeTimestamp != nil {
                 let gameDateAndTime = dateAndTimeTimestamp!.dateValue()
                 let newGame = Game(eosTeamCode: eosTeamCode, oppositeTeamCode: oppositeTeamCode, eosScore: eosScore, oppositeTeamScore: oppositeTeamScores, isHomeGame: isHomeGame, gameDateAndTime: gameDateAndTime, teamLeague: teamLeague, documentId: documentId, eosPlayers: eosPlayers, oppositeTeamPlayers: oppositeTeamPlayers, statsLink: statsLink, gameDesc: gameDesc, gameCoverUrl: gameCoverUrl)

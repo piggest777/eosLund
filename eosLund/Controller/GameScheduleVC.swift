@@ -79,13 +79,18 @@ class GameScheduleVC: UIViewController {
         checkIfRealmBaseExist()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        view.setUpStatusBar()
+    override func viewDidAppear(_ animated: Bool) {
         checkTeamsUpdatePossibility { (success) in
             if success {
                 self.setListener()
             }
         }
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        view.setUpStatusBar()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -160,6 +165,7 @@ class GameScheduleVC: UIViewController {
                     if let error = error {
                         debugPrint("error fetching docs: \(error)")
                     } else {
+                        //TODO: change parse system
                         self.noGameCover.isHidden = true
                         self.gamesArray.removeAll()
                         self.gamesArray = Game.parseData(snapshot: snapshot)
@@ -212,6 +218,7 @@ class GameScheduleVC: UIViewController {
             print("Updating team base")
             upadateTeamRealmBase { success in
                 if success {
+                    print("updated team base")
                     completionHandler(true)
                 }
             }
@@ -219,7 +226,7 @@ class GameScheduleVC: UIViewController {
     }
     
     
-    //update iformation about team in realm local base
+    //update information about team in realm local base
     func upadateTeamRealmBase (updaterStatus: @escaping (Bool)->() ) {
         loadTeamInfoFromFirebase { (returnedArray) in
             var index = 1
@@ -290,6 +297,7 @@ class GameScheduleVC: UIViewController {
                 return false
             }
         }
+        //TODO: rework and make find first?
         
         if let nextGame: Game = filteredGamesArray.first {
             noGameCover.isHidden = true
@@ -443,7 +451,7 @@ class GameScheduleVC: UIViewController {
                let filePath = pathComponent.path
                let fileManager = FileManager.default
                if fileManager.fileExists(atPath: filePath) {
-                   print("FILE AVAILABLE")
+                   print("FILE AVAILABLE: \(filePath)")
                } else {
                    print("FILE NOT AVAILABLE")
                 copyBaseToDocumentsFolder()
@@ -515,7 +523,6 @@ extension GameScheduleVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = scheduleTableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath) as? GamesTableViewCell else { return UITableViewCell()}
         
         cell.configureCell(game: gamesArray[indexPath.row])
-        
         return cell
     }
     

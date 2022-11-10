@@ -6,6 +6,7 @@
 //  Copyright © 2019 Denis Rakitin. All rights reserved.
 //
 
+import FirebaseFirestore
 import UIKit
 import Firebase
 import FirebaseStorage
