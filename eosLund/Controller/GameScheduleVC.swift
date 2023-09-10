@@ -198,7 +198,7 @@ class GameScheduleVC: UIViewController {
                     if let timestampUpdateDate = data?["updateDate"] as? Timestamp {
                         let firebaseUpdateDate = timestampUpdateDate.dateValue()
                         if firebaseUpdateDate > self.updateDate! {
-                            self.upadateTeamRealmBase { success in
+                            self.updateTeamRealmBase { success in
                                 if success {
                                     completionHandler(true)
                                 }
@@ -216,7 +216,7 @@ class GameScheduleVC: UIViewController {
             }
         } else {
             print("Updating team base")
-            upadateTeamRealmBase { success in
+            updateTeamRealmBase { success in
                 if success {
                     print("updated team base")
                     completionHandler(true)
@@ -227,7 +227,7 @@ class GameScheduleVC: UIViewController {
     
     
     //update information about team in realm local base
-    func upadateTeamRealmBase (updaterStatus: @escaping (Bool)->() ) {
+    func updateTeamRealmBase (updaterStatus: @escaping (Bool)->() ) {
         loadTeamInfoFromFirebase { (returnedArray) in
             var index = 1
             for team in returnedArray {
