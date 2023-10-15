@@ -70,17 +70,6 @@ class GameScheduleVC: UIViewController {
     var previousButton: UIButton? = nil
     var selectedLeagueIndex = 2
     
-    lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .white
-        cv.delegate = self
-        cv.dataSource = self
-        return cv
-    }()
-
-    
     func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -124,7 +113,8 @@ class GameScheduleVC: UIViewController {
         }
         
         let selectedIndexPath = IndexPath(item: selectedLeagueIndex, section: 0)
-        collectionView.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: false)
+        leagueButtonCollection.layoutIfNeeded()
+        leagueButtonCollection.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: false)
 
     }
     

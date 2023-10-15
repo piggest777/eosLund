@@ -89,7 +89,7 @@ class GameInfoVC: UIViewController {
         
         switch gameLeague {
         case "SBLD":
-            leagueLbl.text = "SWEDISH BASKETBAL LEAGUE WOMEN"
+            leagueLbl.text = "SWEDISH BASKETBALL LEAGUE WOMEN"
             if let image = UIImage(named: "defaultCoverSBLD.jpg") {
                 gameImg.image = image
             } else {
@@ -101,6 +101,9 @@ class GameInfoVC: UIViewController {
         case "BE Dam":
             leagueLbl.text = "BASKETETTAN WOMEN"
             gameImg.image = UIImage(named: "defaultCoverBED.jpg")
+        case "BE Herr":
+            leagueLbl.text = "BASKETETTAN MEN"
+            gameImg.image = UIImage(named: "defaultCoverBEH.jpg")
         default:
             leagueLbl.text = ""
             gameImg.image = UIImage(named: "defaultCoverSBLD.jpg")
