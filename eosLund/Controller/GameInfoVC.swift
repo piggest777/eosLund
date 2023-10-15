@@ -131,8 +131,8 @@ class GameInfoVC: UIViewController {
         statisticBtn.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         statisticBtn.layer.shadowRadius = 5
         statisticBtn.layer.shadowOpacity = 1
-        statisticBtn.layer.borderColor = #colorLiteral(red: 0.4922404289, green: 0.7722371817, blue: 0.4631441236, alpha: 1)
-        statisticBtn.layer.borderWidth = 5
+        statisticBtn.layer.borderColor = UIColor(named: "eosGreen")?.cgColor
+        statisticBtn.layer.borderWidth = 2
         statisticBtn.layer.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         statisticBtn.isEnabled = true
     }

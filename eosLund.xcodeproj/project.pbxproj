@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C6954D72AD9D1C500F74451 /* Leagues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6954D62AD9D1C500F74451 /* Leagues.swift */; };
+		2C6954D92ADBC18D00F74451 /* LeagueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6954D82ADBC18D00F74451 /* LeagueCell.swift */; };
 		2C85189C2AAE66F1006F5920 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = 2C85189B2AAE66F1006F5920 /* default.realm */; };
+		3DCCAEF064F84341C040728D /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52170B5AFC7F1EC1DD8BD427 /* Pods_eosLund.framework */; };
 		B5092C28249244D300E5F5FF /* RoundedViewForPlayerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5092C27249244D300E5F5FF /* RoundedViewForPlayerDetails.swift */; };
 		B51731AF247AF6E4004FABA1 /* PlayerDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51731AE247AF6E4004FABA1 /* PlayerDetailsVC.swift */; };
 		B51731B1247AF80D004FABA1 /* PlayerDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51731B0247AF80D004FABA1 /* PlayerDetailsCell.swift */; };
@@ -21,13 +24,13 @@
 		B558614623C7949700EAC330 /* NetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558614523C7949700EAC330 /* NetService.swift */; };
 		B558614823C7EC5400EAC330 /* NewsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558614723C7EC5400EAC330 /* NewsVC.swift */; };
 		B569D82723DF1FC800FDA022 /* GameInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569D82623DF1FC800FDA022 /* GameInfoVC.swift */; };
-		B56FFCC023E8588100A3526C /* stringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FFCBF23E8588100A3526C /* stringExt.swift */; };
+		B56FFCC023E8588100A3526C /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FFCBF23E8588100A3526C /* StringExt.swift */; };
 		B574950323B16DA500E1BCDD /* PlayerInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B574950223B16DA500E1BCDD /* PlayerInfoVC.swift */; };
 		B5801C9D23EF6FEF00C19A44 /* TeamRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5801C9C23EF6FEF00C19A44 /* TeamRealmObject.swift */; };
 		B5801C9F23EF7E3A00C19A44 /* TeamFirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5801C9E23EF7E3A00C19A44 /* TeamFirestoreModel.swift */; };
 		B5801CA323F377D600C19A44 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5801CA223F377D600C19A44 /* UIImageExt.swift */; };
 		B58066FB2400B47E0088C643 /* RealmExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58066FA2400B47E0088C643 /* RealmExt.swift */; };
-		B58D651C23CCB94700A4A2A0 /* dateFormatStringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */; };
+		B58D651C23CCB94700A4A2A0 /* DateFormatStringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D651B23CCB94700A4A2A0 /* DateFormatStringExt.swift */; };
 		B595D94E23C9042500A720B4 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */; };
 		B595D95023C912D700A720B4 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B595D94F23C912D700A720B4 /* PaddingLabel.swift */; };
 		B59E75E82399AE9A00191EB5 /* TeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59E75E72399AE9A00191EB5 /* TeamCollectionViewCell.swift */; };
@@ -47,12 +50,14 @@
 		B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFD10F238EFFD100EA88B8 /* GamesTableViewCell.swift */; };
 		B5B7A3F52393D71200D2419F /* ViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B7A3F42393D71200D2419F /* ViewExt.swift */; };
 		B5CED11E23FDA91C00B9E663 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CED11D23FDA91C00B9E663 /* RoundedView.swift */; };
-		FF88A243302049FD9758A344 /* Pods_eosLund.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ED58FC80B413A63DD15C72 /* Pods_eosLund.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C6954D62AD9D1C500F74451 /* Leagues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leagues.swift; sourceTree = "<group>"; };
+		2C6954D82ADBC18D00F74451 /* LeagueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueCell.swift; sourceTree = "<group>"; };
 		2C85189B2AAE66F1006F5920 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
-		3BB4B8B6BC695C696B8FC78E /* Pods-eosLund.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.release.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.release.xcconfig"; sourceTree = "<group>"; };
+		4E431379EAC09AE8A71B183D /* Pods-eosLund.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.release.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.release.xcconfig"; sourceTree = "<group>"; };
+		52170B5AFC7F1EC1DD8BD427 /* Pods_eosLund.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eosLund.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5092C27249244D300E5F5FF /* RoundedViewForPlayerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedViewForPlayerDetails.swift; sourceTree = "<group>"; };
 		B51731AE247AF6E4004FABA1 /* PlayerDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsVC.swift; sourceTree = "<group>"; };
 		B51731B0247AF80D004FABA1 /* PlayerDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsCell.swift; sourceTree = "<group>"; };
@@ -66,13 +71,13 @@
 		B558614523C7949700EAC330 /* NetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetService.swift; sourceTree = "<group>"; };
 		B558614723C7EC5400EAC330 /* NewsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsVC.swift; sourceTree = "<group>"; };
 		B569D82623DF1FC800FDA022 /* GameInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoVC.swift; sourceTree = "<group>"; };
-		B56FFCBF23E8588100A3526C /* stringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringExt.swift; sourceTree = "<group>"; };
+		B56FFCBF23E8588100A3526C /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		B574950223B16DA500E1BCDD /* PlayerInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfoVC.swift; sourceTree = "<group>"; };
 		B5801C9C23EF6FEF00C19A44 /* TeamRealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRealmObject.swift; sourceTree = "<group>"; };
 		B5801C9E23EF7E3A00C19A44 /* TeamFirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFirestoreModel.swift; sourceTree = "<group>"; };
 		B5801CA223F377D600C19A44 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
 		B58066FA2400B47E0088C643 /* RealmExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExt.swift; sourceTree = "<group>"; };
-		B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateFormatStringExt.swift; sourceTree = "<group>"; };
+		B58D651B23CCB94700A4A2A0 /* DateFormatStringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatStringExt.swift; sourceTree = "<group>"; };
 		B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		B595D94F23C912D700A720B4 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		B59E75E72399AE9A00191EB5 /* TeamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -95,8 +100,7 @@
 		B5B4E0AE2438C9E2001715A6 /* Eos Lund.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Eos Lund.entitlements"; sourceTree = "<group>"; };
 		B5B7A3F42393D71200D2419F /* ViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExt.swift; sourceTree = "<group>"; };
 		B5CED11D23FDA91C00B9E663 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
-		C3ED58FC80B413A63DD15C72 /* Pods_eosLund.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eosLund.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F49D32C7365CD2E332B75AA8 /* Pods-eosLund.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.debug.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.debug.xcconfig"; sourceTree = "<group>"; };
+		F262C432EB140A2754C9C6FB /* Pods-eosLund.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eosLund.debug.xcconfig"; path = "Target Support Files/Pods-eosLund/Pods-eosLund.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF88A243302049FD9758A344 /* Pods_eosLund.framework in Frameworks */,
+				3DCCAEF064F84341C040728D /* Pods_eosLund.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,8 +118,8 @@
 		AD6241853061A2D76CB23BE9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F49D32C7365CD2E332B75AA8 /* Pods-eosLund.debug.xcconfig */,
-				3BB4B8B6BC695C696B8FC78E /* Pods-eosLund.release.xcconfig */,
+				F262C432EB140A2754C9C6FB /* Pods-eosLund.debug.xcconfig */,
+				4E431379EAC09AE8A71B183D /* Pods-eosLund.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -142,7 +146,7 @@
 				B5AFD0EA238D5CA900EA88B8 /* eosLund */,
 				B5AFD0E9238D5CA900EA88B8 /* Products */,
 				AD6241853061A2D76CB23BE9 /* Pods */,
-				D84430213CADE9282FA076B3 /* Frameworks */,
+				B785F7B3F3F7030D6F4FEE1D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,6 +205,7 @@
 				B5801C9C23EF6FEF00C19A44 /* TeamRealmObject.swift */,
 				B5529B1D23C8E1B1009149BC /* News.swift */,
 				B51731B424877F1B004FABA1 /* BasicPlayer.swift */,
+				2C6954D62AD9D1C500F74451 /* Leagues.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				B5529B1F23C8E5D5009149BC /* NewsCell.swift */,
 				B51731B0247AF80D004FABA1 /* PlayerDetailsCell.swift */,
 				B5092C27249244D300E5F5FF /* RoundedViewForPlayerDetails.swift */,
+				2C6954D82ADBC18D00F74451 /* LeagueCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -235,18 +241,18 @@
 			children = (
 				B5B7A3F42393D71200D2419F /* ViewExt.swift */,
 				B595D94D23C9042500A720B4 /* UIViewControllerExt.swift */,
-				B58D651B23CCB94700A4A2A0 /* dateFormatStringExt.swift */,
-				B56FFCBF23E8588100A3526C /* stringExt.swift */,
+				B58D651B23CCB94700A4A2A0 /* DateFormatStringExt.swift */,
+				B56FFCBF23E8588100A3526C /* StringExt.swift */,
 				B5801CA223F377D600C19A44 /* UIImageExt.swift */,
 				B58066FA2400B47E0088C643 /* RealmExt.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
 		};
-		D84430213CADE9282FA076B3 /* Frameworks */ = {
+		B785F7B3F3F7030D6F4FEE1D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C3ED58FC80B413A63DD15C72 /* Pods_eosLund.framework */,
+				52170B5AFC7F1EC1DD8BD427 /* Pods_eosLund.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -258,11 +264,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5AFD0FE238D5CAC00EA88B8 /* Build configuration list for PBXNativeTarget "eosLund" */;
 			buildPhases = (
-				903384565E24E24ACD6F98F6 /* [CP] Check Pods Manifest.lock */,
+				A93CF7E1E2470BC60855ACF9 /* [CP] Check Pods Manifest.lock */,
 				B5AFD0E4238D5CA900EA88B8 /* Sources */,
 				B5AFD0E5238D5CA900EA88B8 /* Frameworks */,
 				B5AFD0E6238D5CA900EA88B8 /* Resources */,
-				8816D00F52E433188624557A /* [CP] Embed Pods Frameworks */,
+				620AFEFEF60A24325D1C9433 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -322,7 +328,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8816D00F52E433188624557A /* [CP] Embed Pods Frameworks */ = {
+		620AFEFEF60A24325D1C9433 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -339,7 +345,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eosLund/Pods-eosLund-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		903384565E24E24ACD6F98F6 /* [CP] Check Pods Manifest.lock */ = {
+		A93CF7E1E2470BC60855ACF9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -374,7 +380,9 @@
 				B558614123C6B45100EAC330 /* CoachCollectionViewCell.swift in Sources */,
 				B5AFD109238EB7F300EA88B8 /* RoundedShadowButton.swift in Sources */,
 				B5AFD0F0238D5CA900EA88B8 /* GameScheduleVC.swift in Sources */,
+				2C6954D72AD9D1C500F74451 /* Leagues.swift in Sources */,
 				B5801CA323F377D600C19A44 /* UIImageExt.swift in Sources */,
+				2C6954D92ADBC18D00F74451 /* LeagueCell.swift in Sources */,
 				B5AFD110238EFFD100EA88B8 /* GamesTableViewCell.swift in Sources */,
 				B5801C9D23EF6FEF00C19A44 /* TeamRealmObject.swift in Sources */,
 				B569D82723DF1FC800FDA022 /* GameInfoVC.swift in Sources */,
@@ -391,14 +399,14 @@
 				B51731B1247AF80D004FABA1 /* PlayerDetailsCell.swift in Sources */,
 				B5AFD10E238EC2AF00EA88B8 /* Game.swift in Sources */,
 				B5AFD0EC238D5CA900EA88B8 /* AppDelegate.swift in Sources */,
-				B58D651C23CCB94700A4A2A0 /* dateFormatStringExt.swift in Sources */,
+				B58D651C23CCB94700A4A2A0 /* DateFormatStringExt.swift in Sources */,
 				B5CED11E23FDA91C00B9E663 /* RoundedView.swift in Sources */,
 				B59E75EA2399C3A900191EB5 /* PlayerRealmObject.swift in Sources */,
 				B51731AF247AF6E4004FABA1 /* PlayerDetailsVC.swift in Sources */,
 				B5AFD0EE238D5CA900EA88B8 /* SceneDelegate.swift in Sources */,
 				B59E75E82399AE9A00191EB5 /* TeamCollectionViewCell.swift in Sources */,
 				B574950323B16DA500E1BCDD /* PlayerInfoVC.swift in Sources */,
-				B56FFCC023E8588100A3526C /* stringExt.swift in Sources */,
+				B56FFCC023E8588100A3526C /* StringExt.swift in Sources */,
 				B558613F23C6B1F200EAC330 /* CoachVC.swift in Sources */,
 				B5529B1E23C8E1B1009149BC /* News.swift in Sources */,
 				B5AFD10C238EC25700EA88B8 /* Constant.swift in Sources */,
@@ -548,7 +556,7 @@
 		};
 		B5AFD0FF238D5CAC00EA88B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F49D32C7365CD2E332B75AA8 /* Pods-eosLund.debug.xcconfig */;
+			baseConfigurationReference = F262C432EB140A2754C9C6FB /* Pods-eosLund.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "eosLund/Eos Lund.entitlements";
@@ -629,7 +637,7 @@
 		};
 		B5AFD100238D5CAC00EA88B8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BB4B8B6BC695C696B8FC78E /* Pods-eosLund.release.xcconfig */;
+			baseConfigurationReference = 4E431379EAC09AE8A71B183D /* Pods-eosLund.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "eosLund/Eos Lund.entitlements";

@@ -23,50 +23,32 @@ class GamesTableViewCell: UITableViewCell {
     
     
     //get information about team from realm and configure game cell according this information
-    func configureCell(game: Game) {
+    func configureCell(game: Game, isCommon: Bool) {
         
-        var oppositeTeam: TeamRealmObject?
         
-        do {
-             oppositeTeam = try Realm().object(ofType: TeamRealmObject.self, forPrimaryKey: game.oppositeTeamCode)
-        } catch  {
-            debugPrint("Can`t get realm object by key")
-        }
-        
-        if oppositeTeam == nil {
-             oppositeTeam = TeamRealmObject(id: "NULL", teamName: "Team", teamCity: "", homeArena: "", logoPathName: "defaultLogo.png")
-        }
+        let oppositeTeam = setupOppositeTeam(for: game.oppositeTeamCode)
+
         //TODO: check if it really needed to use nullcheck for team
 // if is home game make eos first team in cell another move eos to second position
         if game.isHomeGame {
             team1NameLbl.text = "\(EOS_TEAM.teamName!) \n \(EOS_TEAM.teamCity!)"
-            team2NameLbl.text = "\(oppositeTeam!.teamName) \n \(oppositeTeam!.teamCity)"
+            team2NameLbl.text = "\(oppositeTeam.teamName) \n \(oppositeTeam.teamCity)"
             team1ScoreLbl.text = "\(game.eosScore!)"
             team2ScoreLbl.text = "\(game.oppositeTeamScore!)"
             let gameCity = EOS_TEAM.teamCity
             let gamePlace = EOS_TEAM.homeArena
-            if let gameDateAndTime = game.gameDateAndTime {
-                let gameTime = gameDateAndTime.toString(format: "d MMM yyyy, HH:mm")
-                gameDateTimeAndPlaceLbl.text = "\(gameCity!), \(gamePlace!), \(gameTime)"
-            } else {
-                 gameDateTimeAndPlaceLbl.text = "\(gameCity!), \(gamePlace!)"
-            }
+            setupGameAndTimeLabel(isCommon: isCommon, gameCity: gameCity, gamePlace: gamePlace , gameTime: game.gameDateAndTime, gameLeague: game.teamLeague)
             hostTeamLogo.setLogoImg(logoPath: EOS_TEAM.logoPathName)
-            guestTeamLogo.setLogoImg(logoPath: oppositeTeam!.logoPathName)
+            guestTeamLogo.setLogoImg(logoPath: oppositeTeam.logoPathName)
         } else {
             team2NameLbl.text = "\(EOS_TEAM.teamName!) \n \(EOS_TEAM.teamCity!)"
-            team1NameLbl.text = "\(oppositeTeam!.teamName) \n \(oppositeTeam!.teamCity)"
+            team1NameLbl.text = "\(oppositeTeam.teamName) \n \(oppositeTeam.teamCity)"
             team2ScoreLbl.text = "\(game.eosScore!)"
             team1ScoreLbl.text = "\(game.oppositeTeamScore!)"
-            let gameCity = oppositeTeam!.teamCity
-            let gamePlace = oppositeTeam!.homeArena
-            if let gameDateAndTime = game.gameDateAndTime {
-                let gameTime = gameDateAndTime.toString(format: "d MMM yyyy, HH:mm")
-                gameDateTimeAndPlaceLbl.text = "\(gameCity), \(gamePlace), \(gameTime)"
-            } else {
-                 gameDateTimeAndPlaceLbl.text = "\(gameCity), \(gamePlace)"
-            }
-            hostTeamLogo.setLogoImg(logoPath: oppositeTeam!.logoPathName)
+            let gameCity = oppositeTeam.teamCity
+            let gamePlace = oppositeTeam.homeArena
+            setupGameAndTimeLabel(isCommon: isCommon, gameCity: gameCity, gamePlace: gamePlace , gameTime: game.gameDateAndTime, gameLeague: game.teamLeague)
+            hostTeamLogo.setLogoImg(logoPath: oppositeTeam.logoPathName)
             guestTeamLogo.setLogoImg(logoPath: EOS_TEAM.logoPathName)
         }
         highLightWinnerScore()
@@ -85,6 +67,33 @@ class GamesTableViewCell: UITableViewCell {
         } else if Int(scoreLblTxt1!)! < Int(scoreLblTxt2!)!{
             team1ScoreLbl.textColor = UIColor.white
             team2ScoreLbl.textColor = #colorLiteral(red: 0, green: 0.3285208941, blue: 0.5748849511, alpha: 1)
+        }
+    }
+    
+    func setupGameAndTimeLabel(isCommon: Bool, gameCity: String?, gamePlace: String?, gameTime: Date?, gameLeague: String) {
+//        if isCommon {
+//            gameDateTimeAndPlaceLbl.text = gameLeague
+//            return
+//        }
+        if let gameTime, let gamePlace, let gameCity {
+            let time = gameTime.toString(format: "d MMM yyyy, HH:mm")
+            if isCommon {
+                gameDateTimeAndPlaceLbl.text = "\(gameLeague), \(gameCity), \(gamePlace)"
+                return
+            }
+            gameDateTimeAndPlaceLbl.text = "\(gameCity), \(gamePlace), \(time)"
+           
+        } else {
+             gameDateTimeAndPlaceLbl.text = ""
+        }
+    }
+    
+    func setupOppositeTeam(for key: String) -> TeamRealmObject {
+        do {
+            return try Realm().object(ofType: TeamRealmObject.self, forPrimaryKey: key) ?? TeamRealmObject(id: "NULL", teamName: "Team", teamCity: "", homeArena: "", logoPathName: "defaultLogo.png")
+        } catch  {
+            debugPrint("Can`t get realm object by key")
+            return TeamRealmObject(id: "NULL", teamName: "Team", teamCity: "", homeArena: "", logoPathName: "defaultLogo.png")
         }
     }
     

@@ -18,7 +18,6 @@ class GameScheduleVC: UIViewController {
     @IBOutlet weak var gameCoverImgView: UIImageView!
     @IBOutlet weak var nextGamePlaceLbl: UILabel!
     @IBOutlet weak var nextGameDateAndTimeLbl: UILabel!
-    @IBOutlet weak var leagueSegmentControl: UISegmentedControl!
     @IBOutlet weak var firstTeamLogotipeImg: UIImageView!
     @IBOutlet weak var secondTeamLogotipeImg: UIImageView!
     @IBOutlet weak var firstTeamNameLbl: UILabel!
@@ -43,6 +42,7 @@ class GameScheduleVC: UIViewController {
     @IBOutlet weak var counterStackView: UIStackView!
     @IBOutlet weak var nextGamePlaceAndTimeStackViewConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var leagueButtonCollection: UICollectionView!
     
     private var gamesArray = [Game]()
     private var teamArray = [TeamFirestoreModel]()
@@ -54,7 +54,43 @@ class GameScheduleVC: UIViewController {
     private var isFullScheduleOpen = false
     private let halfHeightOfScreenSize = UIScreen.main.bounds.height/2 - 45
     
-    var choosenLeague: String = "SBLD"
+    var chosenLeague: Leagues {
+        get {
+            return leagues[selectedLeagueIndex]
+        }
+        set {}
+    }
+    
+    let leagues: [Leagues] = [
+        .SBLD,
+        .SEHerr,
+        .All,
+        .BEDam,
+        .BEHerr]
+    var previousButton: UIButton? = nil
+    var selectedLeagueIndex = 2
+    
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = .white
+        cv.delegate = self
+        cv.dataSource = self
+        return cv
+    }()
+
+    
+    func setupCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        leagueButtonCollection.collectionViewLayout = layout
+        leagueButtonCollection.backgroundColor = UIColor(named: "eosRed")
+        leagueButtonCollection.delegate = self
+        leagueButtonCollection.dataSource = self
+        
+    }
+    
     
     let defaults = UserDefaults.standard
     
@@ -72,24 +108,29 @@ class GameScheduleVC: UIViewController {
         setUpViewToDisplayDependOnScreenSize()
         scheduleTableView.dataSource = self
         scheduleTableView.delegate = self
-        leagueSegmentControl.layer.cornerRadius = 5
+//        leagueSegmentControl.layer.cornerRadius = 5
         swipeNextGame()
-        tournamentBtnView.isHidden = false
-        
+//        tournamentBtnView.isHidden = false
+        setupCollectionView()
+        setupTournamentTableButton()
         checkIfRealmBaseExist()
     }
-    
+        
     override func viewDidAppear(_ animated: Bool) {
         checkTeamsUpdatePossibility { (success) in
             if success {
                 self.setListener()
             }
         }
+        
+        let selectedIndexPath = IndexPath(item: selectedLeagueIndex, section: 0)
+        collectionView.scrollToItem(at: selectedIndexPath, at: .centeredHorizontally, animated: false)
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         view.setUpStatusBar()
+
 
     }
     
@@ -126,7 +167,7 @@ class GameScheduleVC: UIViewController {
             viewHidhConstraint.constant = halfHeightOfScreenSize - 50
             bigScreenGameInfoStackView.isHidden = false
             smalScreenGameInfoStackView.isHidden = true
-            moreThanAGameView.isHidden = false
+            moreThanAGameView.isHidden = true
             nextGamePlaceLbl.font = UIFont(name: "AvenirNext-Medium", size: 20)
             nextGameDateAndTimeLbl.font = UIFont(name: "AvenirNext-Medium", size: 17)
             nextGamePlaceAndTimeStackViewConstraint.constant = 50
@@ -152,14 +193,20 @@ class GameScheduleVC: UIViewController {
     
     // create firebase listener for track changes in game online
     func setListener () {
-        var leaugePredicate: [String] = ["SBLD"]
-        if choosenLeague == "All" {
-            leaugePredicate = ["SBLD", "SE Herr", "BE Dam"]
+        var leaguePredicate: [Leagues] = [.All]
+        if chosenLeague == .All {
+            leaguePredicate = [
+                .SBLD,
+                .SEHerr,
+                .BEDam,
+                .BEHerr]
         } else {
-            leaugePredicate = [choosenLeague]
+            leaguePredicate = [leagues[selectedLeagueIndex]]
         }
+        
+        let stringLeaguePredicate = leaguePredicate.map{$0.rawValue}
             gameScheduleListener = gamesReference
-                .whereField(TEAM_LEAGUE, in: leaugePredicate)
+                .whereField(TEAM_LEAGUE, in: stringLeaguePredicate)
                 .order(by: GAME_DATE_AND_TIME, descending: false)
                 .addSnapshotListener({ (snapshot, error) in
                     if let error = error {
@@ -402,8 +449,8 @@ class GameScheduleVC: UIViewController {
     @IBAction func tournamentBtnWasPressed(_ sender: Any) {
         
         nextGameView.isHidden = false
-        if choosenLeague != "All" {
-            NetService.instance.getTournamentTableUrl(league: choosenLeague) { (returnedUrl) in
+        if chosenLeague != .All {
+            NetService.instance.getTournamentTableUrl(league: chosenLeague.rawValue) { (returnedUrl) in
                 if let urlString = returnedUrl {
                     if urlString.isValidURL {
                         let url =  URL(string:  urlString)
@@ -480,30 +527,58 @@ class GameScheduleVC: UIViewController {
     }
     
     //setup view depend from league
-    @IBAction func segmentControlWasSwitched(_ sender: Any) {
-        switch leagueSegmentControl.selectedSegmentIndex{
-        case 0:
-            choosenLeague = "SBLD"
-            gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
-            tournamentBtnView.isHidden = false
-        case 1:
-            choosenLeague = "SE Herr"
-            gameCoverImgView.image = UIImage(named: "defaultCoverSEH.jpg")
-            tournamentBtnView.isHidden = false
-        case 2:
-            choosenLeague = "BE Dam"
-            gameCoverImgView.image = UIImage(named: "defaultCoverBED.jpg")
-            tournamentBtnView.isHidden = false
-        case 3:
-            choosenLeague = "All"
-            gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
+//    @IBAction func segmentControlWasSwitched(_ sender: Any) {
+//        switch leagueSegmentControl.selectedSegmentIndex{
+//        case 0:
+//            chosenLeague = .SBLD
+//            gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
+//            tournamentBtnView.isHidden = false
+//        case 1:
+//            chosenLeague = .SEHerr
+//            gameCoverImgView.image = UIImage(named: "defaultCoverSEH.jpg")
+//            tournamentBtnView.isHidden = false
+//        case 2:
+//            chosenLeague = .BEDam
+//            gameCoverImgView.image = UIImage(named: "defaultCoverBED.jpg")
+//            tournamentBtnView.isHidden = false
+//        case 3:
+//            chosenLeague = .All
+//            gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
+//            tournamentBtnView.isHidden = true
+//        default:
+//            chosenLeague = .SBLD
+//            gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
+//        }
+//        
+//        switchLeagueTabMaintain()
+//        setupLegue()
+//    }
+    
+    func setupTournamentTableButton(){
+        if chosenLeague == .All {
             tournamentBtnView.isHidden = true
-        default:
-            choosenLeague = "SBLD"
-            gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
+            return
         }
-        
-        
+        tournamentBtnView.isHidden = false
+    }
+    
+    func setupLegue() {
+        switch chosenLeague {
+        case .SBLD:
+            gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
+        case .SEHerr:
+            gameCoverImgView.image = UIImage(named: "defaultCoverSEH.jpg")
+        case .BEDam:
+            gameCoverImgView.image = UIImage(named: "defaultCoverBED.jpg")
+        case .All:
+            gameCoverImgView.image = UIImage(named: "defaultCoverSBLD.jpg")
+        case .BEHerr:
+            gameCoverImgView.image = UIImage(named: "defaultCoverBEH.jpg")
+        }
+        setupTournamentTableButton()
+    }
+    
+    func switchLeagueTabMaintain() {
         if gameScheduleListener != nil {
             gameScheduleListener.remove()
         }
@@ -522,7 +597,9 @@ extension GameScheduleVC: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = scheduleTableView.dequeueReusableCell(withIdentifier: "gameCell", for: indexPath) as? GamesTableViewCell else { return UITableViewCell()}
         
-        cell.configureCell(game: gamesArray[indexPath.row])
+        let isCommon = (chosenLeague == .All)
+ 
+        cell.configureCell(game: gamesArray[indexPath.row], isCommon: isCommon)
         return cell
     }
     
@@ -536,11 +613,44 @@ extension GameScheduleVC: UITableViewDelegate, UITableViewDataSource {
                 if let game = sender as? Game {
                     destinationVC.game = game
                 } else {
-                    print("couldn`t find game")
+                    print("couldn't find game")
                 }
             }
             else { return }
         }
         else {return}
+    }
+}
+
+extension GameScheduleVC:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(leagues.count)
+        return leagues.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leagueCell", for: indexPath) as! LeagueCell
+        print(leagues[indexPath.item])
+        cell.label.text = leagues[indexPath.item].rawValue
+        cell.label.textColor = indexPath.item == selectedLeagueIndex ? UIColor(named: "snowWhite") : UIColor(named: "backgroundText")
+        cell.setHighlighted(indexPath.item == selectedLeagueIndex)
+        return cell
+    }
+
+    // MARK: - UICollectionViewDelegate
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedLeagueIndex = indexPath.item
+        collectionView.reloadData()
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        switchLeagueTabMaintain()
+        setupLegue()
+    }
+
+    // MARK: - UICollectionViewDelegateFlowLayout
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Determine the size for your cells, perhaps dynamically based on the title's width
+        return CGSize(width: 80, height: 40) // Example size
     }
 }

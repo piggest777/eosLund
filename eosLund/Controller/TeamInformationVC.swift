@@ -27,7 +27,7 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
     let firebaseDB = Firestore.firestore()
     let firebaseStorage = Storage.storage()
     var realmFetchedArray: Results<PlayerRealmObject>?
-    var choosenLeague: String = "SBLD"
+    var chosenLeague: Leagues = .SBLD
     
     let defaults = UserDefaults.standard
     
@@ -48,7 +48,7 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         collectionView.delegate = self
         collectionView.dataSource = self
         progressBar.isHidden = true
-        realmFetchedArray = PlayerRealmObject.getRealmPredicatePlayerListForTable(league: choosenLeague)
+        realmFetchedArray = PlayerRealmObject.getRealmPredicatePlayerListForTable(league: chosenLeague.rawValue)
         
         //update player base according base status
         trackFirebaseUpdateDate() { (baseStatus) in
@@ -117,15 +117,17 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
         
         switch teamSelectorSegmentControl.selectedSegmentIndex {
         case 0:
-            choosenLeague = "SBLD"
+            chosenLeague = .SBLD
         case 1:
-            choosenLeague = "SE Herr"
+            chosenLeague = .SEHerr
         case 2:
-            choosenLeague = "BE Dam"
+            chosenLeague = .BEDam
+        case 3:
+            chosenLeague = .BEHerr
         default:
-            choosenLeague = "SBLD"
+            chosenLeague = .SBLD
         }
-        realmFetchedArray = PlayerRealmObject.getAllPlayers()?.filter("playerLeague = '\(choosenLeague)'").sorted(byKeyPath: "playerNumber")
+        realmFetchedArray = PlayerRealmObject.getAllPlayers()?.filter("playerLeague = '\(chosenLeague.rawValue)'").sorted(byKeyPath: "playerNumber")
         collectionView.reloadData()
     }
     
@@ -314,7 +316,7 @@ class TeamInformationVC: UIViewController, UICollectionViewDelegate, UICollectio
             }
         } else if segue.identifier == "toCoachVC" {
             if let destinationVC = segue.destination as? CoachVC {
-                destinationVC.choosenLeague = choosenLeague
+                destinationVC.choosenLeague = chosenLeague.rawValue
             }
         }
     }

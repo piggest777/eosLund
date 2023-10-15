@@ -17,7 +17,7 @@ extension UIView {
                     
                     let statusbarView = UIView()
 
-                    statusbarView.backgroundColor = #colorLiteral(red: 0.4922404289, green: 0.7722371817, blue: 0.4631441236, alpha: 1)
+                    statusbarView.backgroundColor = UIColor(named: "eosGreen")
                     self.addSubview(statusbarView)
                   
                     statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -30,9 +30,9 @@ extension UIView {
                     statusbarView.centerXAnchor
                         .constraint(equalTo: self.centerXAnchor).isActive = true
                   
-                } else {
-                    let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-                    statusBar?.backgroundColor = #colorLiteral(red: 0.4922404289, green: 0.7722371817, blue: 0.4631441236, alpha: 1)
-                }
+         } else {
+             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+             statusBar?.backgroundColor = UIColor(named: "eosGreen")
+         }
     }
 }
