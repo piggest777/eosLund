@@ -71,13 +71,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate : MessagingDelegate {
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
   // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
     let dataDict:[String: String] = ["token": fcmToken ?? ""]
     NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-
+        
+        Messaging.messaging().token { token, error in
+          if let error = error {
+            print("Error fetching FCM registration token: \(error)")
+          } else if let token = token {
+            print("FCM registration token: \(token)")
+          }
+        }
   }
-
 }
 
 @available(iOS 10, *)
@@ -111,6 +121,14 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     if let messageID = userInfo[gcmMessageIDKey] {
       print("Message ID: \(messageID)")
     }
+      
+      let actionIdentifier = response.actionIdentifier
+          if actionIdentifier == UNNotificationDefaultActionIdentifier {
+              // The user swiped to unlock from the notification (tapped the notification)
+              let requestIdentifier = response.notification.request.identifier
+              // Remove the notification from the Notification Center
+              UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [requestIdentifier])
+          }
 
     // Print full message.
     print(userInfo)

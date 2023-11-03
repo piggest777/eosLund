@@ -77,8 +77,9 @@ class GamesTableViewCell: UITableViewCell {
 //        }
         if let gameTime, let gamePlace, let gameCity {
             let time = gameTime.toString(format: "d MMM yyyy, HH:mm")
+            let date = gameTime.toString(format: "d MMM")
             if isCommon {
-                gameDateTimeAndPlaceLbl.text = "\(gameLeague), \(gameCity), \(gamePlace)"
+                gameDateTimeAndPlaceLbl.text = "\(gameLeague), \(gameCity), \(date)"
                 return
             }
             gameDateTimeAndPlaceLbl.text = "\(gameCity), \(gamePlace), \(time)"
