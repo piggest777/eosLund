@@ -1,5 +1,7 @@
 # Eos Lund Basket for iOS
 
+**Active development** · 2019–2023
+
 The original iOS app for Eos Lund Basket, a basketball club in Lund, Sweden. Fans can browse league fixtures and results, see a countdown to the next game, explore team and player profiles, and follow club news.
 
 The app uses Swift, UIKit, and storyboards. Firestore provides schedule and roster data, Firebase Storage serves images, and Firebase Cloud Messaging handles push notifications. Realm stores team and player data locally.
